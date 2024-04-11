@@ -17,7 +17,16 @@ const Main = () => {
             textAlign="center"
             gap="60px"
         >
-            <Typography variant="mainPageTitle">
+            <Typography
+                sx={{
+                    background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                    display: 'inline',
+                }}
+                variant="mainPageTitle">
+
                 Gyeongbokgung Palace X
             </Typography>
             
