@@ -46,9 +46,9 @@ function DrawerAppBar(props) {
     const container = window !== undefined ? () => window().document.body : undefined;
   
     return (
-      <Box sx={{ display: 'flex' }}>
+      <Box sx={{ display: 'flex'}}>
         <AppBar component="nav">
-          <Toolbar>
+          <Toolbar variant="dense">
             <IconButton
               color="inherit"
               aria-label="open drawer"
