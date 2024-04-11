@@ -29,7 +29,11 @@ let theme = createTheme({
         fontSize: '78px',
         fontFamily: "'Times New Roman', Times, serif",
         letterSpacing: '10px',
-        color: 'white',
+        // color: 'white',
+        // color: 'transparent',
+        // backgroundClip: 'text',
+        // '-webkit-background-clip': 'text',
+        // background: 'linear-gradient(to bottom, white, transparent)'
       },
       mainSubtitle: {
         fontSize: '14px',
