@@ -35,7 +35,7 @@ const Main = () => {
                 textAlign="center"
                 justifyContent="center"
             >
-                <Box>
+                <Box sx={{maxWidth: "600px"}}>
                     <Typography variant="mainSubtitle" >
                     This website offers diverse cultural insights on Gyeongbokgung Palace, providing a platform for sharing varied perceptions and feelings about the subject, going beyond mere information gathering.
                     </Typography>
