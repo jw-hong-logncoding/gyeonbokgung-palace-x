@@ -15,7 +15,9 @@ let theme = createTheme({
         main: '#305E69'
       },
       secondary: {
-        main: '#323F51'
+        main: '#323F51',
+        dark: '#1C1E22',
+        light: '#7A7A7A'
       },
     },
     typography: {
