@@ -28,7 +28,6 @@ let theme = createTheme({
         fontWeight: 500,
       },
       mainPageTitle: {
-        fontSize: '78px',
         fontFamily: "'Times New Roman', Times, serif",
         letterSpacing: '10px',
         // color: 'white',

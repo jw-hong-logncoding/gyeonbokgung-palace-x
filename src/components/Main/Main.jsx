@@ -13,30 +13,67 @@ const Main = () => {
                     alt="Gyeongbokgung Palace"
                 />
             </S.MainImageContainer>
-        <Stack
+            <Stack
                 paddingTop="230px"
                 textAlign="center"
                 gap="60px"
             >
-                <Typography
+                <Stack
                     sx={{
-                        background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
-                        WebkitBackgroundClip: 'text',
-                        backgroundClip: 'text',
-                        color: 'transparent',
-                        display: 'inline',
+                        flexDirection: {
+                            xs: 'column',
+                            lg: 'row'
+                        },
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '15px',
+                        textAlign: 'center',
                     }}
-                    variant="mainPageTitle">
-
-                    Gyeongbokgung Palace X
-                </Typography>
+                >
+                    <Typography
+                        sx={{
+                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
+                            WebkitBackgroundClip: 'text',
+                            backgroundClip: 'text',
+                            color: 'transparent',
+                            display: 'inline',
+                            fontSize: {
+                                sm: '78px',
+                                xs: '38px'
+                            }
+                        }}
+                        variant="mainPageTitle">
+                            Gyeongbokgung
+                    </Typography>
+                    <Typography
+                        sx={{
+                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
+                            WebkitBackgroundClip: 'text',
+                            backgroundClip: 'text',
+                            color: 'transparent',
+                            display: 'inline',
+                            fontSize: {
+                                sm: '78px',
+                                xs: '38px'
+                            }
+                        }}
+                        variant="mainPageTitle">
+                            Palace X
+                    </Typography>    
+                </Stack>
+                
                 
                 <Box
                     sx={{ display: 'flex'}}
                     textAlign="center"
                     justifyContent="center"
                 >
-                    <Box sx={{maxWidth: "600px"}}>
+                    <Box sx={{maxWidth:
+                         {
+                            xs:'400px',
+                            sm: '600px'
+                         }
+                         }}>
                         <Typography variant="mainSubtitle" >
                         This website offers diverse cultural insights on Gyeongbokgung Palace, providing a platform for sharing varied perceptions and feelings about the subject, going beyond mere information gathering.
                         </Typography>
