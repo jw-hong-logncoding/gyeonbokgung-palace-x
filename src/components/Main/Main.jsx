@@ -2,8 +2,10 @@ import { Box, Stack, Typography } from "@mui/material";
 import IMAGES from "../../assets/images";
 import * as S from "./Main.style";
 import LoginButton from "../LoginButton";
+import useUserData from "../../hooks/useUserData";
 
 const Main = () => {
+    const { userData } = useUserData();
     return (
         <>
             <S.MainImageContainer>
@@ -79,7 +81,7 @@ const Main = () => {
                         </Typography>
                     </Box>
                 </Box>
-                <LoginButton />
+                {userData ? null : (<LoginButton />)}
         </Stack>
         </>
     )

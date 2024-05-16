@@ -4,21 +4,47 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
+import { useNavigate } from 'react-router-dom';
+import useUserData from "../../hooks/useUserData";
+import { removeFromLocalStorage } from "../../functions/localStorageFunctions";
+import { LOCAL_STORAGE_KEYS } from "../../enums";
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
 
 function DrawerAppBar(props) {
     // eslint-disable-next-line react/prop-types
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
-  
+    const { userData } = useUserData();
+    const navigate = useNavigate();
+    console.log(userData);
+
+    const navItems = [
+      { title: 'Home', onClick: () => {} },
+      { title: 'About', onClick: () => {} },
+    ];
+    
+    if (userData) {
+      navItems.push(...[
+        { title: 'Map', onClick: () => {} },
+        { title: 'Community', onClick: () => {} },
+        { title: 'My Page', onClick: () => {} },
+      ]);
+    }
+ 
     const handleDrawerToggle = () => {
       setMobileOpen((prevState) => !prevState);
     };
-    const handleClose = () => {
+
+    const handleCloseMenu = () => {
       setAnchorEl(null);
+    }
+
+    const handleLogout = () => {
+      handleCloseMenu();
+      removeFromLocalStorage(LOCAL_STORAGE_KEYS.USER);
+      navigate(0);
     };
 
     const handleMenu = (event) => {
@@ -32,10 +58,10 @@ function DrawerAppBar(props) {
         </Typography>
         <Divider />
         <List>
-          {navItems.map((item) => (
-            <ListItem key={item} disablePadding>
-              <ListItemButton sx={{ textAlign: 'center' }}>
-                <ListItemText primary={item} />
+          {navItems.map(({title, onClick }) => (
+            <ListItem key={title} disablePadding>
+              <ListItemButton sx={{ textAlign: 'center' }} onClick={onClick}>
+                <ListItemText primary={title} />
               </ListItemButton>
             </ListItem>
           ))}
@@ -66,25 +92,28 @@ function DrawerAppBar(props) {
               G P X
             </Typography>
             <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-              {navItems.map((item) => (
-                <Button key={item} sx={{ color: '#fff' }}>
-                  {item}
+              {navItems.map(({title, onClick}) => (
+                <Button key={title} sx={{ color: '#fff' }} onClick={onClick}>
+                  {title}
                 </Button>
               ))}
             </Box>
             <Box>
 
             </Box>
-            <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                color="inherit"
-              >
-                <AccountCircle />
+            {userData &&
+              <IconButton
+                  size="large"
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
               </IconButton>
+            }
+            
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -98,9 +127,9 @@ function DrawerAppBar(props) {
                   horizontal: 'right',
                 }}
                 open={Boolean(anchorEl)}
-                onClose={handleClose}
+                onClick={handleCloseMenu}
               >
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
           </Toolbar>
         </AppBar>
