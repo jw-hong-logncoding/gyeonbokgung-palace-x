@@ -11,6 +11,9 @@ let theme = createTheme({
       }
     },
     palette: {
+      background: {
+        default: '#323F51'
+      },
       primary: {
         main: '#305E69'
       },
