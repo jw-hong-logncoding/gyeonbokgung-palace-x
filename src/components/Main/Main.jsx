@@ -3,6 +3,7 @@ import IMAGES from "../../assets/images";
 import * as S from "./Main.style";
 import LoginButton from "../LoginButton";
 import useUserData from "../../hooks/useUserData";
+import About from "../About";
 
 const Main = () => {
     const { userData } = useUserData();
@@ -82,6 +83,7 @@ const Main = () => {
                     </Box>
                 </Box>
                 {userData ? null : (<LoginButton />)}
+                <About />
         </Stack>
         </>
     )
