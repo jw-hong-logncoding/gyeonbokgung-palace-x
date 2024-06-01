@@ -28,7 +28,9 @@ function DrawerAppBar(props) {
     if (userData) {
       navItems.push(...[
         { title: 'Map', onClick: () => {} },
-        { title: 'Community', onClick: () => {} },
+        { title: 'Community', onClick: () => {
+          navigate('/community');
+        } },
         { title: 'My Page', onClick: () => {} },
       ]);
     }
