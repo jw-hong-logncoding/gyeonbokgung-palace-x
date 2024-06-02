@@ -75,7 +75,7 @@ function DrawerAppBar(props) {
   
     return (
       <Box sx={{ display: 'flex'}}>
-        <AppBar component="nav" >
+        <AppBar component="nav" position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
           <Toolbar variant="dense">
             <IconButton
               color="inherit"

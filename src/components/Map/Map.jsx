@@ -1,7 +1,28 @@
+import { Drawer, Toolbar } from "@mui/material";
+import { useOutlet, Outlet } from "react-router-dom";
+import BuildingList from "./BuildingList";
+
+
+const drawerWidth = 400;
+
 const Map = () => {
-  return (
-    <div>Map</div>
-  )
+    const outlet = useOutlet();
+    return (
+        <div>
+            <Drawer
+                anchor="right"
+                variant="permanent"
+                sx={{
+                    width: drawerWidth,
+                    flexShrink: 0,
+                    [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
+                }}
+            >
+                <Toolbar />
+                {outlet ? <Outlet /> : <BuildingList />}
+            </Drawer>
+        </div>
+    )
 }
 
 export default Map;
