@@ -3,7 +3,7 @@ import { useOutlet, Outlet } from "react-router-dom";
 import BuildingList from "./BuildingList";
 
 
-const drawerWidth = 400;
+const drawerWidth = 500;
 
 const Map = () => {
     const outlet = useOutlet();

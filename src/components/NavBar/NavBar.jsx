@@ -21,13 +21,19 @@ function DrawerAppBar(props) {
     console.log(userData);
 
     const navItems = [
-      { title: 'Home', onClick: () => {} },
+      { title: 'Home', onClick: () => {
+        navigate('/')
+      } 
+      
+    },
       { title: 'About', onClick: () => {} },
     ];
     
     if (userData) {
       navItems.push(...[
-        { title: 'Map', onClick: () => {} },
+        { title: 'Map', onClick: () => {
+          navigate('/map');
+        } },
         { title: 'Community', onClick: () => {
           navigate('/community');
         } },
