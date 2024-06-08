@@ -77,7 +77,10 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                     alignItems='center'
                     justifyContent='center'
                     flexDirection='row'
-                    gap="50px"
+                    gap={{
+                        xs: "10px",
+                        sm: "50px"
+                    }}
                 >
                     <Box
                         width="180px"

@@ -21,7 +21,7 @@ const BuildingList = () => {
     ];
 
     return (
-        <Box sx={{ overflow: 'auto' }}>
+        <Box sx={{ overflowY: 'auto' }}>
             <Box
                 marginLeft="10px"
                 marginBottom="5px"
