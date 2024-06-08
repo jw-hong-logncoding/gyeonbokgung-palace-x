@@ -1,13 +1,23 @@
-import { useQuery } from "react-query";
-import { fetchPosts } from "../../apis/firebaseApis";
+// import { useQuery } from "react-query";
+// import { fetchPosts } from "../../apis/firebaseApis";
+import { Box, Stack } from "@mui/material";
+import ReviewTable from "./ReviewTable";
 
 const ReviewList = () => {
-    const { data } = useQuery('posts', fetchPosts);
-    console.log(data);
+    // const { data } = useQuery('posts', fetchPosts);
 
     return (
         <div>
-            {data[0].title}
+            <Stack
+                display="flex"
+                alignItems="center"
+            >
+                <Box
+                    marginTop="10px"
+                >
+                    <ReviewTable />
+                </Box>
+            </Stack>
         </div>
     )
 }

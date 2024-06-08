@@ -61,27 +61,38 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                             </Box>
                         ))
                     }
-                </Box>
-                <Box
-                    sx={{
-                        marginTop: '20px',
-                        padding: '0px 25px 0px 20px'
+                    <Box
+                        marginTop="10px"
+                    >
+                        <Typography
+                            fontSize="20px"
+                            fontWeight="bold"
+                        >
+                            Description:
+                        </Typography>
+                    </Box>
+                    <Box
+                        sx={{
+                            marginTop: '10px',
+                            padding: '0px 25px 0px 20px'
 
-                    }}
-                >
-                    {description}
-                </Box>
-                <Stack
-                    marginTop="20px"
-                    marginBottom="40px"
-                    alignItems='center'
-                    justifyContent='center'
-                    flexDirection='row'
-                    gap={{
-                        xs: "10px",
-                        sm: "50px"
-                    }}
-                >
+                        }}
+                    >
+                        {description}
+                    </Box>
+
+                    </Box>
+                                    <Stack
+                        marginTop="20px"
+                        marginBottom="40px"
+                        alignItems='center'
+                        justifyContent='center'
+                        flexDirection='row'
+                        gap={{
+                            xs: "10px",
+                            sm: "50px"
+                        }}
+                    >
                     <Box
                         width="180px"
                     >
