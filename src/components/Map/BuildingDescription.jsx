@@ -4,7 +4,9 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
     return (
         <div>
             <Stack>
-                <Box>
+                <Box
+                    marginLeft="15px"
+                >
                     <Typography
                         sx={{
                             fontSize: "30px",
@@ -13,14 +15,32 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                     >
                         {title}
                     </Typography>
-                    <Divider />
                 </Box>
-                <Box>
-                    <img src={photo}/>
+                <Divider />
+                <Box
+                    display="flex"
+                    marginY="10px"
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <img
+                        style={{
+                            width: "440px",
+                            boxShadow: '10px 10px 45px rgba(0, 0, 0, 0.15)'  // 그림자 추가
+                        }}
+                        src={photo}
+                    />
                 </Box>
-                <Box>
-                    <Box>
-                        <Typography>
+                <Box
+                    marginLeft="15px"
+                >
+                    <Box
+                        marginBottom="8px"
+                    >
+                        <Typography
+                            fontSize="20px"
+                            fontWeight="bold"
+                        >
                             Keywords:
                         </Typography>
                     </Box>
@@ -30,7 +50,8 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                                 key={index}
                                 sx={{
                                     display: 'inline-block',
-                                    bgcolor: 'skyblue',
+                                    color: 'white',
+                                    bgcolor: 'secondary.light',
                                     borderRadius: '15px',
                                     padding: '5px 10px 5px 10px',
                                     marginRight: '5px'
@@ -44,24 +65,42 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                 <Box
                     sx={{
                         marginTop: '20px',
-                        padding: '0px 20px 0px 20px'
+                        padding: '0px 25px 0px 20px'
 
                     }}
                 >
                     {description}
                 </Box>
                 <Stack
-                    marginTop="10px"
+                    marginTop="20px"
+                    marginBottom="40px"
                     alignItems='center'
-                    justifyContent='space-around'
+                    justifyContent='center'
                     flexDirection='row'
+                    gap="50px"
                 >
-                    <Button>
-                        View
-                    </Button>
-                    <Button>
-                        Write
-                    </Button>
+                    <Box
+                        width="180px"
+                    >
+                        <Button
+                            variant='contained'
+                            color="secondary"
+                            fullWidth
+                        >
+                            View
+                        </Button>
+                    </Box>
+                    <Box
+                        width="180px"
+                    >
+                        <Button
+                            variant='contained'
+                            color="secondary"
+                            fullWidth
+                        >
+                            Write
+                        </Button>
+                    </Box>
                 </Stack>
             </Stack>
         </div>
