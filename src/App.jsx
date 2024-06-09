@@ -5,6 +5,7 @@ import NavBarLayout from './components/Layout/NavBarLayout/NavBarLayout'
 import Community from './components/Community'
 import Map from './components/Map'
 import BuildingInfo from './components/Map/BuildingInfo'
+import ReviewForm from './components/ReviewForm'
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<NavBarLayout />}>
           <Route index path="/" element={<Home />} />
           <Route index path="/community" element={<Community />} />
+          <Route index path="/review-form" element={<ReviewForm />} />
           <Route path="/map" element={<Map />} >
             <Route path="/map/:title" element={<BuildingInfo />} />
           </Route>
