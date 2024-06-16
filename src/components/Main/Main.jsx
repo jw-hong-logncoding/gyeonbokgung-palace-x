@@ -12,7 +12,7 @@ const Main = () => {
             <S.MainImageContainer>
                 <S.MainImageOverlay />
                 <S.MainImage
-                    src={IMAGES.gyeongbokgung}
+                    src={IMAGES.finalgyeongbokgung}
                     alt="Gyeongbokgung Palace"
                 />
             </S.MainImageContainer>

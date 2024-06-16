@@ -3,7 +3,8 @@ import { styled } from "@mui/material";
 
 export const MainImageContainer = styled('span')({
     width: '100%',
-    height: '100vh',
+    height: '420vh',
+    // height: '400vh',
     display: 'flex',
     position: 'absolute',
     justifyContent: 'center',
@@ -12,8 +13,8 @@ export const MainImageContainer = styled('span')({
 });
 
 export const MainImage = styled('img')({
-    objectFit: 'cover',
-    objectPosition: '-50px 48px',
+    objectFit: 'contain',
+    objectPosition: '-60px 68px',
     zIndex: -2,
 });
 

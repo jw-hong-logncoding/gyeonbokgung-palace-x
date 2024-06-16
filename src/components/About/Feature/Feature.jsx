@@ -14,80 +14,14 @@ const Feature = () => {
         }
     }, [currentPage])
     return (
-        <div
-        >
+        <div>
             <Stack
                 tabIndex="-1"
                 ref={aboutPageRef}
-                paddingTop="100px"
-            >
-                <Typography
-                    sx={{
-                        background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
-                        WebkitBackgroundClip: 'text',
-                        backgroundClip: 'text',
-                        color: 'transparent',
-                        display: 'inline',
-                        fontSize: {
-                            sm: '78px',
-                            xs: '38px'
-                        }
-                    }}
-                    variant="mainPageTitle">
-                    Features
-                </Typography>
-                <Stack
-                    sx={{
-                        flexDirection: "row",
-                        justifyContent: "center",
-                        marginTop: "40px",
-                        gap: "80px"
-                    }}
-                >
-                    <Stack
-                        sx={{
-                            marginTop: "20px"   
-                        }}
-                    >
-                        <img
-                            style={{
-                                width: "130px",
-                                height: "130px"
-                            }}
-                            src={IMAGES.share}
-                        />
-                        <Typography
-                            color="white"
-                        >
-                            share{/* // children */}
-                        </Typography>
-                    </Stack>
-                    <Stack
-                        sx={{
-                            marginTop: "20px"
-                        }}
-                    >
-                        <img
-                        style={{
-                            width: "130px",
-                            height: "130px"
-                        }}
-                            src={IMAGES.tour}
-                        />
-                        <Typography
-                        color="white"
-                        >
-                            tour
-                        </Typography>
-                    </Stack>
-                      
-                </Stack>
-            </Stack>
-
-            <Stack
+                paddingTop="200px"
                 gap='30px'
                 alignItems="center"
-                marginTop="20px"
+                marginTop="200px"
             >
                 <Typography
                     sx={{
@@ -102,7 +36,7 @@ const Feature = () => {
                         }
                     }}
                     variant="mainPageTitle">
-                    Gyeongbokgung Palace
+                    About Gyeongbokgung
                 </Typography>
                 <Typography
                     sx={{
@@ -123,6 +57,7 @@ const Feature = () => {
             <Stack
                 alignItems= 'center'
                 marginTop="20px"
+                paddingTop="700px"
             >
                 <Typography
                     sx={{
@@ -215,6 +150,7 @@ const Feature = () => {
                 </Stack>
                  <Stack
                  alignItems="center"
+                 paddingTop="300px"
                  >
                       <Typography
                         sx={{
@@ -289,7 +225,7 @@ const Feature = () => {
                 </Stack>
 
                 <Stack
-                    paddingBottom='100px'
+                    paddingBottom='20px'
                 >
                     <Typography
                         sx={{
@@ -300,8 +236,8 @@ const Feature = () => {
                             display: 'inline',
                             marginTop: '60px',
                             fontSize: {
-                                sm: '78px',
-                                xs: '38px'
+                                sm: '48px',
+                                xs: '28px'
                             }}}
                         variant="mainPageTitle"
                         >

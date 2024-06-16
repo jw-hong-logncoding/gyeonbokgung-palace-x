@@ -12,7 +12,9 @@ const IMAGES = {
     gangnyeongjeon: new URL('./gangnyeongjeon.jpg', import.meta.url).href,
     jagyeongjeon: new URL('./jagyeongjeon.jpg', import.meta.url).href,
     jibokjae: new URL('./jibokjae.jpg', import.meta.url).href,
-    gyotaejeon: new URL('./gyotaejeon.jpg', import.meta.url).href
+    gyotaejeon: new URL('./gyotaejeon.jpg', import.meta.url).href,
+    Final2Gyeongbokgung: new URL('./final2gyeongbokgung.jpg', import.meta.url).href,
+    finalgyeongbokgung: new URL('./finalgyeongbokgung.jpg', import.meta.url).href
 }
 
 export default IMAGES;
