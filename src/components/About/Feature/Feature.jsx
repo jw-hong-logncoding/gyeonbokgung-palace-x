@@ -1,11 +1,25 @@
 import { Stack, Typography } from "@mui/material";
 import IMAGES from "../../../assets/images";
+import { useEffect, useRef } from "react";
+import useQueryParams from "../../../hooks/useQueryParams";
 
 const Feature = () => {
+    const query = useQueryParams(); 
+    const currentPage = query.get('page');
+    const aboutPageRef = useRef();
+    useEffect(() => {
+        const regex = /^about.*/;
+        if (regex.test(currentPage)) {
+            aboutPageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }, [currentPage])
     return (
-        <>
+        <div
+        >
             <Stack
-                marginTop="280px"
+                tabIndex="-1"
+                ref={aboutPageRef}
+                paddingTop="100px"
             >
                 <Typography
                     sx={{
@@ -315,7 +329,7 @@ const Feature = () => {
                         </Typography>
                 </Stack>
             </Stack>
-        </>
+        </div>
     )
 }
 

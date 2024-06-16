@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import useUserData from "../../hooks/useUserData";
 import { removeFromLocalStorage } from "../../functions/localStorageFunctions";
 import { LOCAL_STORAGE_KEYS } from "../../enums";
+import { generateRandomString } from "../../functions/stringFunctions";
 
 const drawerWidth = 240;
 
@@ -26,7 +27,9 @@ function DrawerAppBar(props) {
       } 
       
     },
-      { title: 'About', onClick: () => {} },
+      { title: 'About', onClick: () => {
+        navigate('/?page=about' + generateRandomString(5))
+      } },
     ];
     
     if (userData) {

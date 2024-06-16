@@ -67,7 +67,14 @@ const Main = () => {
                 
                 
                 <Box
-                    sx={{ display: 'flex'}}
+                    sx={{
+                        display: 'flex',
+                        height: {
+                            xs: "350px",
+                            md: "200px"
+                        }
+
+                    }}
                     textAlign="center"
                     justifyContent="center"
                 >
