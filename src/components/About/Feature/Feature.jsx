@@ -113,8 +113,7 @@ const Feature = () => {
                             xs: '32px'
                         },
                         width: {
-                            sm: '800px',
-                            xs: '400px'
+                            md: '800px',
                         }
 
                     }}

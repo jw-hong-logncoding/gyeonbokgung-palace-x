@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, Stack } from '@mui/material';
+import { Box, Button, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import { BUILDING_DATA_LIST } from '../../data';
 import { useState } from "react";
 
@@ -65,7 +65,9 @@ const ReviewTable = () => {
     return (
       <TableContainer component={Paper}>
         <Table
-            sx={{maxWidth: "800px"}}
+            sx={{
+                maxWidth: "800px",
+            }}
             aria-label="customized table"
         >
           <TableHead>
@@ -75,7 +77,14 @@ const ReviewTable = () => {
               <StyledTableCell align="left">Keywords</StyledTableCell>
               <StyledTableCell align="left">View</StyledTableCell>
               <StyledTableCell align="left">
-                <FormControl variant="standard" sx={{ minWidth: 120, height: 0, bottom: "12px" }} size="small">
+                <FormControl variant="standard" sx={{
+                        minWidth: {
+                            xs: 55,
+                            md: 120
+                        },
+                        height: 0,
+                        bottom: "12px"
+                    }} size="small">
                     <InputLabel id="demo-simple-select-standard-label">Filter</InputLabel>
                     <Select
                             value={filterValue}
@@ -102,18 +111,22 @@ const ReviewTable = () => {
                 <StyledTableCell align="left">
                     <Stack
                         display="flex"
-                        flexDirection="row"
                         gap="5px"
+                        flexDirection="row"
+                        width="100px"
                     >
                     {
                         row.keywords.map((e, i) => (
                             <Box
                                 key={i}
+                                width="100px"
                                 sx={{
                                     display: "inline-block",
                                     backgroundColor: "secondary.main",
                                     fontSize: "12px",
-                                    padding: "5px 10px 5px 10px",
+                                    padding: {
+                                        xs: "5px 10px 5px 10px"
+                                    },
                                     borderRadius: "15px",
                                     color: "white"
                                 }}
@@ -126,6 +139,7 @@ const ReviewTable = () => {
                 </StyledTableCell>
                 <StyledTableCell align="left">
                     <Button
+                        size='small'
                         variant="outlined"
                     >
                         More
@@ -135,9 +149,21 @@ const ReviewTable = () => {
                     <Stack
                         direction="row"
                         alignItems="center"
-                        gap="2px"
+                        gap="5px"
                     >
-                        {`${row.likes} likes`}
+                        <Typography>
+                            {`${row.likes}`}
+                        </Typography>
+                        <Typography
+                            sx={{
+                                display: {
+                                    xs: "none",
+                                    md: "contents",
+                                }
+                            }}
+                        >
+                            likes
+                        </Typography>
                         <FavoriteIcon sx={{width: "17px"}} />
                     </Stack>
                 </StyledTableCell>

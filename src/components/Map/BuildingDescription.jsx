@@ -1,6 +1,8 @@
 import { Button, Stack, Box, Typography, Divider } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const BuildingDescription = ({title, photo, keywordList, description }) => {
+    const navigate = useNavigate();
     return (
         <div>
             <Stack>
@@ -100,6 +102,7 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                             variant='contained'
                             color="secondary"
                             fullWidth
+                            onClick={() => {navigate('/community')}}
                         >
                             View
                         </Button>
