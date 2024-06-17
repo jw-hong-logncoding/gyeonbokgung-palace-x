@@ -18,10 +18,10 @@ const Feature = () => {
             <Stack
                 tabIndex="-1"
                 ref={aboutPageRef}
-                paddingTop="200px"
+                paddingTop="240px"
                 gap='30px'
                 alignItems="center"
-                marginTop="200px"
+                marginTop="210px"
             >
                 <Typography
                     sx={{
@@ -57,7 +57,12 @@ const Feature = () => {
             <Stack
                 alignItems= 'center'
                 marginTop="20px"
-                paddingTop="700px"
+                sx={{
+                    paddingTop: {
+                        xs: "600px",
+                        md: "700px"
+                    }
+                }}
             >
                 <Typography
                     sx={{
@@ -159,7 +164,10 @@ const Feature = () => {
                             backgroundClip: 'text',
                             color: 'transparent',
                             display: 'inline',
-                            marginTop: '80px',
+                            marginTop: {
+                                xs: '0px',
+                                md: '180px'
+                            },
                             fontSize: {
                                 sm: '78px',
                                 xs: '38px'
@@ -224,9 +232,7 @@ const Feature = () => {
                         </Typography>
                 </Stack>
 
-                <Stack
-                    paddingBottom='20px'
-                >
+                <Stack>
                     <Typography
                         sx={{
                             background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
@@ -234,7 +240,7 @@ const Feature = () => {
                             backgroundClip: 'text',
                             color: 'transparent',
                             display: 'inline',
-                            marginTop: '60px',
+                            marginTop: '160px',
                             fontSize: {
                                 sm: '48px',
                                 xs: '28px'

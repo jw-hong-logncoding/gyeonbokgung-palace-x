@@ -3,18 +3,17 @@ import { styled } from "@mui/material";
 
 export const MainImageContainer = styled('span')({
     width: '100%',
-    height: '420vh',
-    // height: '400vh',
+    height: '3920px',
     display: 'flex',
     position: 'absolute',
     justifyContent: 'center',
-    alignItems: 'center',
+    alignItems: 'start',
     overflow: 'hidden'
 });
 
 export const MainImage = styled('img')({
     objectFit: 'contain',
-    objectPosition: '-60px 68px',
+    objectPosition: '0px -80px',
     zIndex: -2,
 });
 
@@ -25,5 +24,6 @@ export const MainImageOverlay = styled('div')({
     left: 0,
     width: '100%',
     height: '100%',
-    backgroundImage: 'linear-gradient(to top, rgba(20, 20, 20, 1), rgba(0, 0, 0, 0))'
+    backgroundImage: "linear-gradient(to bottom, rgba(20, 20, 20, 0.2) 0%, rgba(20, 20, 20, 0.7) 10%, rgba(20, 20, 20, 0.8) 100%)",
+    pointerEvents: "none"
 });
