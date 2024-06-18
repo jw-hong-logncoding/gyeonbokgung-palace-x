@@ -17,7 +17,10 @@ const Main = () => {
                 />
             </S.MainImageContainer>
             <Stack
-                paddingTop="230px"
+                paddingTop={{
+                    xs: '175px',
+                    md: '230px'
+                }}
                 textAlign="center"
                 gap="60px"
             >
@@ -40,9 +43,13 @@ const Main = () => {
                             backgroundClip: 'text',
                             color: 'transparent',
                             display: 'inline',
+                            letterSpacing: {
+                                xs: "8px",
+                                md: "10px"
+                            },
                             fontSize: {
                                 sm: '78px',
-                                xs: '38px'
+                                xs: '34px'
                             }
                         }}
                         variant="mainPageTitle">
@@ -55,9 +62,13 @@ const Main = () => {
                             backgroundClip: 'text',
                             color: 'transparent',
                             display: 'inline',
+                            letterSpacing: {
+                                xs: "8px",
+                                md: "10px"
+                            },
                             fontSize: {
                                 sm: '78px',
-                                xs: '38px'
+                                xs: '34px'
                             }
                         }}
                         variant="mainPageTitle">
@@ -70,8 +81,8 @@ const Main = () => {
                     sx={{
                         display: 'flex',
                         height: {
-                            xs: "350px",
-                            md: "200px"
+                            xs: "100px",
+                            md: "100px"
                         }
 
                     }}

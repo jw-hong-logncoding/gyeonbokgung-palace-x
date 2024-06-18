@@ -1,5 +1,4 @@
-import { Stack, Typography } from "@mui/material";
-import IMAGES from "../../../assets/images";
+import { Box, Stack, Typography } from "@mui/material";
 import { useEffect, useRef } from "react";
 import useQueryParams from "../../../hooks/useQueryParams";
 
@@ -14,14 +13,18 @@ const Feature = () => {
         }
     }, [currentPage])
     return (
-        <div>
+        <Box
+            sx={{
+                padding: "15px"
+            }}
+        >
             <Stack
                 tabIndex="-1"
                 ref={aboutPageRef}
-                paddingTop="240px"
+                paddingTop="200px"
                 gap='30px'
                 alignItems="center"
-                marginTop="210px"
+                marginTop="280px"
             >
                 <Typography
                     sx={{
@@ -32,9 +35,13 @@ const Feature = () => {
                         display: 'inline',
                         fontSize: {
                             sm: '78px',
-                            xs: '38px'
-                        }
-                    }}
+                            xs: '34px'
+                        },
+                        letterSpacing: {
+                            xs: "8px",
+                            md: "10px"
+                        },
+                   }}
                     variant="mainPageTitle">
                     About Gyeongbokgung
                 </Typography>
@@ -73,8 +80,13 @@ const Feature = () => {
                     display: 'inline',
                     fontSize: {
                         sm: '78px',
-                        xs: '38px'
-                    }}}
+                        xs: '34px'
+                    },
+                    letterSpacing: {
+                        xs: "7px",
+                        md: "10px"
+                    },
+                   }}
                     variant="mainPageTitle"
                 >
                     Joseon Dynasty
@@ -165,13 +177,18 @@ const Feature = () => {
                             color: 'transparent',
                             display: 'inline',
                             marginTop: {
-                                xs: '0px',
+                                xs: '40px',
                                 md: '180px'
                             },
                             fontSize: {
                                 sm: '78px',
-                                xs: '38px'
-                            }}}
+                                xs: '34px'
+                            },
+                            letterSpacing: {
+                                xs: "8px",
+                                md: "10px"
+                            },
+                            }}
                             variant="mainPageTitle"
                         >
                             Jo / Jung / Gun
@@ -270,7 +287,7 @@ const Feature = () => {
                         </Typography>
                 </Stack>
             </Stack>
-        </div>
+        </Box>
     )
 }
 
