@@ -114,6 +114,9 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                             variant='contained'
                             color="secondary"
                             fullWidth
+                            onClick={() => {
+                                navigate("/review-form");
+                            }}
                         >
                             Write
                         </Button>
