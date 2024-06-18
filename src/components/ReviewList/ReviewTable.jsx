@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Box, Button, Chip, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
+import { Button, Chip, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import { BUILDING_DATA_LIST } from '../../data';
 import { useState } from "react";
 import { isMobile } from 'react-device-detect';

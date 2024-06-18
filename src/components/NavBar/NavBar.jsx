@@ -40,7 +40,9 @@ function DrawerAppBar(props) {
         { title: 'Community', onClick: () => {
           navigate('/community');
         } },
-        { title: 'My Page', onClick: () => {} },
+        { title: 'My Page', onClick: () => {
+          navigate('/my-page')
+        } },
       ]);
     }
  
