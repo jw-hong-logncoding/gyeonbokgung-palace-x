@@ -7,6 +7,7 @@ import Map from './components/Map'
 import BuildingInfo from './components/Map/BuildingInfo'
 import ReviewForm from './components/ReviewForm'
 import MyPage from './components/MyPage'
+import ReviewDetail from './components/ReviewDetail'
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/map" element={<Map />} >
             <Route path="/map/:title" element={<BuildingInfo />} />
           </Route>
+          <Route path="/review/:id" element={<ReviewDetail />} />
         </Route>
         <Route path="*" element={<NotFound />}/>
       </Routes>

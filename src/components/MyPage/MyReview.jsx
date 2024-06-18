@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { Box, Button, Typography } from '@mui/material';
 import { BUILDING_DATA_LIST } from '../../data';
 import { isMobile } from 'react-device-detect';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -36,6 +37,7 @@ function createData(id, building, date,  likes) {
 
 
 const MyReview = () => {
+    const navigate = useNavigate();
     const rows = BUILDING_DATA_LIST
         .map(({title, date="06-18-2024"}) => {
             return createData("ID", title, date, 24);
@@ -153,6 +155,7 @@ const MyReview = () => {
                         }}
                         size='small'
                         variant="outlined"
+                        onClick={() => {navigate(`/review/${row.id}`)}}
                     >
                         More
                     </Button>

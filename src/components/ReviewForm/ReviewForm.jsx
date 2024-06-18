@@ -1,8 +1,7 @@
-import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Select, Slide, Slider, Stack, TextField, TextareaAutosize, Typography, styled } from "@mui/material";
+import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Select, Stack, TextField, TextareaAutosize, Typography, styled } from "@mui/material";
 import { BUILDING_DATA_LIST } from "../../data";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useState } from "react";
-import { SpaceBar } from "@mui/icons-material";
 
 const ReviewForm = () => {
     const [buildingState, setBuildingState] = useState();

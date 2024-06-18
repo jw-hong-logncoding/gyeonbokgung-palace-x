@@ -11,6 +11,7 @@ import { Button, Chip, FormControl, InputLabel, MenuItem, Select, Stack, Typogra
 import { BUILDING_DATA_LIST } from '../../data';
 import { useState } from "react";
 import { isMobile } from 'react-device-detect';
+import { useNavigate } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -38,6 +39,7 @@ function createData(id, building, keywords,  likes) {
 
 
 const ReviewTable = () => {
+    const navigate = useNavigate()
     const [filterValue, setFilterValue] = useState("");
 
     const handleSelectChange = (e) => {
@@ -203,6 +205,7 @@ const ReviewTable = () => {
                         }}
                         size='small'
                         variant="outlined"
+                        onClick={() => {navigate(`/review/${row.id}`)}}
                     >
                         More
                     </Button>
