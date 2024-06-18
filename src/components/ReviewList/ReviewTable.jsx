@@ -7,9 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import { Box, Button, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
+import { Box, Button, Chip, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import { BUILDING_DATA_LIST } from '../../data';
 import { useState } from "react";
+import { isMobile } from 'react-device-detect';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -63,33 +64,72 @@ const ReviewTable = () => {
 
 
     return (
-      <TableContainer component={Paper}>
+      <TableContainer
+        sx={{
+            width: {
+                xs: "100vw",
+                md: "700px"
+            }
+        }}
+        component={Paper}
+        >
         <Table
-            sx={{
-                maxWidth: "800px",
-            }}
             aria-label="customized table"
+            size={isMobile ? 'small' : 'medium'}
         >
           <TableHead>
             <TableRow>
-              <StyledTableCell>#</StyledTableCell>
-              <StyledTableCell>Building</StyledTableCell>
-              <StyledTableCell align="left">Keywords</StyledTableCell>
-              <StyledTableCell align="left">View</StyledTableCell>
-              <StyledTableCell align="left">
+                <StyledTableCell
+                    align="center"
+                    sx={{
+                        padding: {
+                            xs: "0px",
+                            md: "6px 16px"
+                        }
+                    }}
+                >
+                    #
+                </StyledTableCell>
+                <StyledTableCell>Building</StyledTableCell>
+                <StyledTableCell align="left">Keywords</StyledTableCell>
+                <StyledTableCell
+                    sx={{
+                        padding: {
+                            xs: "0px",
+                            md: "6px 16px"
+                        },
+                        textAlign: {
+                            xs: "center",
+                            md: "left"
+                        }
+                    }}
+                >
+                    View
+                </StyledTableCell>
+                <StyledTableCell align="left">
                 <FormControl variant="standard" sx={{
                         minWidth: {
-                            xs: 55,
+                            xs: 60,
                             md: 120
                         },
                         height: 0,
-                        bottom: "12px"
+                        bottom: "14px",
                     }} size="small">
-                    <InputLabel id="demo-simple-select-standard-label">Filter</InputLabel>
+                    <InputLabel sx={{color: "white", fontSize: "14px"}} id="demo-simple-select-standard-label">Filter</InputLabel>
                     <Select
                             value={filterValue}
                             label="Filter"
                             onChange={handleSelectChange}
+                            sx={{
+                                fontSize: '13px',
+                                color: 'white', // 선택된 텍스트의 색상을 빨간색으로 설정
+                                '.MuiSelect-select': {
+                                  color: 'white', // 선택된 텍스트의 색상을 빨간색으로 설정
+                                },
+                                '& .Mui-selected': {
+                                  color: 'white', // 선택된 항목의 텍스트 색상을 파란색으로 설정
+                                },
+                              }}
                         >
                         <MenuItem value="">
                             <em>None</em>
@@ -104,47 +144,69 @@ const ReviewTable = () => {
             {rows
             .map((row, i) => (
               <StyledTableRow key={row.building}>
-                <StyledTableCell align="left">{i + 1}</StyledTableCell>
+                <StyledTableCell
+                    sx={{
+                        padding: "3px"
+                    }}
+                    size="small"
+                    align="left"
+                >
+                    <Typography
+                        sx={{
+                            fontSize: "12px",
+                            textAlign: "center"
+                        }}
+                    >
+                        {i + 1}
+                    </Typography>
+                </StyledTableCell>
                 <StyledTableCell component="th" scope="row">
-                  {row.building}
+                    <Typography
+                        sx={{
+                            fontSize: "12px",
+                        }}
+                    >
+                        {row.building}
+                    </Typography>
                 </StyledTableCell>
                 <StyledTableCell align="left">
                     <Stack
                         display="flex"
+                        flexWrap="wrap"
+                        maxWidth="400px"
                         gap="5px"
                         flexDirection="row"
-                        width="100px"
+                        minWidth="50px"
                     >
                     {
                         row.keywords.map((e, i) => (
-                            <Box
+                            <Chip
+                                size='small'
+                                label={e}
                                 key={i}
-                                width="100px"
-                                sx={{
-                                    display: "inline-block",
-                                    backgroundColor: "secondary.main",
-                                    fontSize: "12px",
-                                    padding: {
-                                        xs: "5px 10px 5px 10px"
-                                    },
-                                    borderRadius: "15px",
-                                    color: "white"
-                                }}
-                            >
-                                {e}
-                            </Box>
+                                color="secondary"
+                            />
                         ))
                     }
                     </Stack>
                 </StyledTableCell>
-                <StyledTableCell align="left">
+                <StyledTableCell
+                    sx={{
+                        padding: "0px"
+                    }}
+                    align="center"
+                    >
                     <Button
+                        sx={{
+                            fontSize: "10px",
+                            minWidth: "5px"
+                        }}
                         size='small'
                         variant="outlined"
                     >
                         More
                     </Button>
-                </StyledTableCell>
+               </StyledTableCell>
                 <StyledTableCell align="left">
                     <Stack
                         direction="row"
