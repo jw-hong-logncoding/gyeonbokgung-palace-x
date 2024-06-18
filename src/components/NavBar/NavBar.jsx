@@ -57,7 +57,7 @@ function DrawerAppBar(props) {
     const handleLogout = () => {
       handleCloseMenu();
       removeFromLocalStorage(LOCAL_STORAGE_KEYS.USER);
-      navigate(0);
+      navigate('/');
     };
 
     const handleMenu = (event) => {
