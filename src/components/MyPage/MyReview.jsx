@@ -64,7 +64,7 @@ const MyReview = () => {
         sx={{
             width: {
                 xs: "100vw",
-                md: "700px"
+                md: "500px"
             }
         }}
         component={Paper}
