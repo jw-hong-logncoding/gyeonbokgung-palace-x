@@ -1,5 +1,5 @@
 import { db } from '../firebase';
-import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection, setDoc, runTransaction } from "firebase/firestore";
 
 
 export async function fetchPosts() {
@@ -32,11 +32,39 @@ export async function fetchPostById(postId) {
 }
   
 export async function addReview(reviewData) {
-  
-  // 새 문서 참조 생성
-  const docRef = doc(collection(db, "reviews"));
-  // 문서 참조에 데이터 쓰기
-  await setDoc(docRef, reviewData);
-  // 새로 추가된 문서의 ID와 데이터 반환
-  return { id: docRef.id, ...reviewData };
+  try {
+    const res = await runTransaction(db, async (transaction) => {
+      const docBuildingsRef = doc(db, "buildings", reviewData.buildingId);
+      const docReviewsRef = doc(collection(db, "reviews"));
+      console.log(docReviewsRef)
+
+      const docSnap = await transaction.get(docBuildingsRef);
+
+      await transaction.set(docReviewsRef, reviewData);
+
+      // building type이 존재할경우
+      if (!docSnap.exists()) {
+        const keywordObject = {};
+        reviewData.keywords.forEach(k => {
+          keywordObject[k] = 1;
+        });
+        await transaction.set(docBuildingsRef, {keywords: keywordObject})
+      } else {
+        const foundKeywords = docSnap.data().keywords;
+        reviewData.keywords.forEach(k => {
+          if (Object.prototype.hasOwnProperty.call(foundKeywords, k)) {
+            foundKeywords[k]++;
+          } else {
+            foundKeywords[k] = 1;
+          }
+        })
+        await transaction.update(docBuildingsRef, { keywords: foundKeywords});
+      }
+      return { id: docReviewsRef.id, ...reviewData };
+    });
+    console.log("Transaction successfully committed!");
+    return res;
+  } catch (e) {
+    console.error("Transaction failed: ", e);
+  }
 }
