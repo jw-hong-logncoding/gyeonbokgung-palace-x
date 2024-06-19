@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import { WithContext as ReactTags, SEPARATORS } from 'react-tag-input';
 import { BUILDING_DATA_LIST } from '../../data';
 import { Box } from '@mui/material';
@@ -12,7 +11,6 @@ const suggestions = BUILDING_DATA_LIST.map((country) => {
 });
 
 const TagInput = ({isHashTag = false, tags, setTags}) => {
-
   const handleChange = (value, event) => {
     if(!isHashTag) return;
     if (event.target.className !== "ReactTags__tagInputField") {
@@ -37,6 +35,8 @@ const TagInput = ({isHashTag = false, tags, setTags}) => {
   };
 
   const handleAddition = (tag) => {
+    tag.id = tag.id.replace(/,/g, '').replace(/ /g, '');
+    tag.text = tag.text.replace(/,/g, '').replace(/ /g, '');
     setTags((prevTags) => {
       return [...prevTags, tag];
     });
@@ -52,7 +52,8 @@ const TagInput = ({isHashTag = false, tags, setTags}) => {
     setTags(newTags);
   };
 
-  const handleTagClick = (index) => {
+  const handleTagClick = (index, event) => {
+    event.stopPropagation();
     console.log('The tag at index ' + index + ' was clicked');
   };
 
@@ -78,6 +79,14 @@ const TagInput = ({isHashTag = false, tags, setTags}) => {
         }
         return tagStyles;
     }
+    const enterEvent = new KeyboardEvent('keydown', {
+        key: 'Enter',
+        code: 'Enter',
+        bubbles: true,
+        cancelable: true,
+        which: 13,
+        keyCode: 13,
+    });
 
   return (
     <Box
@@ -117,9 +126,20 @@ const TagInput = ({isHashTag = false, tags, setTags}) => {
             '& .ReactTags__clearAll': {},
         }}
     >
+        <form>
         <ReactTags
+            inputProps={{
+                onKeyUp: (e) => {
+                    if(e.key === 'Unidentified'){
+                        var inputValue = e.target.value;
+                        var lastLetter = inputValue.charAt(inputValue.length - 1);
+                        if(lastLetter === ',' || lastLetter === '\n') {
+                            e.target.dispatchEvent(enterEvent);
+                        }
+                    }
+                }
+            }}
           tags={tags}
-          handleChange={(e)=>{console.log(e)}}
           suggestions={suggestions}
           separators={[SEPARATORS.ENTER, SEPARATORS.COMMA]}
           handleInputChange={handleChange}
@@ -129,11 +149,11 @@ const TagInput = ({isHashTag = false, tags, setTags}) => {
           handleTagClick={handleTagClick}
           onTagUpdate={onTagUpdate}
           inputFieldPosition="bottom"
-          editable
           clearAll
           onClearAll={onClearAll}
           maxTags={7}
         />
+</form>
     </Box>
   );
 };
