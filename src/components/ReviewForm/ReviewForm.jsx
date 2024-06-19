@@ -1,10 +1,13 @@
-import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Select, Stack, TextField, TextareaAutosize, Typography, styled } from "@mui/material";
+import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Select, Stack, TextareaAutosize, Typography, styled } from "@mui/material";
 import { BUILDING_DATA_LIST } from "../../data";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useState } from "react";
+import TagInput from "../TagInput/TagInput";
 
 const ReviewForm = () => {
     const [buildingState, setBuildingState] = useState();
+    const [hashTags, setHashTags] = useState([]);
+    const [keywords, setKeywords] = useState([]);
 
     const handleBuildingChange = (e) => {
         console.log(e.target.value);
@@ -70,6 +73,7 @@ const ReviewForm = () => {
                             }} size="small">
                                 <Select
                                     onChange={handleBuildingChange}
+                                    sx={{fontSize: "14px"}}
                                 >
                                 {BUILDING_DATA_LIST
                                     .map(({title, value}, i) => {
@@ -82,62 +86,47 @@ const ReviewForm = () => {
                             </FormControl>
                         </Stack>
                         <Stack
+                            marginTop="8px"
                             flexDirection="row"
-                            alignItems="center"
+                            alignItems="start"
                         >
                             <Typography
                                 sx={{
                                     fontWeight: "bold",
+                                    marginRight: "10px"
                                 }}
                             >
                                 {`Keywords: `}
                             </Typography>
-                            <Box
-                                sx={{
-                                    paddingRight: "20px",
-                                    width: "100%"
-                                }}
-                            >
-                                <TextField
-                                    sx={{
-                                        marginLeft: "10px",
-                                        width: "100%"
-                                    }}
-                                    id="standard-basic"
-                                    variant="standard"
-                                />
-                            </Box>
+                                <Box>
+                                    <TagInput
+                                        setTags={setKeywords}
+                                        tags={keywords}
+                                    />
+                                </Box>
                        </Stack>
                         <Stack
                             flexDirection='row'
-                            alignItems="center"
+                            alignItems="start"
+                            marginTop="10px"
                         >
                             <Typography
                                 sx={{
-                                    fontWeight: 'bold'
+                                    fontWeight: 'bold',
+                                    marginRight: '10px'
                                 }}
                             >{`Hashtags: `}</Typography>
-                            <FormControl sx={{
-                                m: 1,
-                                width: '100%',
-                                marginLeft: "10px"
-                                }} size="small"
-                            >
-                                <Select
-                                    onChange={handleBuildingChange}
-                                >
-                                {BUILDING_DATA_LIST
-                                    .map(({title, value}, i) => {
-                                        return (
-                                            <MenuItem key={i} value={value}>{title}</MenuItem>
-                                        )
-                                    })
-                                }
-                            </Select>
-                            </FormControl>
+                            <Box>
+                                <TagInput
+                                    setTags={setHashTags}
+                                    tags={hashTags}
+                                    isHashTag
+                                />
+                            </Box>
                         </Stack>
                         <Stack
                             alignItems="left"
+                            marginTop="10px"
                         >
                             <Typography
                                 sx={{
@@ -197,6 +186,7 @@ const ReviewForm = () => {
                             >
                                 <Button
                                     variant="contained"
+                                    onClick={() => {get}}
                                 >
                                     Post
                                 </Button>
