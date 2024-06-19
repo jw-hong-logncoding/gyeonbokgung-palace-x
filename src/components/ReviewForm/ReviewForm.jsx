@@ -3,11 +3,43 @@ import { BUILDING_DATA_LIST } from "../../data";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useState } from "react";
 import TagInput from "../TagInput/TagInput";
+import { loadUserInfo } from "../../functions/localStorageFunctions";
+import { useMutation } from "react-query";
+import { addReview } from "../../apis/firebaseApis";
+import { useNavigate } from "react-router-dom";
 
 const ReviewForm = () => {
+    const navigate = useNavigate();
     const [buildingState, setBuildingState] = useState();
     const [hashTags, setHashTags] = useState([]);
     const [keywords, setKeywords] = useState([]);
+    const [review, setReview] = useState("");
+
+    const mutation = useMutation(reviewData => addReview(reviewData), {
+        onSuccess: (data) => {
+            console.log('Post added!', data);
+            navigate(`/review/${data.id}`);
+        },
+        onError: (error) => {
+            console.error('Error adding post:', error);
+        }
+    });
+
+    const handlePost = (e) => {
+        const { userId, username } = loadUserInfo();
+        const reviewRequest = {
+            userId,
+            username,
+            buildingId: buildingState,
+            date: new Date().toUTCString(),
+            photoUrl: null,
+            keywords: keywords.map((k) => k.text),
+            hashTags: hashTags.map((h) => h.text),
+            review,
+            likes: {}
+        }
+        mutation.mutate(reviewRequest)
+    }
 
     const handleBuildingChange = (e) => {
         console.log(e.target.value);
@@ -146,6 +178,8 @@ const ReviewForm = () => {
                                         overflow: "auto"
                                     }}
                                     aria-label="minimum height"
+                                    onChange={(e) => {setReview(e.target.value)}}
+                                    value={review}
                                     minRows={3}
                                     maxLength={600}
                                     placeholder="Write review here"
@@ -186,7 +220,7 @@ const ReviewForm = () => {
                             >
                                 <Button
                                     variant="contained"
-                                    onClick={() => {get}}
+                                    onClick={handlePost}
                                 >
                                     Post
                                 </Button>

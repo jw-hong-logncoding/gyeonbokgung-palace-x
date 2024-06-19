@@ -1,5 +1,5 @@
 import { db } from '../firebase';
-import { doc, getDoc, getDocs,  collection } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection, setDoc } from "firebase/firestore";
 
 
 export async function fetchPosts() {
@@ -31,3 +31,12 @@ export async function fetchPostById(postId) {
     return snapshot.data();
 }
   
+export async function addReview(reviewData) {
+  
+  // 새 문서 참조 생성
+  const docRef = doc(collection(db, "reviews"));
+  // 문서 참조에 데이터 쓰기
+  await setDoc(docRef, reviewData);
+  // 새로 추가된 문서의 ID와 데이터 반환
+  return { id: docRef.id, ...reviewData };
+}
