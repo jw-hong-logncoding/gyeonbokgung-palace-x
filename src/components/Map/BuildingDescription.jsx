@@ -25,9 +25,13 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                     justifyContent="center"
                     alignItems="center"
                 >
-                    <img
-                        style={{
-                            width: "440px",
+                    <Box
+                        component="img"
+                        sx={{
+                            width: {
+                                xs: "95%",
+                                md: "440px"
+                            },
                             boxShadow: '10px 10px 45px rgba(0, 0, 0, 0.15)'  // 그림자 추가
                         }}
                         src={photo}
