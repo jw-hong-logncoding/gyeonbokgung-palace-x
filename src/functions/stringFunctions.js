@@ -7,3 +7,8 @@ export function generateRandomString(length) {
     }
     return result;
 }
+
+export function parseTranslateY(transformString) {
+    const match = /translateY\((-?\d+\.?\d*)px\)/.exec(transformString);
+    return match ? parseFloat(match[1]) : null;
+}
