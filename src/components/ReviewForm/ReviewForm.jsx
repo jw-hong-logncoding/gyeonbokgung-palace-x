@@ -11,7 +11,7 @@ import { useImageStore } from "../../store";
 
 const ReviewForm = () => {
     const navigate = useNavigate();
-    const [buildingState, setBuildingState] = useState();
+    const [buildingState, setBuildingState] = useState("gwanghwamun");
     const [hashTags, setHashTags] = useState([]);
     const [keywords, setKeywords] = useState([]);
     const [review, setReview] = useState("");
@@ -61,14 +61,14 @@ const ReviewForm = () => {
             }}
         >
             <Card sx={{
-                    minWidth: {
-                        xs: "350px",
-                        md: "550px"
-                    },
-                    maxWidth: "700px",
-                    marginTop: "10px"
-                }}>
-                
+                minWidth: {
+                    xs: "350px",
+                    md: "550px"
+                },
+                maxWidth: "700px",
+                marginTop: "10px"
+            }}>
+
                 <CardContent
                 >
                     <Box>
@@ -91,140 +91,135 @@ const ReviewForm = () => {
                             marginTop: "10px"
                         }}
                     >
-                    <Stack
-                        display="flex"
-                        alignItems="left"
-                        width="400px"
-                    >
                         <Stack
-                            flexDirection='row'
-                            alignItems="center"
+                            display="flex"
+                            alignItems="left"
+                            width="400px"
                         >
-                            <Typography
-                                sx={{
-                                    fontWeight: "bold"
-                                }}
-                            >{`Building: `}</Typography>
-                            <FormControl sx={{
-                                m: 1,
-                                width: '100%',
-                                marginLeft: "20px"
-                            }} size="small">
-                                <Select
-                                    onChange={handleBuildingChange}
-                                    sx={{fontSize: "14px"}}
-                                >
-                                {BUILDING_DATA_LIST
-                                    .map(({title, value}, i) => {
-                                        return (
-                                            <MenuItem key={i} value={value}>{title}</MenuItem>
-                                        )
-                                    })
-                                }
-                            </Select>
-                            </FormControl>
-                        </Stack>
-                        <Stack
-                            marginTop="8px"
-                            flexDirection="row"
-                            alignItems="start"
-                        >
-                            <Typography
-                                sx={{
-                                    fontWeight: "bold",
-                                    marginRight: "10px"
-                                }}
+                            <Stack
+                                flexDirection='row'
+                                alignItems="center"
                             >
-                                {`Keywords: `}
-                            </Typography>
+                                <Typography
+                                    sx={{
+                                        fontWeight: "bold"
+                                    }}
+                                >{`Building: `}</Typography>
+                                <FormControl sx={{
+                                    m: 1,
+                                    width: '100%',
+                                    marginLeft: "20px"
+                                }} size="small">
+                                    <Select
+                                        value={buildingState}
+                                        onChange={handleBuildingChange}
+                                        sx={{ fontSize: "14px" }}
+                                    >
+                                        {BUILDING_DATA_LIST
+                                            .map(({ title, value }, i) => {
+                                                return (
+                                                    <MenuItem key={i} value={value}>{title}</MenuItem>
+                                                )
+                                            })
+                                        }
+                                    </Select>
+                                </FormControl>
+                            </Stack>
+                            <Stack
+                                marginTop="8px"
+                                flexDirection="row"
+                                alignItems="start"
+                            >
+                                <Typography
+                                    sx={{
+                                        fontWeight: "bold",
+                                        marginRight: "10px"
+                                    }}
+                                >
+                                    {`Keywords: `}
+                                </Typography>
                                 <Box>
                                     <TagInput
                                         setTags={setKeywords}
                                         tags={keywords}
                                     />
                                 </Box>
-                       </Stack>
-                        <Stack
-                            flexDirection='row'
-                            alignItems="start"
-                            marginTop="10px"
-                        >
-                            <Typography
-                                sx={{
-                                    fontWeight: 'bold',
-                                    marginRight: '10px'
-                                }}
-                            >{`Hashtags: `}</Typography>
-                            <Box>
-                                <TagInput
-                                    setTags={setHashTags}
-                                    tags={hashTags}
-                                    isHashTag
-                                />
-                            </Box>
-                        </Stack>
-                        <Stack
-                            alignItems="left"
-                            marginTop="10px"
-                        >
-                            <Typography
-                                sx={{
-                                    fontWeight: 'bold'
-                                }}
-                            >{`Review: `}</Typography>
-                            <Box
-                                sx={{
-                                    marginTop: "5px",
-                                }}
+                            </Stack>
+                            <Stack
+                                flexDirection='row'
+                                alignItems="start"
+                                marginTop="10px"
                             >
-                                <TextareaAutosize
-                                    style={{
-                                        width: "100%",
-                                        minHeight: "50px",
-                                        maxHeight: "400px",
-                                        overflow: "auto"
+                                <Typography
+                                    sx={{
+                                        fontWeight: 'bold',
+                                        marginRight: '10px'
                                     }}
-                                    aria-label="minimum height"
-                                    onChange={(e) => {setReview(e.target.value)}}
-                                    value={review}
-                                    minRows={3}
-                                    maxLength={600}
-                                    placeholder="Write review here"
-                                />
-                            </Box>
+                                >{`Hashtags: `}</Typography>
+                                <Box>
+                                    <TagInput
+                                        setTags={setHashTags}
+                                        tags={hashTags}
+                                        isHashTag
+                                    />
+                                </Box>
+                            </Stack>
                             <Stack
                                 alignItems="left"
-                                flexDirection="column"
-                                flexWrap="wrap"
-                                sx={{
-                                    "> div:nth-child(3n+3)": {
-                                        flexBasis: "100%",
-                                    }
-                                }}
+                                marginTop="10px"
                             >
                                 <Typography
                                     sx={{
                                         fontWeight: 'bold'
                                     }}
-                                >{`Optional: `}</Typography>
-                                <ImageUploader />
-                            </Stack>
-                            <Box
-                                sx={{
-                                    display: 'flex',
-                                    justifyContent: 'right',
-                                    marginTop: '30px'
-                                }}
-                            >
-                                <Button
-                                    variant="contained"
-                                    onClick={handlePost}
+                                >{`Review: `}</Typography>
+                                <Box
+                                    sx={{
+                                        marginTop: "5px",
+                                    }}
                                 >
-                                    Post
-                                </Button>
-                            </Box>
+                                    <TextareaAutosize
+                                        style={{
+                                            width: "100%",
+                                            minHeight: "50px",
+                                            maxHeight: "400px",
+                                            overflow: "auto"
+                                        }}
+                                        aria-label="minimum height"
+                                        onChange={(e) => { setReview(e.target.value) }}
+                                        value={review}
+                                        minRows={3}
+                                        maxLength={600}
+                                        placeholder="Write review here"
+                                    />
+                                </Box>
+                                <Stack
+                                    alignItems="left"
+                                    flexDirection="column"
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontWeight: 'bold'
+                                        }}
+                                    >{`Optional: `}</Typography>
+                                    <ImageUploader />
+                                </Stack>
+                                <Box
+                                    sx={{
+                                        display: 'flex',
+                                        justifyContent: 'right',
+                                        marginTop: '30px'
+                                    }}
+                                >
+                                    <Button
+                                        variant="contained"
+                                        onClick={handlePost}
+                                    >
+                                        Post
+                                    </Button>
+                                </Box>
+                            </Stack>
                         </Stack>
-                    </Stack>
                     </Box>
                 </CardContent>
             </Card>
