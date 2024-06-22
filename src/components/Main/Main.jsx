@@ -38,18 +38,18 @@ const Main = () => {
                 >
                     <Typography
                         sx={{
-                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
+                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5))',
                             WebkitBackgroundClip: 'text',
                             backgroundClip: 'text',
                             color: 'transparent',
                             display: 'inline',
                             letterSpacing: {
-                                xs: "8px",
+                                xs: "3px",
                                 md: "10px"
                             },
                             fontSize: {
                                 sm: '78px',
-                                xs: '34px'
+                                xs: '50px'
                             }
                         }}
                         variant="mainPageTitle">
@@ -57,18 +57,18 @@ const Main = () => {
                     </Typography>
                     <Typography
                         sx={{
-                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
+                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5))',
                             WebkitBackgroundClip: 'text',
                             backgroundClip: 'text',
                             color: 'transparent',
                             display: 'inline',
                             letterSpacing: {
-                                xs: "8px",
+                                xs: "3px",
                                 md: "10px"
                             },
                             fontSize: {
                                 sm: '78px',
-                                xs: '34px'
+                                xs: '50px'
                             }
                         }}
                         variant="mainPageTitle">

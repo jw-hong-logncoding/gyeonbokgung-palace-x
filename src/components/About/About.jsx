@@ -28,17 +28,17 @@ const About = () => {
             >
                 <Typography
                     sx={{
-                        background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
+                        background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5))',
                         WebkitBackgroundClip: 'text',
                         backgroundClip: 'text',
                         color: 'transparent',
                         display: 'inline',
                         fontSize: {
                             sm: '78px',
-                            xs: '34px'
+                            xs: '50px'
                         },
                         letterSpacing: {
-                            xs: "8px",
+                            xs: "3px",
                             md: "10px"
                         },
                    }}
@@ -73,17 +73,17 @@ const About = () => {
             >
                 <Typography
                     sx={{
-                    background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
+                    background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5))',
                     WebkitBackgroundClip: 'text',
                     backgroundClip: 'text',
                     color: 'transparent',
                     display: 'inline',
                     fontSize: {
                         sm: '78px',
-                        xs: '34px'
+                        xs: '50px'
                     },
                     letterSpacing: {
-                        xs: "7px",
+                        xs: "3px",
                         md: "10px"
                     },
                    }}
@@ -171,7 +171,7 @@ const About = () => {
                  >
                       <Typography
                         sx={{
-                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
+                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5))',
                             WebkitBackgroundClip: 'text',
                             backgroundClip: 'text',
                             color: 'transparent',
@@ -182,10 +182,10 @@ const About = () => {
                             },
                             fontSize: {
                                 sm: '78px',
-                                xs: '34px'
+                                xs: '50px'
                             },
                             letterSpacing: {
-                                xs: "8px",
+                                xs: "3px",
                                 md: "10px"
                             },
                             }}
@@ -252,7 +252,7 @@ const About = () => {
                 <Stack>
                     <Typography
                         sx={{
-                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.4))',
+                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5))',
                             WebkitBackgroundClip: 'text',
                             backgroundClip: 'text',
                             color: 'transparent',
@@ -260,7 +260,7 @@ const About = () => {
                             marginTop: '160px',
                             fontSize: {
                                 sm: '48px',
-                                xs: '28px'
+                                xs: '38px'
                             }}}
                         variant="mainPageTitle"
                         >
