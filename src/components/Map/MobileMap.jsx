@@ -29,7 +29,7 @@ const MobileMap = () => {
         observer.observe(targetElement, config);
         }, []);
 
-    const snapPoints = [-BETWEEN_TOP_AND_SHEET, 600, 400, 30];
+    const snapPoints = [1200, 600, 400, 30];
 
     return (
         <div>
@@ -38,7 +38,6 @@ const MobileMap = () => {
                 isOpen
                 snapPoints={snapPoints}
                 initialSnap={1}
-                onClose={() => {}}
                 ref={sheetRef}
                 detent="content-height"
             >
@@ -46,14 +45,16 @@ const MobileMap = () => {
 
                     <Sheet.Header />
                         <Sheet.Content>
-                            <Box sx={{height: window.innerHeight-BETWEEN_TOP_AND_SHEET-40}}>
-                                <Box
-                                    ref={contentRef}
-                                    sx={{ overflowY: "auto" }}
-                                >
-                                    {outlet ? <Outlet /> : <BuildingList />}
+                            <Sheet.Scroller draggableAt="top">
+                                <Box sx={{height: window.innerHeight-BETWEEN_TOP_AND_SHEET-40}}>
+                                    <Box
+                                        ref={contentRef}
+                                        sx={{ overflowY: "auto" }}
+                                    >
+                                        {outlet ? <Outlet /> : <BuildingList />}
+                                    </Box>
                                 </Box>
-                            </Box>
+                            </Sheet.Scroller>
                         </Sheet.Content>
                 </Sheet.Container>
             </Sheet>

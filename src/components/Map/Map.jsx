@@ -1,13 +1,14 @@
 import { Drawer, Toolbar } from "@mui/material";
 import { useOutlet, Outlet } from "react-router-dom";
 import BuildingList from "./BuildingList";
-import { isMobile } from "react-device-detect";
 import MobileMap from "./MobileMap";
+import useIsMobile from "../../hooks/useIsMobile";
 
 export const drawerWidth = 500;
 
 export const Map = () => {
     const outlet = useOutlet();
+    const isMobile = useIsMobile();
 
     if (!isMobile) {
         return (
