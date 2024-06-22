@@ -7,6 +7,7 @@ import { loadUserInfo } from "../../functions/localStorageFunctions";
 import { useMutation } from "react-query";
 import { addReview } from "../../apis/firebaseApis";
 import { useNavigate } from "react-router-dom";
+import ImageUploader from "../ImageUploader/ImageUploader";
 
 const ReviewForm = () => {
     const navigate = useNavigate();
@@ -51,6 +52,7 @@ const ReviewForm = () => {
             sx={{
                 display: "flex",
                 justifyContent: "center",
+                width: "100%"
             }}
         >
             <Card sx={{
@@ -187,29 +189,20 @@ const ReviewForm = () => {
                             </Box>
                             <Stack
                                 alignItems="left"
-                                flexDirection="row"
+                                flexDirection="column"
+                                flexWrap="wrap"
+                                sx={{
+                                    "> div:nth-child(3n+3)": {
+                                        flexBasis: "100%",
+                                    }
+                                }}
                             >
                                 <Typography
                                     sx={{
                                         fontWeight: 'bold'
                                     }}
                                 >{`Optional: `}</Typography>
-                                <Button
-                                    sx={{
-                                        width: "160px",
-                                        marginLeft: "10px"
-                                    }}
-                                    component="label"
-                                    color="secondary"
-                                    size="small"
-                                    role={undefined}
-                                    variant="contained"
-                                    tabIndex={-1}
-                                    startIcon={<CloudUploadIcon />}
-                                >
-                                    Upload a Photo
-                                    <VisuallyHiddenInput type="file" />
-                                </Button>
+                                <ImageUploader />
                             </Stack>
                             <Box
                                 sx={{
