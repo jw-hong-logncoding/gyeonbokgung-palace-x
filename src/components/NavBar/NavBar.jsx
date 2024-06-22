@@ -10,7 +10,7 @@ import { removeFromLocalStorage } from "../../functions/localStorageFunctions";
 import { LOCAL_STORAGE_KEYS } from "../../enums";
 import { generateRandomString } from "../../functions/stringFunctions";
 
-const drawerWidth = 240;
+const drawerWidth = 130;
 
 function DrawerAppBar(props) {
     // eslint-disable-next-line react/prop-types
@@ -66,9 +66,9 @@ function DrawerAppBar(props) {
 
     const drawer = (
       <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-        <Typography variant="h6" sx={{ my: 2 }}>
-          GyeongbokgungPalaceX
-        </Typography>
+        <Box
+        marginTop="50px"
+        />
         <Divider />
         <List>
           {navItems.map(({title, onClick }) => (
@@ -86,7 +86,7 @@ function DrawerAppBar(props) {
   
     return (
       <Box sx={{ display: 'flex'}}>
-        <AppBar component="nav" position="fixed" sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+        <AppBar component="nav" position="fixed" sx={{ zIndex: "10000001", }}>
           <Toolbar variant="dense">
             <IconButton
               color="inherit"
@@ -129,6 +129,11 @@ function DrawerAppBar(props) {
             
               <Menu
                 id="menu-appbar"
+                sx={{
+                  zIndex: "10000002",
+                  left: "45px",
+                  top: "23px"
+                }}
                 anchorEl={anchorEl}
                 anchorOrigin={{
                   vertical: 'top',
@@ -156,6 +161,7 @@ function DrawerAppBar(props) {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
+              zIndex: "10000000",
               display: { xs: 'block', sm: 'none' },
               '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
             }}
