@@ -1,14 +1,5 @@
 import { WithContext as ReactTags, SEPARATORS } from 'react-tag-input';
-import { BUILDING_DATA_LIST } from '../../data';
 import { Box } from '@mui/material';
-
-const suggestions = BUILDING_DATA_LIST.map((country) => {
-  return {
-    id: country.value,
-    text: country.title,
-    className: '',
-  };
-});
 
 const TagInput = ({isHashTag = false, tags, setTags}) => {
   const handleChange = (value, event) => {
@@ -140,7 +131,6 @@ const TagInput = ({isHashTag = false, tags, setTags}) => {
                 }
             }}
           tags={tags}
-          suggestions={suggestions}
           separators={[SEPARATORS.ENTER, SEPARATORS.COMMA]}
           handleInputChange={handleChange}
           handleDelete={handleDelete}
