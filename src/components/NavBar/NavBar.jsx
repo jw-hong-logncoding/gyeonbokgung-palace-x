@@ -12,9 +12,7 @@ import { generateRandomString } from "../../functions/stringFunctions";
 
 const drawerWidth = 130;
 
-function DrawerAppBar(props) {
-    // eslint-disable-next-line react/prop-types
-    const { window } = props;
+function DrawerAppBar() {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const { userData } = useUserData();
@@ -23,7 +21,8 @@ function DrawerAppBar(props) {
 
     const navItems = [
       { title: 'Home', onClick: () => {
-        navigate('/')
+        window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
+        navigate('/');
       } 
       
     },
@@ -81,8 +80,6 @@ function DrawerAppBar(props) {
         </List>
       </Box>
     );
-  
-    const container = window !== undefined ? () => window().document.body : undefined;
   
     return (
       <Box sx={{ display: 'flex'}}>
@@ -153,7 +150,6 @@ function DrawerAppBar(props) {
         </AppBar>
         <nav>
           <Drawer
-            container={container}
             variant="temporary"
             open={mobileOpen}
             onClose={handleDrawerToggle}
