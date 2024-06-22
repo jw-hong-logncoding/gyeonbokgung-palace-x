@@ -1,22 +1,62 @@
-import { Button } from '@mui/material';
-import React from 'react';
-import ImageUploading from 'react-images-uploading';
+import { useState } from 'react';
+import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { Box, Button } from '@mui/material';
+import { v4 as uuidv4 } from 'uuid';
+import { storage } from '../../firebase';
+import ImageUploading from 'react-images-uploading';
+import { useImageStore } from '../../store';
+import { loadUserInfo } from '../../functions/localStorageFunctions';
+import ProgressWithLabel from '../CircularProgressLabel/ProgressWithLabel';
 
 const ImageUploader = () => {
-    const [images, setImages] = React.useState([]);
+    const { uploadingProgress, setDownloadUrl, setUploadingProgress } = useImageStore();
     const maxNumber = 1;
+    const [images, setImages] = useState();
 
     const onChange = (imageList, addUpdateIndex) => {
-        // data for submit
-        console.log(imageList, addUpdateIndex);
         setImages(imageList);
+        if (imageList.length === 1) {
+            uploadPhoto(imageList[0]['data_url']);
+        }
     };
 
+    const uploadPhoto = async (image) => {
+        if (!image) return;
+        try {
+            const response = await fetch(image);
+            const blob = await response.blob();
+
+            const { userId } = loadUserInfo();
+            const imageRef = ref(storage, `images/${userId}/${uuidv4()}`);
+            const uploadTask = uploadBytesResumable(imageRef, blob)
+
+            uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                    const progress = Math.round(
+                        (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                    );
+                    setUploadingProgress(progress);
+                },
+                (error) => {
+                    console.log(error);
+                    console.log(error.serverResponse);
+                },
+                () => {
+                    getDownloadURL(uploadTask.snapshot.ref)
+                        .then((downloadURL) => {
+                            setDownloadUrl(downloadURL);
+                        });
+                }
+            );
+            } catch (error) {
+                console.error('Failed to convert data URL to blob:', error);
+            }
+        }
     return (
         <div className="App">
             <ImageUploading
-                multiple
                 value={images}
                 onChange={onChange}
                 maxNumber={maxNumber}
@@ -48,9 +88,18 @@ const ImageUploader = () => {
                         </Button>
                         {imageList.map((image, index) => (
                             <div key={index} className="image-item">
-                                <img src={image['data_url']} alt="" width="200" />
+                                <Box sx={{width: "200px"}}>
+                                    <img src={image['data_url']} alt="" width="200" />
+                                    <ProgressWithLabel value={uploadingProgress} />
+                                </Box>
                                 <div className="image-item__btn-wrapper">
-                                    <button onClick={() => onImageRemove(index)}>Remove</button>
+                                    <button onClick={() => {
+                                        setDownloadUrl(null);
+                                        onImageRemove(index);
+                                    }}
+                                    >
+                                        Remove
+                                    </button>
                                 </div>
                             </div>
                         ))}
@@ -59,6 +108,7 @@ const ImageUploader = () => {
             </ImageUploading>
         </div>
     );
-}
+};
+
 
 export default ImageUploader;

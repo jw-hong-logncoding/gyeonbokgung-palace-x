@@ -1,13 +1,13 @@
-import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Select, Stack, TextareaAutosize, Typography, styled } from "@mui/material";
+import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Select, Stack, TextareaAutosize, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
 import { BUILDING_DATA_LIST } from "../../data";
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { useState } from "react";
 import TagInput from "../TagInput/TagInput";
 import { loadUserInfo } from "../../functions/localStorageFunctions";
 import { useMutation } from "react-query";
 import { addReview } from "../../apis/firebaseApis";
 import { useNavigate } from "react-router-dom";
 import ImageUploader from "../ImageUploader/ImageUploader";
+import { useImageStore } from "../../store";
 
 const ReviewForm = () => {
     const navigate = useNavigate();
@@ -15,6 +15,11 @@ const ReviewForm = () => {
     const [hashTags, setHashTags] = useState([]);
     const [keywords, setKeywords] = useState([]);
     const [review, setReview] = useState("");
+    const { downloadUrl, uploadingProgress } = useImageStore();
+    useEffect(() => {
+        console.log(downloadUrl);
+        console.log(uploadingProgress);
+    }, [downloadUrl])
 
     const mutation = useMutation(reviewData => addReview(reviewData), {
         onSuccess: (data) => {
@@ -26,14 +31,14 @@ const ReviewForm = () => {
         }
     });
 
-    const handlePost = (e) => {
+    const handlePost = () => {
         const { userId, username } = loadUserInfo();
         const reviewRequest = {
             userId,
             username,
             buildingId: buildingState,
             date: new Date().toUTCString(),
-            photoUrl: null,
+            photoUrl: downloadUrl,
             keywords: keywords.map((k) => k.text),
             hashTags: hashTags.map((h) => h.text),
             review,
@@ -226,17 +231,5 @@ const ReviewForm = () => {
         </Box>
     );
 }
-const VisuallyHiddenInput = styled('input')({
-    clip: 'rect(0 0 0 0)',
-    clipPath: 'inset(50%)',
-    height: 1,
-    overflow: 'hidden',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: 1,
-  });
-  
 
 export default ReviewForm;
