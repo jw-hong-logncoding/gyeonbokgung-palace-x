@@ -35,7 +35,7 @@ const About = () => {
                         display: 'inline',
                         fontSize: {
                             sm: '78px',
-                            xs: '50px'
+                            xs: '11vw'
                         },
                         letterSpacing: {
                             xs: "3px",
@@ -80,7 +80,7 @@ const About = () => {
                     display: 'inline',
                     fontSize: {
                         sm: '78px',
-                        xs: '50px'
+                        xs: '11vw'
                     },
                     letterSpacing: {
                         xs: "3px",
@@ -182,7 +182,7 @@ const About = () => {
                             },
                             fontSize: {
                                 sm: '78px',
-                                xs: '50px'
+                                xs: '11vw'
                             },
                             letterSpacing: {
                                 xs: "3px",
@@ -260,7 +260,7 @@ const About = () => {
                             marginTop: '160px',
                             fontSize: {
                                 sm: '48px',
-                                xs: '38px'
+                                xs: '10vw'
                             }}}
                         variant="mainPageTitle"
                         >

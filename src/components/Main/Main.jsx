@@ -49,7 +49,7 @@ const Main = () => {
                             },
                             fontSize: {
                                 sm: '78px',
-                                xs: '50px'
+                                xs: '11vw'
                             }
                         }}
                         variant="mainPageTitle">
@@ -68,7 +68,7 @@ const Main = () => {
                             },
                             fontSize: {
                                 sm: '78px',
-                                xs: '50px'
+                                xs: '11vw'
                             }
                         }}
                         variant="mainPageTitle">
