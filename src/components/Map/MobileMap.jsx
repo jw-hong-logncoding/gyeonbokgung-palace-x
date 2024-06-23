@@ -29,7 +29,7 @@ const MobileMap = () => {
         observer.observe(targetElement, config);
         }, []);
 
-    const snapPoints = [1200, 600, 400, 30];
+    const snapPoints = [-BETWEEN_TOP_AND_SHEET, 600, 400, 30];
 
     return (
         <div>
