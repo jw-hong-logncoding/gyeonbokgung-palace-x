@@ -4,6 +4,7 @@ import { Outlet, useOutlet } from "react-router-dom";
 import { Box } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { parseTranslateY } from "../../functions/stringFunctions";
+import InteractiveMap from "./InteractiveMap";
 
 const BETWEEN_TOP_AND_SHEET = 50;
 
@@ -33,6 +34,7 @@ const MobileMap = () => {
 
     return (
         <div>
+            <InteractiveMap isMobile />
             <Sheet
                 id="top-sheet"
                 isOpen

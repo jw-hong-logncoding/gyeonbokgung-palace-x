@@ -1,8 +1,10 @@
-import { Drawer, Toolbar } from "@mui/material";
+import { Box, Drawer, Toolbar } from "@mui/material";
 import { useOutlet, Outlet } from "react-router-dom";
 import BuildingList from "./BuildingList";
 import MobileMap from "./MobileMap";
 import useIsMobile from "../../hooks/useIsMobile";
+import InteractiveMap from "./InteractiveMap";
+
 
 export const drawerWidth = 500;
 
@@ -25,6 +27,9 @@ export const Map = () => {
                     <Toolbar />
                     {outlet ? <Outlet /> : <BuildingList />}
                 </Drawer>
+                <Box>
+                    <InteractiveMap drawerWidth={drawerWidth} />
+                </Box>
             </div>
         );
     }

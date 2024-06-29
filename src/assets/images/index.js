@@ -1,4 +1,6 @@
 const IMAGES = {
+    mapPhoto: new URL('./map.png', import.meta.url).href,
+    pin: new URL('./pin.png', import.meta.url).href,
     gyeongbokgung: new URL('./gyeongbokgung.png', import.meta.url).href,
     share: new URL('./share.png', import.meta.url).href,
     tour: new URL('./tour.png', import.meta.url).href,
