@@ -12,16 +12,12 @@ const BuildingInfo = () => {
             <div>
                 <BuildingDescription
                     title="Gwanghwamun"
-                    photo=""
+                    photo={IMAGES.gwanghwamun}
                     keywordList={['Pond', 'Nature']}
                     description={`
-                        Heungnyemun, the middle gate of Gyeongbokgung Palace, means “to promote etiquette.” Originally
-                        named ‘Hongryemun,’ it was renamed in 1867 during the palace’s reconstruction. Dismantled during
-                        the Japanese colonial period, it was restored in 2001 after the demolition of the Japanese General
-                        Government Building.
-                        Geumcheon stream flows from Baegaksan Mountain through the Heungnyemun area, crossed by
-                        Yeongjegyo bridge. Named during King Sejong’s reign, the bridge survived the Japanese invasions
-                        of Korea. It was repaired in 1867, dismantled during the colonial period, and restored in 2001.
+                        Gwanghwamun, the main gate of Gyeonbokgung Palace, means “the enlightening influence of the king.” Unlike other palace gates, it was grandly built with a high stone base and a multi-story pavilion.
+                        The gate has three arches: the central one for the king and the side ones for the crown prince and officials. A bell in the gatehouse was used to announce the time.
+                        During the Japanese colonial period, Gwanghwamun was moved to make way for the Japanese General Government Building and was destroyed during the Korean War. It was relocated in 1968 but reconstructed incorrectly with reinforced concrete. The gate was fully restored to its original appearance and location in 2010.
                 `} />
             </div>
         );

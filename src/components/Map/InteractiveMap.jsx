@@ -15,23 +15,23 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
     const lastTouches = useRef([]);
     const [stagePosition, setStagePosition] = useState({ x: 0, y: 0 });
 
-    // Todo
-    // '/map/heungnyemun'
-    // '/map/geunjeongjeon'
-    // '/map/sajeongjeon'
-    // '/map/sujeongjeon'
-    // '/map/gyeonghoeru'
-    // '/map/hyangwonjeong'
-    // '/map/gangnyeongjeon'
-    // '/map/geunjeongmun'
-    // '/map/jibokjae'
     const iconSize = 150;
     const selectedIconSize = 200;
     // 아이콘 위치 설정
     const icons = [
-      {pathname: "/map/gyotaejeon", x: 750, y: 0, id: 1, width: iconSize, height: iconSize },
-      {pathname: "/map/hyangwonjeong", x: 1000, y: 450, id: 2, width: iconSize, height: iconSize},
-    ];
+        {pathname: "/map/jibokjae", x: 750, y: 0, id: 1, width: iconSize, height: iconSize },
+        {pathname: "/map/hyangwonjeong", x: 1000, y: 450, id: 2, width: iconSize, height: iconSize},
+        {pathname: "/map/jagyeongjeon", x: 1400, y: 1350, id: 3, width: iconSize, height: iconSize},
+        {pathname: "/map/gyeonghoeru", x: 675, y: 1525, id: 4, width: iconSize, height: iconSize},
+        {pathname: "/map/gangnyeongjeon", x: 1025, y: 1625, id: 5, width: iconSize, height: iconSize},
+        {pathname: "/map/gyotaejeon", x: 1025, y: 1465, id: 6, width: iconSize, height: iconSize},
+        {pathname: "/map/sajeongjeon", x: 1025, y: 1840, id: 7, width: iconSize, height: iconSize},
+        {pathname: "/map/geunjeongjeon", x: 990, y: 2060, id: 8, width: iconSize, height: iconSize},
+        {pathname: "/map/sujeongjeon", x: 665, y: 1860, id: 9, width: iconSize, height: iconSize},
+        {pathname: "/map/geunjeongmun", x: 990, y: 2360, id: 10, width: iconSize, height: iconSize},
+        {pathname: "/map/heungnyemun", x: 985, y: 2690, id: 11, width: iconSize, height: iconSize},
+        {pathname: "/map/gwanghwamun", x: 975, y: 3175, id: 12, width: iconSize, height: iconSize}
+      ];
 
   const handleWheel = (e) => {
     e.evt.preventDefault();
