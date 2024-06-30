@@ -13,24 +13,24 @@ const MobileMap = () => {
     const sheetRef = useRef(null);
     const contentRef = useRef(null);
 
-    useEffect(() => {
-        const targetElement = document.querySelector('#top-sheet > *');
+    // useEffect(() => {
+    //     const targetElement = document.querySelector('#top-sheet > *');
 
-        const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            if (mutation.attributeName === 'style') {
-            const newValue = targetElement.style.transform;
-            const integer = Math.ceil(parseTranslateY(newValue));
-            contentRef.current.style.height = (window.innerHeight-integer-BETWEEN_TOP_AND_SHEET-40)+"px";
-            }
-            });
-        });
+    //     const observer = new MutationObserver((mutations) => {
+    //     mutations.forEach((mutation) => {
+    //         if (mutation.attributeName === 'style') {
+    //         const newValue = targetElement.style.transform;
+    //         const integer = Math.ceil(parseTranslateY(newValue));
+    //         contentRef.current.style.height = (window.innerHeight-integer-BETWEEN_TOP_AND_SHEET-40)+"px";
+    //         }
+    //         });
+    //     });
 
-        const config = { attributes: true, attributeFilter: ['style'] };
-        observer.observe(targetElement, config);
-        }, []);
+    //     const config = { attributes: true, attributeFilter: ['style'] };
+    //     observer.observe(targetElement, config);
+    //     }, []);
 
-    const snapPoints = [-BETWEEN_TOP_AND_SHEET, 600, 400, 30];
+    const snapPoints = [-50, 350, 50];
 
     return (
         <div>
@@ -41,21 +41,23 @@ const MobileMap = () => {
                 snapPoints={snapPoints}
                 initialSnap={1}
                 ref={sheetRef}
+                onClose={() => {}}
+                onAbort={() => {}}
+                onSnap={() => {}}
                 detent="content-height"
             >
                 <Sheet.Container>
-
                     <Sheet.Header />
                         <Sheet.Content>
-                            <Sheet.Scroller draggableAt="top">
-                                <Box sx={{height: window.innerHeight-BETWEEN_TOP_AND_SHEET-40}}>
+                            <Sheet.Scroller draggableAt="bottom">
+                                {/* <Box sx={{height: window.innerHeight-BETWEEN_TOP_AND_SHEET-40}}> */}
                                     <Box
                                         ref={contentRef}
-                                        sx={{ overflowY: "auto" }}
+                                        // sx={{ overflowY: "auto" }}
                                     >
                                         {outlet ? <Outlet /> : <BuildingList />}
                                     </Box>
-                                </Box>
+                                {/* </Box> */}
                             </Sheet.Scroller>
                         </Sheet.Content>
                 </Sheet.Container>
