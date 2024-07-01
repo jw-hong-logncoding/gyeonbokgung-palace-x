@@ -3,11 +3,8 @@ import MyLikes from "./MyLikes";
 import MyReview from "./MyReview";
 import { useQuery } from "react-query";
 import { fetchMyReviewsByUserId } from "../../apis/firebaseApis";
-import useUserData from "../../hooks/useUserData";
 
 const MyPage = () => {
-    // const { userData } = useUserData();
-    // console.log(userData);
     const { data } = useQuery('reviews', fetchMyReviewsByUserId);
     console.log(data);
     return (
