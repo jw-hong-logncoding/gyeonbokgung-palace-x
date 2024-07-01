@@ -10,6 +10,9 @@ import { Box, Button, Typography } from '@mui/material';
 import { BUILDING_DATA_LIST } from '../../data';
 import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from "react-query";
+import { fetchMyReviewsByUserId } from "../../apis/firebaseApis";
+import { formatDate } from '../../functions/stringFunctions';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -37,11 +40,14 @@ function createData(id, building, date,  likes) {
 
 
 const MyReview = () => {
+    const { data } = useQuery('reviews', fetchMyReviewsByUserId);
+    console.log(data);
     const navigate = useNavigate();
-    const rows = BUILDING_DATA_LIST
-        .map(({title, date="06-18-2024"}) => {
-            return createData("ID", title, date, 24);
-        });
+    const rows = data.map(({ id, buildingId, date, likes }) => {
+        const building = BUILDING_DATA_LIST.find((b) => b.value === buildingId);
+        const likesCount = Object.keys(likes).length;
+        return createData(id, building.title, formatDate(new Date(date)), likesCount);
+    });
 
     return (
         <Box
@@ -107,7 +113,7 @@ const MyReview = () => {
           <TableBody>
             {rows
             .map((row, i) => (
-              <StyledTableRow key={row.building}>
+              <StyledTableRow key={i}>
                 <StyledTableCell
                     sx={{
                         padding: "3px"

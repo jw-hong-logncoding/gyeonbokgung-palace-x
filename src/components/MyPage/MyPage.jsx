@@ -1,12 +1,9 @@
 import { Box, Card, Divider, Stack } from "@mui/material";
 import MyLikes from "./MyLikes";
 import MyReview from "./MyReview";
-import { useQuery } from "react-query";
-import { fetchMyReviewsByUserId } from "../../apis/firebaseApis";
 
 const MyPage = () => {
-    const { data } = useQuery('reviews', fetchMyReviewsByUserId);
-    console.log(data);
+
     return (
         <Box
             sx={{
