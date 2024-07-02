@@ -1,11 +1,16 @@
 import { useLocation } from "react-router-dom";
 import BuildingDescription from "./BuildingDescription";
 import IMAGES from "../../assets/images";
+import { useQuery } from "react-query";
+import { fetchAllBuildingInfo } from "../../apis/firebaseApis";
+import { findBuildingKeywords } from "../../functions/finderFunctions";
 
 const BuildingInfo = () => {
     const location = useLocation();
     const pathArray = location.pathname.split('/');
     const buildingTitle = pathArray[pathArray.length - 1];
+    const { data } = useQuery("buildingInfo", fetchAllBuildingInfo);
+    console.log(data);
 
     if (buildingTitle === 'gwanghwamun') {
         return (
@@ -13,7 +18,7 @@ const BuildingInfo = () => {
                 <BuildingDescription
                     title="Gwanghwamun"
                     photo={IMAGES.gwanghwamun}
-                    keywordList={['Pond', 'Nature']}
+                    keywordList={findBuildingKeywords('gwanghwamun', data)}
                     description={`
                         Gwanghwamun, the main gate of Gyeonbokgung Palace, means “the enlightening influence of the king.” Unlike other palace gates, it was grandly built with a high stone base and a multi-story pavilion.
                         The gate has three arches: the central one for the king and the side ones for the crown prince and officials. A bell in the gatehouse was used to announce the time.
@@ -27,7 +32,7 @@ const BuildingInfo = () => {
                 <BuildingDescription
                     title="Heungnyemun"
                     photo={IMAGES.heungnyemun}
-                    keywordList={['Nature']}
+                    keywordList={findBuildingKeywords('heungnyemun', data)}
                     description={`
                         Heungnyemun, the middle gate of Gyeongbokgung Palace, means “to promote etiquette.” Originally named ‘Hongryemun,’ it was renamed in 1867 during the palace’s reconstruction. Dismantled during the Japanese colonial period, it was restored in 2001 after the demolition of the Japanese General Government Building.
                         Geumcheon stream flows from Baegaksan Mountain through the Heungnyemun area, crossed by Yeongjegyo bridge. Named during King Sejong’s reign, the bridge survived the Japanese invasions of Korea. It was repaired in 1867, dismantled during the colonial period, and restored in 2001.
@@ -40,7 +45,7 @@ const BuildingInfo = () => {
                 <BuildingDescription
                     title="Geunjeongmun"
                     photo={IMAGES.geunjeongmun}
-                    keywordList={['Nature']}
+                    keywordList={findBuildingKeywords('geunjeongmun', data)}
                     description={`
                         Geunjeongmun is the main gate of Geunjeongjeon Hall, unique for its two-story Ujingak-style roof
                         with three front bays and two side bays. It hosted the enthronement ceremonies of Kings Danjong,
@@ -57,7 +62,7 @@ const BuildingInfo = () => {
                 <BuildingDescription
                     title="Geunjeongjeon"
                     photo={IMAGES.geunjeongjeon}
-                    keywordList={['MainPalace']}
+                    keywordList={findBuildingKeywords('geunjeongjeon', data)}
                     description={`
                     Geunjeongjeon is the central hall for significant state events like coronations and official receptions. Its name, ‘Geunjeong,’ symbolizes diligent governance, making it the palace’s largest and most formal structure. Built on a two-tiered stone platform, Geunjeongjeon stands gracefully, with a two-story layout creating a spacious, unified interior. The front courtyard, ‘Jojjeong,’ maintains the palace’s ceremonial ambiance with its stone slab paving and central pathways like ‘Samdo.’ Intricately carved stone pillars and railings around the platform add artistic flair, featuring symbols such as the Four Guardian Deities and the Twelve Zodiac Animals. Inside, the floor is laid with bricks, and the king’s throne sits at the northern center. Geunjeongjeon has witnessed the enthronements of several kings, earning its designation as a national treasure in 1985.
                     `}
@@ -70,7 +75,7 @@ const BuildingInfo = () => {
                 <BuildingDescription
                     title="Sajeongjeon"
                     photo={IMAGES.sajeongjeon}
-                    keywordList={["Office of the king"]}
+                    keywordList={findBuildingKeywords('sajeongjeong', data)}
                     description={`
                     Sajeongjeon, meaning ‘thoughtful governance,’ was the king’s official workplace for daily affairs with
 officials. It hosted morning briefings, meetings, and discussions. Inside, like Geunjeongjeon, was the
@@ -88,7 +93,7 @@ reign.
                 <BuildingDescription
                     title="Sujeongjeon"
                     photo={IMAGES.sujeongjeon}
-                    keywordList={['MainLibrary']}
+                    keywordList={findBuildingKeywords('sujeongjeon', data)}
                     description={`
                     Sujeongjeon, meaning of ‘Hall of Good Governance,’ was King Gojong’s study hall. Built during his
 reign, it housed the Military Affairs Office during the Gabo Reform in 1894 and later became the
@@ -103,7 +108,7 @@ Sujeongjeon was designated a treasure in 2012.
                 <BuildingDescription
                     title="Gyeonghoeru"
                     photo={IMAGES.gyeonghoeru}
-                    keywordList={['Banquet']}
+                    keywordList={findBuildingKeywords('gyeonghoeru', data)}
                     description={`
                     Gyeonghoeru, the “Pavilion of Joyous Gatherings,” sits within a pond on the western side of
 Gyeonbokgung Palace. It was where the king hosted lavish banquets and entertained foreign
@@ -121,7 +126,7 @@ treasure in 1985.
                 <BuildingDescription
                     title="Hyangwonjeong"
                     photo={IMAGES.hyangwonjeong}
-                    keywordList={["Pond"]}
+                    keywordList={findBuildingKeywords('hyangwonjeong', data)}
                     description={`
                     Hyangwonjeong, meaning “fragrance drifting far,” was originally the site of Chwirojeong, built during
 King Sejo’s reign. In 1873, King Gojong created an island in the middle of a pond and constructed
@@ -137,7 +142,7 @@ source of Hyangwonji’s water, lies northwest. Hyangwonjeong was designated a t
                 <BuildingDescription
                     title="Gangnyeongjeon"
                     photo={IMAGES.gangnyeongjeon}
-                    keywordList={["bedchamber"]}
+                    keywordList={findBuildingKeywords('gangnyeongjeon', data)}
                     description={`
                     Gangnyeongjeon was the king and queen’s daily residence alongside Gyotaejeon. Its name,
 ‘Gangnyeong,’ implies peace and well-being. Here, the king managed routine tasks and held
@@ -155,7 +160,7 @@ surrounded by its annexes: Gyeongseongjeon, Yeonsaengjeon, Eungjidang, and Yeong
                 <BuildingDescription
                     title="Jagyeongjeon"
                     photo={IMAGES.jagyeongjeon}
-                    keywordList={["QueenMother"]}
+                    keywordList={findBuildingKeywords('jagyeongjeon', data)}
                     description={`
                     Jagyeongjeon is named for “receiving a mother’s blessings,” originating from Jagyeongdang in
 Changgyeonggung Palace. Built by King Gojong in 1867 to honor Queen Sinjeong, it was rebuilt in
@@ -172,7 +177,7 @@ for both functionality and beauty.
                 <BuildingDescription
                     title="Jibokjae"
                     photo={IMAGES.jibokjae}
-                    keywordList={["King's Library"]}
+                    keywordList={findBuildingKeywords('jibokjae', data)}
                     description={`
                     Jibokjae, meaning “Gathering Precious Treasures.” Is the central building flanked by Palujung on the
 left and Hyupgildang on the right. Moved to the west side of Geoncheonggung Palace in 1891
@@ -191,7 +196,7 @@ plaque, a unique feature in Gyeongbokgung Palace.
                 <BuildingDescription
                     title="Gyotaejeon"
                     photo={IMAGES.gyotaejeon}
-                    keywordList={["Queen"]}
+                    keywordList={findBuildingKeywords('gyotaejeon', data)}
                     description={`
                     Gyotaejeon, serving as both the royal residence and specifically the queen’s living quarters,
 embodies harmony and tranquility. Though not part of the original palace, it’s believed to have

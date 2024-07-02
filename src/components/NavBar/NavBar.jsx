@@ -135,7 +135,7 @@ function DrawerAppBar() {
                 id="menu-appbar"
                 sx={{
                   zIndex: "10000002",
-                  left: "45px",
+                  left: "20px",
                   top: "23px"
                 }}
                 anchorEl={anchorEl}

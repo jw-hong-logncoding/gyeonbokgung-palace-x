@@ -1,7 +1,25 @@
 import { db } from '../firebase';
-import { doc, getDoc, getDocs, collection, setDoc, runTransaction, query, where } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection, runTransaction, query, where } from "firebase/firestore";
 import { loadFromLocalStorage } from '../functions/localStorageFunctions';
 import { LOCAL_STORAGE_KEYS } from '../enums';
+
+export async function fetchAllBuildingInfo() {
+  const collectionRef = collection(db, "buildings");
+  const snapshot = await getDocs(collectionRef);
+
+  if (snapshot.empty) {
+    console.log("No document found");
+    return null;
+  }
+
+  const documents = snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+
+  console.log(documents);
+  return documents;
+}
 
 export async function fetchReviewById(id) {
   console.log(id);

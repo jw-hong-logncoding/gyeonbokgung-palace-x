@@ -100,7 +100,6 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
     setStagePosition({ x, y });
   };
   
-  console.log(drawerWidth)
     return (
       <Stage
         ref={stageRef}
@@ -119,10 +118,10 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
     >
         <Layer>
           <Image image={image} />
-          {icons.map((icon) => (
+          {icons.map((icon, i) => (
             <>
                 <Rect
-                    key={`rect-${icon.id}`}
+                    key={`rect-${i}`}
                     x={icon.x}
                     y={icon.y}
                     width={icon.pathname === location.pathname ? selectedIconSize : iconSize}
@@ -136,7 +135,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
                     shadowOpacity={0.6} // 그림자 투명도
                 />
                 <Image
-                    key={icon.id}
+                    key={i}
                     image={pin}
                     x={icon.x}
                     y={icon.y}

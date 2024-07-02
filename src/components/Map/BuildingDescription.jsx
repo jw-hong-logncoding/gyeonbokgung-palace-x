@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const BuildingDescription = ({title, photo, keywordList, description }) => {
     const navigate = useNavigate();
+    console.log(keywordList)
     return (
         <div>
             <Stack>

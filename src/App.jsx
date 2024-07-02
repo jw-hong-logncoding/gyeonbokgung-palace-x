@@ -8,6 +8,8 @@ import BuildingInfo from './components/Map/BuildingInfo'
 import ReviewForm from './components/ReviewForm'
 import MyPage from './components/MyPage'
 import ReviewDetail from './components/ReviewDetail'
+import { Suspense } from 'react'
+import { CircularProgress } from '@mui/material'
 
 function App() {
   return (
@@ -19,7 +21,12 @@ function App() {
           <Route index path="/review-form" element={<ReviewForm />} />
           <Route index path="/my-page" element={<MyPage />} />
           <Route path="/map" element={<Map />} >
-            <Route path="/map/:title" element={<BuildingInfo />} />
+            <Route path="/map/:title" element={
+                <Suspense fallback={<CircularProgress />}>
+                  <BuildingInfo />
+                </Suspense>
+              }
+            />
           </Route>
           <Route path="/review/:id" element={<ReviewDetail />} />
         </Route>

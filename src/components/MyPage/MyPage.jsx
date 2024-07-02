@@ -1,4 +1,4 @@
-import { Box, Card, Divider, Stack } from "@mui/material";
+import { Box, Card, CircularProgress, Divider, Stack } from "@mui/material";
 import MyLikes from "./MyLikes";
 import MyReview from "./MyReview";
 import { Suspense } from "react";
@@ -35,7 +35,7 @@ const MyPage = () => {
                     }}   
                 >
                     <Suspense
-                        fallback={<>Loading...</>}
+                        fallback={<CircularProgress />}
                     >
                         <MyReview />
                     </Suspense>
@@ -48,7 +48,11 @@ const MyPage = () => {
                             flexItem
                         />
                     </Box>
-                    <MyLikes />
+                    <Suspense
+                        fallback={<CircularProgress />}
+                    >
+                        <MyLikes />
+                    </Suspense>
                 </Stack>
             </Box>
             </Card>
