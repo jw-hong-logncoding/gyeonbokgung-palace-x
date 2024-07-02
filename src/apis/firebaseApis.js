@@ -106,6 +106,27 @@ export async function fetchPostById(postId) {
     }
     return snapshot.data();
 }
+
+export async function updateLike({ userId, reviewId, isLike, buildingId }) {
+  await runTransaction(db, async (transaction) => {
+    const userDocRef = doc(db, "users", userId);
+    const reviewDocRef = doc(db, "reviews", reviewId);
+    const buildingDocRef = doc(db, "buildings", buildingId);
+
+    // 현재 문서 상태 읽기
+    // const userDoc = await transaction.get(userDocRef);
+    const reviewDoc = await transaction.get(reviewDocRef);
+
+    if (!reviewDoc.exists()) {
+      throw new Error("Document does not exist!");
+    }
+
+    // 문서 업데이트
+    transaction.set(userDocRef, { likes: { [reviewId]: isLike } }, { merge: true });
+    transaction.set(reviewDocRef, { likes: { [userId]: isLike } }, { merge: true });
+    transaction.set(buildingDocRef, { likes: { [userId]: isLike } }, { merge: true });
+  });
+}
   
 export async function addReview(reviewData) {
   try {

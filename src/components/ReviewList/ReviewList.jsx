@@ -1,4 +1,4 @@
-import { Box, Stack } from "@mui/material";
+import { Box, CircularProgress, Stack } from "@mui/material";
 import ReviewTable from "./ReviewTable";
 import { Suspense } from "react";
 
@@ -13,7 +13,7 @@ const ReviewList = () => {
                     marginTop="10px"
                 >
                     <Suspense
-                        fallback={<>Loading...</>}
+                        fallback={<CircularProgress />}
                     >
                         <ReviewTable />
                     </Suspense>

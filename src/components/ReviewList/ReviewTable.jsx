@@ -15,6 +15,7 @@ import { useQuery } from "react-query";
 import { useNavigate } from 'react-router-dom';
 import { fetchAllReviews } from "../../apis/firebaseApis";
 import { startTransition } from 'react';
+import LikeCounter from '../LikeCounter/LikeCounter';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -36,8 +37,8 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(id, building, keywords,  likes) {
-    return {id, building, keywords, likes };
+function createData(id, building, keywords, likes, buildingId) {
+    return {id, building, keywords, likes, buildingId };
 }
 
 
@@ -54,7 +55,7 @@ const ReviewTable = () => {
         .map(({id, buildingId, keywords, likes}) => {
             const building = BUILDING_DATA_LIST.find((b) => b.value === buildingId);
             const likesCount = Object.keys(likes).length;
-            return createData(id, building.title, keywords, likesCount);
+            return createData(id, building.title, keywords, likesCount, buildingId);
         })
         .sort((a, b) => {
             if (filterValue !== "building"){
@@ -228,20 +229,7 @@ const ReviewTable = () => {
                         alignItems="center"
                         gap="5px"
                     >
-                        <Typography>
-                            {`${row.likes}`}
-                        </Typography>
-                        <Typography
-                            sx={{
-                                display: {
-                                    xs: "none",
-                                    md: "contents",
-                                }
-                            }}
-                        >
-                            likes
-                        </Typography>
-                        <FavoriteIcon sx={{width: "17px"}} />
+                        <LikeCounter reviewId={row.id} buildingId={row.buildingId}  />
                     </Stack>
                 </StyledTableCell>
               </StyledTableRow>
