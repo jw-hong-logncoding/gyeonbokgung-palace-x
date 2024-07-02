@@ -3,6 +3,7 @@ import { doc, getDoc, getDocs, collection, runTransaction, query, where } from "
 import { loadFromLocalStorage } from '../functions/localStorageFunctions';
 import { LOCAL_STORAGE_KEYS } from '../enums';
 
+
 export async function fetchAllBuildingInfo() {
   const collectionRef = collection(db, "buildings");
   const snapshot = await getDocs(collectionRef);
@@ -17,7 +18,6 @@ export async function fetchAllBuildingInfo() {
     ...doc.data()
   }));
 
-  console.log(documents);
   return documents;
 }
 
@@ -54,7 +54,6 @@ export async function fetchAllReviews() {
     ...doc.data()
   }));
 
-  console.log(documents);
   return documents;
 }
 
@@ -74,7 +73,6 @@ export async function fetchMyReviewsByUserId() {
     ...doc.data()
   }));
 
-  console.log(documents);
   return documents;
 }
 
@@ -92,7 +90,6 @@ export async function fetchPosts() {
       ...doc.data()
     }));
   
-    console.log(documents);
     return documents;
 }
  

@@ -40,18 +40,15 @@ function createData(id, building, date,  likes) {
 }
 
 
-const MyReview = () => {
+const MyReview = ({ data }) => {
     const navigate = useNavigate();
-    const { data, } = useQuery('myReviews', fetchMyReviewsByUserId);
     const rows = data.map(({ id, buildingId, date, likes }, i) => {
-        console.log(id, buildingId)
         const building = BUILDING_DATA_LIST.find((b) => 
             {
              return b.value === buildingId;
             }
         );
         const likesCount = Object.keys(likes).length;
-        console.log(building)
         return createData(id, building?.title, formatDate(new Date(date)), likesCount);
     });
 

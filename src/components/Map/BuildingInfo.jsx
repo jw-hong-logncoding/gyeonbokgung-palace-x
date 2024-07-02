@@ -10,7 +10,6 @@ const BuildingInfo = () => {
     const pathArray = location.pathname.split('/');
     const buildingTitle = pathArray[pathArray.length - 1];
     const { data } = useQuery("buildingInfo", fetchAllBuildingInfo);
-    console.log(data);
 
     if (buildingTitle === 'gwanghwamun') {
         return (

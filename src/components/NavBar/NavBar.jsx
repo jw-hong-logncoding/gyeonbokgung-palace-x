@@ -18,7 +18,6 @@ function DrawerAppBar() {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const { userData } = useUserData();
     const navigate = useNavigate();
-    console.log(userData);
 
     const navItems = [
       { title: 'Home', onClick: () => {

@@ -11,6 +11,7 @@ import { BUILDING_DATA_LIST } from '../../data';
 import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
 import { startTransition } from 'react';
+import useUserData from '../../hooks/useUserData';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -32,16 +33,25 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(id, building, username,  likes) {
-    return {id, building, username, likes };
+function createData(id, building, username) {
+    return {id, building, username };
 }
 
 
-const MyLikes = () => {
+const MyLikes = ({ data }) => {
     const navigate = useNavigate();
-    const rows = BUILDING_DATA_LIST
-        .map(({title}) => {
-            return createData("ID", title, "JW", 24);
+    const { userData } = useUserData();
+    console.log(data);
+    
+    const rows = data
+        .filter(({ likes }) => likes[userData.uid])
+        .map(({id, buildingId, username }) => {
+            const building = BUILDING_DATA_LIST.find((b) => 
+                {
+                 return b.value === buildingId;
+                }
+            );
+            return createData(id, building?.title, username);
         });
 
     return (

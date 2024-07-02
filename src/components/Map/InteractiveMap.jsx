@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { Stage, Layer, Image, Circle, Rect } from 'react-konva';
 import IMAGES from "../../assets/images";
 import useImage from 'use-image';
@@ -113,13 +113,14 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
         onTouchMove={handleTouchMove}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
+        onDragMove={() => {}}
         x={stagePosition.x}
         y={stagePosition.y}
     >
         <Layer>
           <Image image={image} />
           {icons.map((icon, i) => (
-            <>
+            <Fragment key={`frag-${i}`}>
                 <Rect
                     key={`rect-${i}`}
                     x={icon.x}
@@ -150,7 +151,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
                         navigate(icon.pathname);
                     }}
                 />
-            </>
+            </Fragment>
           ))}
         </Layer>
       </Stage>

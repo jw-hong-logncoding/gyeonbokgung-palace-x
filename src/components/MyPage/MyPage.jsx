@@ -1,10 +1,11 @@
 import { Box, Card, CircularProgress, Divider, Stack } from "@mui/material";
 import MyLikes from "./MyLikes";
 import MyReview from "./MyReview";
-import { Suspense } from "react";
+import { useQuery } from "react-query";
+import { fetchMyReviewsByUserId } from "../../apis/firebaseApis";
 
 const MyPage = () => {
-
+    const { data } = useQuery('myReviews', fetchMyReviewsByUserId);
     return (
         <Box
             sx={{
@@ -34,11 +35,7 @@ const MyPage = () => {
                         md: 'row'
                     }}   
                 >
-                    <Suspense
-                        fallback={<CircularProgress />}
-                    >
-                        <MyReview />
-                    </Suspense>
+                    <MyReview data={data} />
                     <Box
                         marginLeft="5px"
                         marginRight="5px"
@@ -48,11 +45,7 @@ const MyPage = () => {
                             flexItem
                         />
                     </Box>
-                    <Suspense
-                        fallback={<CircularProgress />}
-                    >
-                        <MyLikes />
-                    </Suspense>
+                    <MyLikes data={data} />
                 </Stack>
             </Box>
             </Card>

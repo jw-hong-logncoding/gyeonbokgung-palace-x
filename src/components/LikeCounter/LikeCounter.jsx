@@ -1,7 +1,7 @@
 import { IconButton, Stack, Typography } from "@mui/material";
 import {Favorite, FavoriteBorderOutlined } from '@mui/icons-material';
 import { useState } from "react";
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { updateLike } from "../../apis/firebaseApis";
 import useUserData from "../../hooks/useUserData";
 import { countLikes } from "../../functions/counterFunctions";
@@ -9,6 +9,7 @@ import { countLikes } from "../../functions/counterFunctions";
 const LikeCounter = ({ reviewId, buildingId, likes }) => {
     const [likeCount, setLikeCount] = useState(countLikes(likes));
     const { userData } = useUserData();
+    const queryClient = useQueryClient();
     const [isLiked, setIsLiked] = useState(likes[userData.uid]);
     const mutation = useMutation(reviewData => updateLike(reviewData), {
         onSuccess: (data) => {
@@ -20,6 +21,8 @@ const LikeCounter = ({ reviewId, buildingId, likes }) => {
                 }
             })
             setIsLiked(!isLiked);
+            queryClient.invalidateQueries(['allReviews']);
+            queryClient.invalidateQueries(['myReviews']);
             console.log('Post added!', data);
         },
         onError: (error) => {
@@ -52,7 +55,6 @@ const LikeCounter = ({ reviewId, buildingId, likes }) => {
         <IconButton
             size="small"
             onClick={() => {
-               
                 mutation.mutate({ userId: userData.uid, reviewId, isLike:!isLiked, buildingId });
             }}
         >

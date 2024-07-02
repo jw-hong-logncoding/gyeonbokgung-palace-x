@@ -19,7 +19,13 @@ function App() {
           <Route index path="/" element={<Home />} />
           <Route index path="/community" element={<Community />} />
           <Route index path="/review-form" element={<ReviewForm />} />
-          <Route index path="/my-page" element={<MyPage />} />
+          <Route index path="/my-page" element={
+            <Suspense
+                fallback={<CircularProgress />}
+            >
+              <MyPage />
+            </Suspense>
+          } />
           <Route path="/map" element={<Map />} >
             <Route path="/map/:title" element={
                 <Suspense fallback={<CircularProgress />}>
