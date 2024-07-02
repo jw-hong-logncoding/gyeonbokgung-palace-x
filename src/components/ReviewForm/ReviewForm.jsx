@@ -16,10 +16,6 @@ const ReviewForm = () => {
     const [keywords, setKeywords] = useState([]);
     const [review, setReview] = useState("");
     const { downloadUrl, uploadingProgress } = useImageStore();
-    useEffect(() => {
-        console.log(downloadUrl);
-        console.log(uploadingProgress);
-    }, [downloadUrl])
 
     const mutation = useMutation(reviewData => addReview(reviewData), {
         onSuccess: (data) => {
@@ -48,7 +44,6 @@ const ReviewForm = () => {
     }
 
     const handleBuildingChange = (e) => {
-        console.log(e.target.value);
         setBuildingState(e.target.value);
     };
 
@@ -79,7 +74,7 @@ const ReviewForm = () => {
                                 marginBottom: "10px"
                             }}
                         >
-                            Write A Review
+                            Write a Review
                         </Typography>
                     </Box>
                     <Divider />

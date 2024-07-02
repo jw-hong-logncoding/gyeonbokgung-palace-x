@@ -41,7 +41,6 @@ function createData(id, building, username) {
 const MyLikes = ({ data }) => {
     const navigate = useNavigate();
     const { userData } = useUserData();
-    console.log(data);
     
     const rows = data
         .filter(({ likes }) => likes[userData.uid])

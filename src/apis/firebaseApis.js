@@ -1,5 +1,5 @@
 import { db } from '../firebase';
-import { doc, getDoc, getDocs, collection, runTransaction, query, where } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection, runTransaction, query, where, updateDoc } from "firebase/firestore";
 import { loadFromLocalStorage } from '../functions/localStorageFunctions';
 import { LOCAL_STORAGE_KEYS } from '../enums';
 
@@ -22,7 +22,6 @@ export async function fetchAllBuildingInfo() {
 }
 
 export async function fetchReviewById(id) {
-  console.log(id);
   const docRef = doc(db, "reviews", id);
   const docSnapshot = await getDoc(docRef);
 
@@ -36,7 +35,6 @@ export async function fetchReviewById(id) {
     ...docSnapshot.data()
   };
 
-  console.log(document);
   return document;
 }
 
@@ -104,6 +102,13 @@ export async function fetchPostById(postId) {
     return snapshot.data();
 }
 
+export async function updateReviewById(reviewId, content) {
+  const reviewRef = doc(db, 'reviews', reviewId);
+    await updateDoc(reviewRef, {
+      review: content
+    });
+}
+
 export async function updateLike({ userId, reviewId, isLike, buildingId }) {
   await runTransaction(db, async (transaction) => {
     const userDocRef = doc(db, "users", userId);
@@ -130,7 +135,6 @@ export async function addReview(reviewData) {
     const res = await runTransaction(db, async (transaction) => {
       const docBuildingsRef = doc(db, "buildings", reviewData.buildingId);
       const docReviewsRef = doc(collection(db, "reviews"));
-      console.log(docReviewsRef)
 
       const docSnap = await transaction.get(docBuildingsRef);
 

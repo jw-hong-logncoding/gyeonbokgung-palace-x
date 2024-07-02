@@ -2,8 +2,8 @@ import { Box, Button, Card, CardContent, Chip, Stack, TextareaAutosize, Typograp
 import IMAGES from "../../assets/images";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import { fetchReviewById } from "../../apis/firebaseApis";
-import { useQuery } from "react-query";
+import { fetchReviewById, updateReviewById } from "../../apis/firebaseApis";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { formatDate } from "../../functions/stringFunctions";
 import useUserData from "../../hooks/useUserData";
 import { BUILDING_DATA_LIST } from "../../data";
@@ -11,13 +11,21 @@ import { BUILDING_DATA_LIST } from "../../data";
 const ReviewDetail = () => {
     const location = useLocation();
     const { userData } = useUserData();
+    const queryClient = useQueryClient();
     const list = location.pathname.split('/');
     const reviewId = list[list.length - 1];
-    const { data } = useQuery(['reviewDetail', reviewId], () => fetchReviewById(reviewId));
-    console.log(data)
-    console.log(userData)
-
     const [isEditable, setEditable] = useState(false);
+    const { data } = useQuery(['reviewDetail', reviewId], () => fetchReviewById(reviewId));
+    const mutation = useMutation((content) => updateReviewById(reviewId, content), {
+        onSuccess: (data) => {
+            setEditable(false);
+            queryClient.invalidateQueries(['reviewDetail']);
+        },
+        onError: (error) => {
+            console.error('Error updating review:', error);
+        }
+    });
+
     const reviewData = {
         buildingId: data.buildingId,
         username: data.username,
@@ -27,9 +35,9 @@ const ReviewDetail = () => {
         keywords: data.keywords,
         hashtags: data.hashTags
     };
+    const [review, setReview] = useState(reviewData.review);
     
 
-    const [review, setReview] = useState(reviewData.review);
     return (
         <Box
             sx={{
@@ -69,7 +77,11 @@ const ReviewDetail = () => {
                                 <Button
                                     variant="contained"
                                     onClick={() => {
-                                        setEditable((v) => !v);
+                                        if (!isEditable) {
+                                            setEditable(!isEditable)
+                                        } else {
+                                            mutation.mutate(review);
+                                        }
                                     }}
                                 >
                                     {isEditable ? "Save" : "Edit"}
