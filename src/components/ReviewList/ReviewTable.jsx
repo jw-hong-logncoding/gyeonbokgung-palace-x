@@ -6,7 +6,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Button, Chip, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
 import { BUILDING_DATA_LIST } from '../../data';
 import { useState } from "react";
@@ -37,14 +36,13 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(id, building, keywords, likes, buildingId) {
-    return {id, building, keywords, likes, buildingId };
+function createData(id, building, keywords, buildingId, likes) {
+    return {id, building, keywords, buildingId, likes};
 }
 
 
 const ReviewTable = () => {
     const { data } = useQuery('allReviews', fetchAllReviews);
-    console.log(data);
     const navigate = useNavigate();
     const [filterValue, setFilterValue] = useState("");
 
@@ -54,8 +52,7 @@ const ReviewTable = () => {
     const rows = data
         .map(({id, buildingId, keywords, likes}) => {
             const building = BUILDING_DATA_LIST.find((b) => b.value === buildingId);
-            const likesCount = Object.keys(likes).length;
-            return createData(id, building.title, keywords, likesCount, buildingId);
+            return createData(id, building.title, keywords, buildingId, likes);
         })
         .sort((a, b) => {
             if (filterValue !== "building"){
@@ -229,7 +226,7 @@ const ReviewTable = () => {
                         alignItems="center"
                         gap="5px"
                     >
-                        <LikeCounter reviewId={row.id} buildingId={row.buildingId}  />
+                        <LikeCounter reviewId={row.id} buildingId={row.buildingId} likes={row.likes} />
                     </Stack>
                 </StyledTableCell>
               </StyledTableRow>
