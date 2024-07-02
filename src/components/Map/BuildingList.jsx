@@ -49,9 +49,13 @@ const BuildingList = () => {
                     <ListItemButton
                         onClick={onClick}
                     >
-                        <ListItemIcon>
-                            <FortIcon />
-                        </ListItemIcon>
+                        <Typography sx={{
+                            fontSize: "18px",
+                            marginRight: "10px"
+                            }}
+                        >
+                            ►
+                        </Typography>
                         <ListItemText primary={title} />
                     </ListItemButton>
                 </ListItem>
