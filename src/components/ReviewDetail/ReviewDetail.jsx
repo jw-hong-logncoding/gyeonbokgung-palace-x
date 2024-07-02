@@ -1,19 +1,35 @@
 import { Box, Button, Card, CardContent, Chip, Stack, TextareaAutosize, Typography } from "@mui/material";
 import IMAGES from "../../assets/images";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { fetchReviewById } from "../../apis/firebaseApis";
+import { useQuery } from "react-query";
+import { formatDate } from "../../functions/stringFunctions";
+import useUserData from "../../hooks/useUserData";
+import { BUILDING_DATA_LIST } from "../../data";
 
 const ReviewDetail = () => {
+    const location = useLocation();
+    const { userData } = useUserData();
+    const list = location.pathname.split('/');
+    const reviewId = list[list.length - 1];
+    const { data } = useQuery(['reviewDetail', reviewId], () => fetchReviewById(reviewId));
+    console.log(data)
+    console.log(userData)
+
     const [isEditable, setEditable] = useState(false);
-    const mockData = {
-        title: "경회루",
-        username: "JWH",
-        date: "06-18-2024",
-        photo: IMAGES.geunjeongjeon,
-        review: `Gyeongbokgung Palace in Seoul is a breathtaking glimpse into Korea’s royal history. Walking through its expansive grounds, you’re surrounded by stunning traditional architecture and tranquil gardens. Each structure tells a story of dynastic times, and the changing of the guard ceremony is a must-see for its colorful pageantry. The palace, beautifully restored, offers a peaceful retreat from the modern city that surrounds it. It’s a vivid reminder of Korea’s rich cultural heritage and an essential experience for any visitor.`,
-        keywords: ["Joseon Dynasty", "Traditional Architecture", "Royal Culture", "Changing of the Guard", "National Treasure"],
-        hashtags: ["#Gyeongbokgung", "#JoseonDynasty", "#KoreanArchitecture", "#GuardChangingCeremony", "#SeoulLandmark"]
+    const reviewData = {
+        buildingId: data.buildingId,
+        username: data.username,
+        date: formatDate(new Date(data.date)),
+        photo: data.photoUrl,
+        review: data.review,
+        keywords: data.keywords,
+        hashtags: data.hashTags
     };
-    const [review, setReview] = useState(mockData.review);
+    
+
+    const [review, setReview] = useState(reviewData.review);
     return (
         <Box
             sx={{
@@ -46,17 +62,23 @@ const ReviewDetail = () => {
                             fontSize="35px"
                             fontWeight="bold"
                         >
-                            {mockData.title}
+                            {BUILDING_DATA_LIST.find((e) => e.value === reviewData.buildingId).title}
                         </Typography>
-                        <Button
-                            variant="contained"
-                            onClick={() => {
-                                setEditable((v) => !v);
-                            }}
-                        >
-                            {isEditable ? "Save" : "Edit"}
-                        </Button>
-                    </Stack>
+                        {
+                            data.userId === userData.uid ? (
+                                <Button
+                                    variant="contained"
+                                    onClick={() => {
+                                        setEditable((v) => !v);
+                                    }}
+                                >
+                                    {isEditable ? "Save" : "Edit"}
+                                </Button>
+                            ) : (
+                                null
+                            )
+                        }
+                   </Stack>
                     <Stack
                         flexDirection="row"
                         justifyContent="space-between"
@@ -66,12 +88,12 @@ const ReviewDetail = () => {
                         <Typography
                             fontSize="21px"
                         >
-                            {`Username: ${mockData.username}`}
+                            {`Username: ${reviewData.username}`}
                         </Typography>
                         <Typography
                             fontSize="21px"
                         >
-                            {mockData.date}
+                            {reviewData.date}
                         </Typography>
                     </Stack>
 
@@ -85,24 +107,26 @@ const ReviewDetail = () => {
                         alignItems="center"
                         gap="20px"
                     >
-                        <Box
-                            display="flex"
-                            justifyContent="center"
-                            alignItems="center"
-                        >
+                        {reviewData.photo ? (
                             <Box
-                                component="img"
-                                sx={{
-                                    width: {
-                                        xs: "340px",
-                                        md: "440px"
-                                    },
-                                    boxShadow: '10px 10px 45px rgba(0, 0, 0, 0.15)'  // 그림자 추가
-                                }}
-                                src={mockData.photo}
-                            />
-                        </Box>
-                        <Box
+                                display="flex"
+                                justifyContent="center"
+                                alignItems="center"
+                            >
+                                <Box
+                                    component="img"
+                                    sx={{
+                                        width: {
+                                            xs: "340px",
+                                            md: "440px"
+                                        },
+                                        boxShadow: '10px 10px 45px rgba(0, 0, 0, 0.15)'  // 그림자 추가
+                                    }}
+                                    src={reviewData.photo}
+                                />
+                            </Box>
+                        ) : null}
+                       <Box
                             display="flex"
                             justifyContent="center"
                             alignItems="center"
@@ -119,27 +143,34 @@ const ReviewDetail = () => {
                                     },
                                     boxShadow: '10px 10px 45px rgba(0, 0, 0, 0.15)'  // 그림자 추가
                                 }}
-                                src={"https://i.namu.wiki/i/iMbSx2HYPedoP0bBU5fmUMqaT09yDJetsZv8HKRXeLfzsNchSEmKVivi2m1jycNaesZhjkMHQUqwU1gkIZ5LPTztGPbh-t2ArnWWkikCASwTpKlVMYQrgygtxF4T_2KTXJhLVzjDZCjk9tdd-mwFog.webp"}
+                                src={IMAGES[reviewData.buildingId]}
                             />
                         </Box>
                     </Stack>
                     <Stack
                         marginBottom='15px'
                     >
-                        <Typography
-                            sx={{
-                                fontWeight: 'bold',
-                                marginBottom: '5px'
-                            }}
-                        >
-                            {`Keywords: `}
-                        </Typography>
+                        {reviewData.keywords.length === 0 ? (
+                            null
+                        ) :
+                        (
+                            <Typography
+                                sx={{
+                                    fontWeight: 'bold',
+                                    marginBottom: '5px'
+                                }}
+                            >
+                                {`Keywords: `}
+                            </Typography>
+                        )
+                        }
+                        
                         <Stack
                             flexDirection="row"
                             flexWrap="wrap"
                             gap="5px"
                         >
-                            {mockData.keywords.map((keyword, i) => {
+                            {reviewData.keywords.map((keyword, i) => {
                                 return <Chip key={i} color="secondary" label={keyword} size="small" />
                             })}
                         </Stack>
@@ -147,19 +178,23 @@ const ReviewDetail = () => {
                     <Stack
                         marginBottom='15px'
                     >
-                        <Typography
-                            sx={{
-                                fontWeight: 'bold'
-                            }}
-                        >
-                            {`Hash Tags: `}
-                        </Typography>
-                        <Stack
+                        {reviewData.hashtags.length === 0 ? (
+                            null
+                        ) : (
+                            <Typography
+                                sx={{
+                                    fontWeight: 'bold'
+                                }}
+                            >
+                                {`Hash Tags: `}
+                            </Typography>
+                        )}
+                       <Stack
                             flexDirection="row"
                             gap="5px"
                             flexWrap="wrap"
                         >
-                            {mockData.hashtags.map((hashtag, i) => {
+                            {reviewData.hashtags.map((hashtag, i) => {
                                 return (
                                     <Box key={i}>
                                         <Typography

@@ -9,6 +9,7 @@ import useUserData from "../../hooks/useUserData";
 import { removeFromLocalStorage } from "../../functions/localStorageFunctions";
 import { LOCAL_STORAGE_KEYS } from "../../enums";
 import { generateRandomString } from "../../functions/stringFunctions";
+import { startTransition } from "react";
 
 const drawerWidth = 130;
 
@@ -34,13 +35,19 @@ function DrawerAppBar() {
     if (userData) {
       navItems.push(...[
         { title: 'Map', onClick: () => {
-          navigate('/map');
+          startTransition(() => {
+            navigate('/map');
+          })
         } },
         { title: 'Community', onClick: () => {
-          navigate('/community');
+          startTransition(() => {
+            navigate('/community');
+          })
         } },
         { title: 'My Page', onClick: () => {
-          navigate('/my-page')
+          startTransition(() => {
+            navigate('/my-page');
+          })
         } },
       ]);
     }

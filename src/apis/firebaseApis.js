@@ -3,6 +3,43 @@ import { doc, getDoc, getDocs, collection, setDoc, runTransaction, query, where 
 import { loadFromLocalStorage } from '../functions/localStorageFunctions';
 import { LOCAL_STORAGE_KEYS } from '../enums';
 
+export async function fetchReviewById(id) {
+  console.log(id);
+  const docRef = doc(db, "reviews", id);
+  const docSnapshot = await getDoc(docRef);
+
+  if (!docSnapshot.exists()) {
+    console.log("No document found with the given ID.");
+    return null;
+  }
+
+  const document = {
+    id: docSnapshot.id,
+    ...docSnapshot.data()
+  };
+
+  console.log(document);
+  return document;
+}
+
+export async function fetchAllReviews() {
+  const collectionRef = collection(db, "reviews");
+  const snapshot = await getDocs(collectionRef);
+
+  if (snapshot.empty) {
+    console.log("No documents found in the collection.");
+    return [];
+  }
+
+  const documents = snapshot.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+
+  console.log(documents);
+  return documents;
+}
+
 export async function fetchMyReviewsByUserId() {
   const data = loadFromLocalStorage(LOCAL_STORAGE_KEYS.USER);
   const collectionRef = collection(db, "reviews");

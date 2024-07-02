@@ -1,6 +1,7 @@
 import { Box, Card, Divider, Stack } from "@mui/material";
 import MyLikes from "./MyLikes";
 import MyReview from "./MyReview";
+import { Suspense } from "react";
 
 const MyPage = () => {
 
@@ -33,7 +34,11 @@ const MyPage = () => {
                         md: 'row'
                     }}   
                 >
-                    <MyReview />
+                    <Suspense
+                        fallback={<>Loading...</>}
+                    >
+                        <MyReview />
+                    </Suspense>
                     <Box
                         marginLeft="5px"
                         marginRight="5px"

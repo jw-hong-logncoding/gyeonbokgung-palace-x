@@ -11,7 +11,10 @@ import { Button, Chip, FormControl, InputLabel, MenuItem, Select, Stack, Typogra
 import { BUILDING_DATA_LIST } from '../../data';
 import { useState } from "react";
 import { isMobile } from 'react-device-detect';
+import { useQuery } from "react-query";
 import { useNavigate } from 'react-router-dom';
+import { fetchAllReviews } from "../../apis/firebaseApis";
+import { startTransition } from 'react';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -39,15 +42,19 @@ function createData(id, building, keywords,  likes) {
 
 
 const ReviewTable = () => {
-    const navigate = useNavigate()
+    const { data } = useQuery('allReviews', fetchAllReviews);
+    console.log(data);
+    const navigate = useNavigate();
     const [filterValue, setFilterValue] = useState("");
 
     const handleSelectChange = (e) => {
         setFilterValue(e.target.value);
     }
-    const rows = BUILDING_DATA_LIST
-        .map(({title}) => {
-            return createData("ID", title, ["Pond", "Temp"], 24);
+    const rows = data
+        .map(({id, buildingId, keywords, likes}) => {
+            const building = BUILDING_DATA_LIST.find((b) => b.value === buildingId);
+            const likesCount = Object.keys(likes).length;
+            return createData(id, building.title, keywords, likesCount);
         })
         .sort((a, b) => {
             if (filterValue !== "building"){
@@ -145,7 +152,7 @@ const ReviewTable = () => {
           <TableBody>
             {rows
             .map((row, i) => (
-              <StyledTableRow key={row.building}>
+              <StyledTableRow key={row.id}>
                 <StyledTableCell
                     sx={{
                         padding: "3px"
@@ -205,7 +212,12 @@ const ReviewTable = () => {
                         }}
                         size='small'
                         variant="outlined"
-                        onClick={() => {navigate(`/review/${row.id}`)}}
+                        onClick={() => {
+                            startTransition(() => {
+                                navigate(`/review/${row.id}`)
+                            })
+                            
+                        }}
                     >
                         More
                     </Button>

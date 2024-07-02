@@ -10,6 +10,7 @@ import { Box, Button, Typography } from '@mui/material';
 import { BUILDING_DATA_LIST } from '../../data';
 import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
+import { startTransition } from 'react';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -157,7 +158,11 @@ const MyLikes = () => {
                         }}
                         size='small'
                         variant="outlined"
-                        onClick={() => {navigate(`/review/${row.id}`)}}
+                        onClick={() => {
+                            startTransition(() => {
+                                navigate(`/review/${row.id}`);
+                            })
+                        }}
                     >
                         More
                     </Button>

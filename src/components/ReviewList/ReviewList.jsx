@@ -1,11 +1,8 @@
-// import { useQuery } from "react-query";
-// import { fetchPosts } from "../../apis/firebaseApis";
 import { Box, Stack } from "@mui/material";
 import ReviewTable from "./ReviewTable";
+import { Suspense } from "react";
 
 const ReviewList = () => {
-    // const { data } = useQuery('posts', fetchPosts);
-
     return (
         <div>
             <Stack
@@ -15,7 +12,11 @@ const ReviewList = () => {
                 <Box
                     marginTop="10px"
                 >
-                    <ReviewTable />
+                    <Suspense
+                        fallback={<>Loading...</>}
+                    >
+                        <ReviewTable />
+                    </Suspense>
                 </Box>
             </Stack>
         </div>

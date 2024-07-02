@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { useQuery } from "react-query";
 import { fetchMyReviewsByUserId } from "../../apis/firebaseApis";
 import { formatDate } from '../../functions/stringFunctions';
+import { startTransition } from 'react';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -40,13 +41,18 @@ function createData(id, building, date,  likes) {
 
 
 const MyReview = () => {
-    const { data } = useQuery('reviews', fetchMyReviewsByUserId);
-    console.log(data);
     const navigate = useNavigate();
-    const rows = data.map(({ id, buildingId, date, likes }) => {
-        const building = BUILDING_DATA_LIST.find((b) => b.value === buildingId);
+    const { data, } = useQuery('myReviews', fetchMyReviewsByUserId);
+    const rows = data.map(({ id, buildingId, date, likes }, i) => {
+        console.log(id, buildingId)
+        const building = BUILDING_DATA_LIST.find((b) => 
+            {
+             return b.value === buildingId;
+            }
+        );
         const likesCount = Object.keys(likes).length;
-        return createData(id, building.title, formatDate(new Date(date)), likesCount);
+        console.log(building)
+        return createData(id, building?.title, formatDate(new Date(date)), likesCount);
     });
 
     return (
@@ -161,7 +167,11 @@ const MyReview = () => {
                         }}
                         size='small'
                         variant="outlined"
-                        onClick={() => {navigate(`/review/${row.id}`)}}
+                        onClick={() => {
+                            startTransition(() => {
+                                navigate(`/review/${row.id}`)
+                            })
+                        }}
                     >
                         More
                     </Button>
