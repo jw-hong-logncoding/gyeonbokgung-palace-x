@@ -1,5 +1,5 @@
 import { Fragment, useRef, useState } from 'react';
-import { Stage, Layer, Image, Circle, Rect } from 'react-konva';
+import { Stage, Layer, Image, Circle, Rect, Text } from 'react-konva';
 import IMAGES from "../../assets/images";
 import useImage from 'use-image';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -119,6 +119,27 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
     >
         <Layer>
           <Image image={image} />
+          <Text
+            text="
+            National Palace
+            Museum of Korea
+            "
+            x={1400}
+            y={750}
+            fontSize={50}
+            fill="white"
+          />
+          <Text
+            text="
+            National Folk
+            Museum
+            of Korea
+            "
+            x={70}
+            y={2900}
+            fontSize={50}
+            fill="white"
+          />
           {icons.map((icon, i) => (
             <Fragment key={`frag-${i}`}>
                 <Rect
