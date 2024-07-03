@@ -1,5 +1,5 @@
 import { Box, Button, Card, CardContent, Divider, FormControl, MenuItem, Select, Stack, TextareaAutosize, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BUILDING_DATA_LIST } from "../../data";
 import TagInput from "../TagInput/TagInput";
 import { loadUserInfo } from "../../functions/localStorageFunctions";
@@ -137,6 +137,7 @@ const ReviewForm = () => {
                                     <TagInput
                                         setTags={setKeywords}
                                         tags={keywords}
+                                        autoFocus={true}
                                     />
                                 </Box>
                             </Stack>

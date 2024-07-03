@@ -1,7 +1,7 @@
 import { WithContext as ReactTags, SEPARATORS } from 'react-tag-input';
 import { Box } from '@mui/material';
 
-const TagInput = ({isHashTag = false, tags, setTags}) => {
+const TagInput = ({isHashTag = false, tags, setTags, autoFocus}) => {
   const handleChange = (value, event) => {
     if(!isHashTag) return;
     if (event.target.className !== "ReactTags__tagInputField") {
@@ -114,11 +114,14 @@ const TagInput = ({isHashTag = false, tags, setTags}) => {
             '& .ReactTags__editTagInputField': {
                 width: "80px",
             },
-            '& .ReactTags__clearAll': {},
+            '& .ReactTags__clearAll': {
+              marginLeft: "5px"
+            },
         }}
     >
         <form>
         <ReactTags
+            autoFocus={autoFocus ? true: false}
             inputProps={{
                 onKeyUp: (e) => {
                     if(e.key === 'Unidentified'){
@@ -128,7 +131,8 @@ const TagInput = ({isHashTag = false, tags, setTags}) => {
                             e.target.dispatchEvent(enterEvent);
                         }
                     }
-                }
+                },
+                
             }}
           tags={tags}
           separators={[SEPARATORS.ENTER, SEPARATORS.COMMA]}
@@ -141,7 +145,7 @@ const TagInput = ({isHashTag = false, tags, setTags}) => {
           inputFieldPosition="bottom"
           clearAll
           onClearAll={onClearAll}
-          maxTags={7}
+          maxTags={4}
         />
 </form>
     </Box>
