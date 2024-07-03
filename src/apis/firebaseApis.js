@@ -4,6 +4,23 @@ import { loadFromLocalStorage } from '../functions/localStorageFunctions';
 import { LOCAL_STORAGE_KEYS } from '../enums';
 
 
+export async function fetchAllLikesByBuildings() {
+  const collectionRef = collection(db, "buildings");
+  const snapshot = await getDocs(collectionRef);
+
+  if (snapshot.empty) {
+    console.log("No document found");
+    return null;
+  }
+  const likesObj = {}
+
+  snapshot.docs.forEach(doc => {
+    likesObj[doc.id] = doc.data().likes || {};
+  });
+
+  return likesObj;
+}
+
 export async function fetchAllBuildingInfo() {
   const collectionRef = collection(db, "buildings");
   const snapshot = await getDocs(collectionRef);

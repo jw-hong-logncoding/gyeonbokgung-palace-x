@@ -1,11 +1,15 @@
 
 import { useNavigate } from "react-router-dom";
-import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from "@mui/material";
-import FortIcon from '@mui/icons-material/Fort';
+import { Box, Divider, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { BUILDING_DATA_LIST } from "../../data";
 import { useMemo } from "react";
+import { useQuery } from "react-query";
+import { fetchAllLikesByBuildings } from "../../apis/firebaseApis";
+import { countLikes } from "../../functions/counterFunctions";
+import LikeCounterOnMain from "../LikeCounterOnMain";
 
 const BuildingList = () => {
+    const { data } = useQuery("buildingLikesInfo", fetchAllLikesByBuildings);
     const navigate = useNavigate();
     const navigateList = useMemo(() => {
         return [
@@ -25,7 +29,7 @@ const BuildingList = () => {
     }, [navigate])
     const buildingList = useMemo(() => {
         return BUILDING_DATA_LIST
-            .map(({ title }, i) => ({ title, onClick: navigateList[i]}));
+            .map(({ title, value}, i) => ({ title, value, onClick: navigateList[i]}));
     }, [navigateList])
 
     return (
@@ -44,7 +48,7 @@ const BuildingList = () => {
             </Box>
             <Divider />
             <List>
-                {buildingList.map(({title, onClick}, index) => (
+                {buildingList.map(({title, value, onClick}, index) => (
                 <ListItem key={index} disablePadding>
                     <ListItemButton
                         onClick={onClick}
@@ -57,6 +61,7 @@ const BuildingList = () => {
                             ►
                         </Typography>
                         <ListItemText primary={title} />
+                        <LikeCounterOnMain likeCount={countLikes(data[value])} />
                     </ListItemButton>
                 </ListItem>
                 ))}
