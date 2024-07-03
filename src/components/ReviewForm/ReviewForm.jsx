@@ -61,7 +61,7 @@ const ReviewForm = () => {
                     md: "550px"
                 },
                 maxWidth: "700px",
-                marginTop: "10px"
+                margin: "30px 0px"
             }}>
 
                 <CardContent

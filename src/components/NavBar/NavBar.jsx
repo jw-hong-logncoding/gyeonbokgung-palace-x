@@ -43,11 +43,7 @@ function DrawerAppBar() {
             navigate('/community');
           })
         } },
-        { title: 'My Page', onClick: () => {
-          startTransition(() => {
-            navigate('/my-page');
-          })
-        } },
+        
       ]);
     }
  
@@ -90,7 +86,10 @@ function DrawerAppBar() {
     return (
       <Box sx={{ display: 'flex'}}>
         <AppBar component="nav" position="fixed" sx={{ zIndex: "10000001", }}>
-          <Toolbar variant="dense">
+          <Toolbar
+            edge="start"
+            variant="dense"
+          >
             <IconButton
               color="inherit"
               aria-label="open drawer"
@@ -114,11 +113,17 @@ function DrawerAppBar() {
                 </Button>
               ))}
             </Box>
-            <Box>
-
-            </Box>
+            
+            <Box
+            sx={{
+              flexGrow: {
+                xs: 1,
+                sm: 0
+              }}}
+            ></Box>
             {userData &&
               <IconButton
+                  edge="end"
                   size="large"
                   aria-label="account of current user"
                   aria-controls="menu-appbar"
@@ -134,7 +139,7 @@ function DrawerAppBar() {
                 id="menu-appbar"
                 sx={{
                   zIndex: "10000002",
-                  left: "20px",
+                  left: "10px",
                   top: "23px"
                 }}
                 anchorEl={anchorEl}
@@ -150,6 +155,11 @@ function DrawerAppBar() {
                 open={Boolean(anchorEl)}
                 onClick={handleCloseMenu}
               >
+                <MenuItem onClick={ () => {
+                  startTransition(() => {
+                    navigate('/my-page');
+                    })
+                  }}>My Page</MenuItem>
                 <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </Menu>
           </Toolbar>
@@ -163,6 +173,7 @@ function DrawerAppBar() {
               keepMounted: true, // Better open performance on mobile.
             }}
             sx={{
+              width: "100%",
               zIndex: "10000000",
               display: { xs: 'block', sm: 'none' },
               '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
