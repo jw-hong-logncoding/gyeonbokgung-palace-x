@@ -38,7 +38,10 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                     />
                 </Box>
                 <Box
-                    marginLeft="15px"
+                    padding={{
+                        xs: "0px 10px",
+                        sm: "0px 30px"
+                    }}
                 >
                     <Box
                         marginBottom="8px"
@@ -80,8 +83,6 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                     <Box
                         sx={{
                             marginTop: '10px',
-                            padding: '0px 25px 0px 20px'
-
                         }}
                     >
                         {description}
