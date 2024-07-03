@@ -191,7 +191,18 @@ const About = () => {
                             }}
                             variant="mainPageTitle"
                         >
-                            Jo / Jung / Gun
+                            Jo / Jong / Gun
+                        </Typography>
+                        <Typography
+                            color="white"
+                            marginTop="10px"
+                            fontSize="18px"
+                            sx={{width: {
+                                lg: "900px"
+                                }
+                            }}
+                        >
+                            Temple name is a title given in praise of a king’s virtues after his death, commonly used to refer to kings during the Joseon Dynasty.
                         </Typography>
                         <Typography
                             color= 'white'
@@ -199,7 +210,7 @@ const About = () => {
                             textAlign='left'
                             marginTop="50px"
                         >
-                            #1. JO
+                            JO
                         </Typography>
                         <Typography
                             color= 'white'
@@ -217,7 +228,7 @@ const About = () => {
                             textAlign='left'
                             marginTop="20px"
                         >
-                            #2. JONG
+                            JONG
                         </Typography>
                         <Typography
                             color= 'white'
@@ -235,7 +246,7 @@ const About = () => {
                             textAlign='left'
                             marginTop="20px"
                         >
-                            #3. GUN
+                            GUN
                         </Typography>
                         <Typography
                             color= 'white'
