@@ -52,7 +52,7 @@ const ReviewDetail = () => {
                     md: "1000px"
                 },
                 maxWidth: "800px",
-                marginTop: "10px"
+                margin: "30px 0px"
             }}>
             <CardContent>
                 <Box

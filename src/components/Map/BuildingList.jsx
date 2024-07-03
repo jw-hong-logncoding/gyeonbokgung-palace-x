@@ -39,7 +39,7 @@ const BuildingList = () => {
                         fontSize: '30px'
                     }}
                 >
-                    Building
+                    Buildings
                 </Typography>
             </Box>
             <Divider />

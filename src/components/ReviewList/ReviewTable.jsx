@@ -73,6 +73,7 @@ const ReviewTable = () => {
     return (
       <TableContainer
         sx={{
+            margin: "25px 0px",
             width: {
                 xs: "100vw",
                 md: "700px"

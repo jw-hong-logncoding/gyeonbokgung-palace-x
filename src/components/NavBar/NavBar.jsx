@@ -38,7 +38,7 @@ function DrawerAppBar() {
             navigate('/map');
           })
         } },
-        { title: 'Community', onClick: () => {
+        { title: 'Review', onClick: () => {
           startTransition(() => {
             navigate('/community');
           })
