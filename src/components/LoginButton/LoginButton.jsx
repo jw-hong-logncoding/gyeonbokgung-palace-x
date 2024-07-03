@@ -9,11 +9,11 @@ const LoginButton = () => {
             <Button
                 sx={{
                     width: '110px',
-                    color: 'white',
+                    color: 'secondary.main',
                     border: '1px solid',
-                    bgcolor: 'secondary.main',
+                    bgcolor: '#CCCCCC',
                     borderColor: 'secondary.light',
-                    '&:hover': { bgcolor: 'secondary.dark' },
+                    '&:hover': { bgcolor: 'secondary.light' },
                     letterSpacing: "3px",
                     fontSize: "12px"
                 }}

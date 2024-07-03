@@ -4,7 +4,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import useUserData from "../../hooks/useUserData";
 import { removeFromLocalStorage } from "../../functions/localStorageFunctions";
 import { LOCAL_STORAGE_KEYS } from "../../enums";
@@ -58,6 +58,9 @@ function DrawerAppBar() {
     const handleLogout = () => {
       handleCloseMenu();
       removeFromLocalStorage(LOCAL_STORAGE_KEYS.USER);
+      if (location.pathname === '/') {
+        window.location.reload();
+      }
       navigate('/');
     };
 
