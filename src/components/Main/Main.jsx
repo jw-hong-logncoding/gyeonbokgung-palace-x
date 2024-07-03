@@ -8,7 +8,7 @@ import About from "../About";
 const Main = () => {
     const { userData } = useUserData();
     return (
-        <>
+        <Box>
             <S.MainImageContainer>
                 <S.MainImageOverlay />
                 <S.MainImage
@@ -102,8 +102,8 @@ const Main = () => {
                 </Box>
                 {userData ? null : (<LoginButton />)}
                 <About />
-        </Stack>
-        </>
+            </Stack>
+        </Box>
     )
 }
 

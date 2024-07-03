@@ -260,7 +260,11 @@ const About = () => {
                         </Typography>
                 </Stack>
 
-                <Stack>
+                <Stack
+                    sx={{
+                        marginTop: "180px"
+                    }}
+                >
                     <Typography
                         sx={{
                             background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5))',
@@ -269,24 +273,34 @@ const About = () => {
                             color: 'transparent',
                             display: 'inline',
                             marginTop: '160px',
+                            letterSpacing: "1px",
+                            fontWeight: "0",
+                            fontFamily: "'Nanum Myeongjo', Times, serif",
                             fontSize: {
-                                sm: '48px',
+                                sm: '34px',
                                 xs: '10vw'
                             }}}
-                        variant="mainPageTitle"
+                            variant="mainPageTitle"
                         >
                             Contact
                         </Typography>
                         <Typography
                             color= 'white'
                             marginTop="20px"
+                            sx={{
+                                fontFamily: "'Nanum Myeongjo', Times, serif",
+                            }}
                         >
-                            Jungwook Hong
+                            If you have any questions or feedback, please don’t hesitate to contact me via email.
                         </Typography>
                         <Typography
                             color= 'white'
                             marginTop="10px"
+                            sx={{
+                                fontFamily: "'NanumMyeongjo', Times, serif",
+                            }}
                         >
+                            {`[ `}
                             <a
                                 style={{
                                     color: 'white',
@@ -295,6 +309,7 @@ const About = () => {
                                 href="mailto: example@gmail.com">
                                 example@gmail.com
                             </a>
+                            {` - Jungwook Hong ]`}
                         </Typography>
                 </Stack>
             </Stack>
