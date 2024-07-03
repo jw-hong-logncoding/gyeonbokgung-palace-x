@@ -2,10 +2,10 @@ import { Box, Card, CircularProgress, Divider, Stack } from "@mui/material";
 import MyLikes from "./MyLikes";
 import MyReview from "./MyReview";
 import { useQuery } from "react-query";
-import { fetchMyReviewsByUserId } from "../../apis/firebaseApis";
+import { fetchAllReviews } from "../../apis/firebaseApis";
 
 const MyPage = () => {
-    const { data } = useQuery('myReviews', fetchMyReviewsByUserId);
+    const { data } = useQuery('myReviews', fetchAllReviews);
     return (
         <Box
             sx={{

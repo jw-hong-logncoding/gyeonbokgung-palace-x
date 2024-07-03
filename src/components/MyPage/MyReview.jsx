@@ -14,6 +14,7 @@ import { useQuery } from "react-query";
 import { fetchMyReviewsByUserId } from "../../apis/firebaseApis";
 import { formatDate } from '../../functions/stringFunctions';
 import { startTransition } from 'react';
+import useUserData from '../../hooks/useUserData';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -42,15 +43,18 @@ function createData(id, building, date,  likes) {
 
 const MyReview = ({ data }) => {
     const navigate = useNavigate();
-    const rows = data.map(({ id, buildingId, date, likes }, i) => {
-        const building = BUILDING_DATA_LIST.find((b) => 
-            {
-             return b.value === buildingId;
-            }
-        );
-        const likesCount = Object.keys(likes).length;
-        return createData(id, building?.title, formatDate(new Date(date)), likesCount);
-    });
+    const { userData } = useUserData();
+    const rows = data
+        .filter((ud) => ud.userId === userData.uid)
+        .map(({ id, buildingId, date, likes }, i) => {
+            const building = BUILDING_DATA_LIST.find((b) => 
+                {
+                return b.value === buildingId;
+                }
+            );
+            const likesCount = Object.keys(likes).length;
+            return createData(id, building?.title, formatDate(new Date(date)), likesCount);
+        });
 
     return (
         <Box
