@@ -306,8 +306,8 @@ const About = () => {
                                     color: 'white',
                                     textDecoration: 'none'
                                 }}
-                                href="mailto: example@gmail.com">
-                                example@gmail.com
+                                href="mailto: gpalacexdeveloper@gmail.com">
+                                gpalacexdeveloper@gmail.com
                             </a>
                             {` - Jungwook Hong ]`}
                         </Typography>
