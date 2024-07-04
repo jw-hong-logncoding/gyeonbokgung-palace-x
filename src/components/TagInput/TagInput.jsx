@@ -84,7 +84,9 @@ const TagInput = ({isHashTag = false, tags, setTags, autoFocus}) => {
         sx={{
             '& .ReactTags__tags': {},
             '& .ReactTags__tagInput': {},
-            '& .ReactTags__tagInputField': {},
+            '& .ReactTags__tagInputField': {
+              width: "97%"
+            },
             '& .ReactTags__selected': {
                 display: "flex",
                 justifyContent: "start",
@@ -115,7 +117,8 @@ const TagInput = ({isHashTag = false, tags, setTags, autoFocus}) => {
                 width: "80px",
             },
             '& .ReactTags__clearAll': {
-              marginLeft: "5px"
+              marginLeft: "5px",
+              display: "none"
             },
         }}
     >

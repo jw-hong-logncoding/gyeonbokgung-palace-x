@@ -6,7 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { Button, Chip, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
+import { Button, Chip, Fab, FormControl, InputLabel, MenuItem, Select, Stack, Typography } from '@mui/material';
+import { Add as AddIcon } from '@mui/icons-material';
 import { BUILDING_DATA_LIST } from '../../data';
 import { useState } from "react";
 import { isMobile } from 'react-device-detect';
@@ -81,6 +82,19 @@ const ReviewTable = () => {
         }}
         component={Paper}
         >
+        <Fab
+            sx={{
+                position: "fixed",
+                bottom: "20px",
+                right: "20px"
+            }}
+            size="medium"
+            color="white"
+            aria-label="add"
+            onClick={() => {navigate('/review-form')}}
+        >
+            <AddIcon/>
+        </Fab>
         <Table
             aria-label="customized table"
             size={isMobile ? 'small' : 'medium'}

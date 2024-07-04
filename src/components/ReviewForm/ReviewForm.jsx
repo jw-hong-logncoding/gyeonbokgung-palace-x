@@ -133,7 +133,9 @@ const ReviewForm = () => {
                                 >
                                     {`Keywords: `}
                                 </Typography>
-                                <Box>
+                                <Box
+                                    sx={{width:"98%"}}
+                                >
                                     <TagInput
                                         setTags={setKeywords}
                                         tags={keywords}
@@ -152,7 +154,9 @@ const ReviewForm = () => {
                                         marginRight: '10px'
                                     }}
                                 >{`Hashtags: `}</Typography>
-                                <Box>
+                                <Box
+                                    sx={{width:"100%"}}
+                                >
                                     <TagInput
                                         setTags={setHashTags}
                                         tags={hashTags}
@@ -208,6 +212,7 @@ const ReviewForm = () => {
                                     }}
                                 >
                                     <Button
+                                        fullWidth
                                         variant="contained"
                                         onClick={handlePost}
                                     >
