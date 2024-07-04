@@ -44,7 +44,7 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                     }}
                 >
                     <Box
-                        marginBottom="8px"
+                        marginBottom="3px"
                     >
                         <Typography
                             fontSize="20px"
@@ -63,6 +63,7 @@ const BuildingDescription = ({title, photo, keywordList, description }) => {
                                     bgcolor: 'secondary.light',
                                     borderRadius: '15px',
                                     padding: '5px 10px 5px 10px',
+                                    marginTop: '5px',
                                     marginRight: '5px'
                                 }}
                             >
