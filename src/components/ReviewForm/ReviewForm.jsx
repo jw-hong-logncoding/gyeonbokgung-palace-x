@@ -8,6 +8,7 @@ import { addReview } from "../../apis/firebaseApis";
 import { useNavigate } from "react-router-dom";
 import ImageUploader from "../ImageUploader/ImageUploader";
 import { useImageStore } from "../../store";
+import { BUILDING_TO_HASHTAG, BUILDING_TO_KEYWORDS } from "../../data/tagData";
 
 const ReviewForm = () => {
     const navigate = useNavigate();
@@ -141,6 +142,33 @@ const ReviewForm = () => {
                                         tags={keywords}
                                         autoFocus={true}
                                     />
+                                    <Stack
+                                        flexDirection="row"
+                                        gap="5px"
+                                        marginTop="1px"
+                                    >
+                                        <Typography
+                                            sx={{
+                                                fontSize: "10px",
+                                                fontStyle: "italic",
+                                                color: "gray"
+                                            }}
+                                        >
+                                            {`ex) `}
+                                        </Typography>
+                                        {BUILDING_TO_KEYWORDS[buildingState].map((text, i) => (
+                                            <Typography
+                                                key={i}
+                                                sx={{
+                                                    fontSize: "10px",
+                                                    fontStyle: "italic",
+                                                    color: "gray"
+                                                }}
+                                            >
+                                                {text}
+                                            </Typography>
+                                        ))}
+                                    </Stack>
                                 </Box>
                             </Stack>
                             <Stack
@@ -162,7 +190,35 @@ const ReviewForm = () => {
                                         tags={hashTags}
                                         isHashTag
                                     />
+                                    <Stack
+                                        flexDirection="row"
+                                        gap="5px"
+                                        marginTop="1px"
+                                    >
+                                        <Typography
+                                            sx={{
+                                                fontSize: "10px",
+                                                fontStyle: "italic",
+                                                color: "gray"
+                                            }}
+                                        >
+                                            {`ex) `}
+                                        </Typography>
+                                        {BUILDING_TO_HASHTAG[buildingState].map((text, i) => (
+                                            <Typography
+                                                key={i}
+                                                sx={{
+                                                    fontSize: "10px",
+                                                    fontStyle: "italic",
+                                                    color: "gray"
+                                                }}
+                                            >
+                                                {text}
+                                            </Typography>
+                                        ))}
+                                    </Stack>
                                 </Box>
+
                             </Stack>
                             <Stack
                                 alignItems="left"
