@@ -146,6 +146,7 @@ const TagInput = ({isHashTag = false, tags, setTags, autoFocus}) => {
           handleTagClick={handleTagClick}
           onTagUpdate={onTagUpdate}
           inputFieldPosition="bottom"
+          placeholder={isHashTag ? 'Write hashtags' : 'Write keywords'}
           clearAll
           onClearAll={onClearAll}
           maxTags={4}
