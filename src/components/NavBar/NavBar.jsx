@@ -10,9 +10,9 @@ import { removeFromLocalStorage } from "../../functions/localStorageFunctions";
 import { LOCAL_STORAGE_KEYS } from "../../enums";
 import { generateRandomString } from "../../functions/stringFunctions";
 import { startTransition } from "react";
+import logo from '../../assets/images/logo.png';
 
 const drawerWidth = 130;
-
 function DrawerAppBar() {
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -99,7 +99,7 @@ function DrawerAppBar() {
                         component="div"
                         sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, fontFamily: "'NanumMyeongjo', Times, serif" }}
                     >
-                        G P X
+                        <img src={logo} alt="Logo" style={{ height: '18px', marginTop: '10px'  }} />  
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map(({ title, onClick }) => (
