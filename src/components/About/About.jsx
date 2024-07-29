@@ -266,20 +266,26 @@ const About = () => {
                     }}
                 >
                     <Typography
-                        sx={{
-                            background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5))',
-                            WebkitBackgroundClip: 'text',
-                            backgroundClip: 'text',
-                            color: 'transparent',
-                            display: 'inline',
-                            marginTop: '160px',
-                            letterSpacing: "1px",
-                            fontWeight: "0",
-                            fontFamily: "'Nanum Myeongjo', Times, serif",
-                            fontSize: {
-                                sm: '34px',
-                                xs: '10vw'
-                            }}}
+                    sx={{
+                      background: 'linear-gradient(to bottom, white, rgba(255, 255, 255, 0.5))',
+                      WebkitBackgroundClip: 'text',
+                      backgroundClip: 'text',
+                      color: 'transparent',
+                      display: 'inline',
+                      marginTop: {
+                        sm: '65px',
+                        md: '60px',
+                        lg: '160px',
+                        xs: '180px',
+                      },
+                      letterSpacing: '1px',
+                      fontWeight: '0',
+                      fontFamily: "'Nanum Myeongjo', Times, serif",
+                      fontSize: {
+                        sm: '34px',
+                        xs: '10vw',
+                      },
+                    }}
                             variant="mainPageTitle"
                         >
                             Contact
@@ -296,6 +302,7 @@ const About = () => {
                         <Typography
                             color= 'white'
                             marginTop="10px"
+                            marginBottom="35px"
                             sx={{
                                 fontFamily: "'NanumMyeongjo', Times, serif",
                             }}

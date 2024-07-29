@@ -48,7 +48,7 @@ const Main = () => {
                                 md: "10px"
                             },
                             fontSize: {
-                                sm: '78px',
+                                sm: '71px',
                                 xs: '11vw'
                             }
                         }}
@@ -67,7 +67,7 @@ const Main = () => {
                                 md: "10px"
                             },
                             fontSize: {
-                                sm: '78px',
+                                sm: '71px',
                                 xs: '11vw'
                             }
                         }}
@@ -81,8 +81,8 @@ const Main = () => {
                     sx={{
                         display: 'flex',
                         height: {
-                            xs: "100px",
-                            md: "100px"
+                            xs: "90px",
+                            md: "90px"
                         }
 
                     }}

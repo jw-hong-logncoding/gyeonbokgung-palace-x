@@ -44,7 +44,7 @@ let theme = createTheme({
       // background: 'linear-gradient(to bottom, white, transparent)'
     },
     mainSubtitle: {
-      fontSize: '14px',
+      fontSize: '17px',
       color: 'white',
     }
   },

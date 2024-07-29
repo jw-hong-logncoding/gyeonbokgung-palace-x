@@ -31,16 +31,14 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     '&:nth-of-type(odd)': {
         backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     '&:last-child td, &:last-child th': {
         border: 0,
     },
 }));
 
-function createData(id, building, keywords, buildingId, likes) {
-    return {id, building, keywords, buildingId, likes};
+function createData(id, building, keywords, buildingId, likes, date) {
+    return { id, building, keywords, buildingId, likes, date };
 }
-
 
 const ReviewTable = () => {
     const { data } = useQuery('allReviews', fetchAllReviews);
@@ -50,205 +48,206 @@ const ReviewTable = () => {
     const handleSelectChange = (e) => {
         setFilterValue(e.target.value);
     }
+
     const rows = data
-        .map(({id, buildingId, keywords, likes}) => {
+        .map(({ id, buildingId, keywords, likes, date }) => {
             const building = BUILDING_DATA_LIST.find((b) => b.value === buildingId);
-            return createData(id, building.title, keywords, buildingId, likes);
+            return createData(id, building.title, keywords, buildingId, likes, date);
         })
         .sort((a, b) => {
-            if (filterValue !== "building"){
+            if (filterValue === "building") {
+                const titleA = a.building.toUpperCase();
+                const titleB = b.building.toUpperCase();
+                if (titleA < titleB) {
+                    return -1;
+                }
+                if (titleA > titleB) {
+                    return 1;
+                }
                 return 0;
+            } else {
+                return new Date(b.date) - new Date(a.date);
             }
-            const titleA = a.building.toUpperCase();
-            const titleB = b.building.toUpperCase();
-            if (titleA < titleB) {
-              return -1;
-            }
-            if (titleA > titleB) {
-              return 1;
-            }
-            return 0;
         });
 
-
     return (
-      <TableContainer
-        sx={{
-            margin: "25px 0px",
-            width: {
-                xs: "100vw",
-                md: "700px"
-            }
-        }}
-        component={Paper}
-        >
-        <Fab
+        <TableContainer
             sx={{
-                position: "fixed",
-                bottom: "20px",
-                right: "20px"
+                margin: "25px 0px",
+                width: {
+                    xs: "100vw",
+                    md: "700px"
+                }
             }}
-            size="medium"
-            color="white"
-            aria-label="add"
-            onClick={() => {navigate('/review-form')}}
+            component={Paper}
         >
-            <AddIcon/>
-        </Fab>
-        <Table
-            aria-label="customized table"
-            size={isMobile ? 'small' : 'medium'}
-        >
-          <TableHead>
-            <TableRow>
-                <StyledTableCell
-                    align="center"
-                    sx={{
-                        padding: {
-                            xs: "0px",
-                            md: "6px 16px"
-                        }
-                    }}
-                >
-                    #
-                </StyledTableCell>
-                <StyledTableCell>Building</StyledTableCell>
-                <StyledTableCell align="left">Keywords</StyledTableCell>
-                <StyledTableCell
-                    sx={{
-                        padding: {
-                            xs: "0px",
-                            md: "6px 16px"
-                        },
-                        textAlign: {
-                            xs: "center",
-                            md: "left"
-                        }
-                    }}
-                >
-                    View
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                <FormControl variant="standard" sx={{
-                        minWidth: {
-                            xs: 60,
-                            md: 120
-                        },
-                        height: 0,
-                        bottom: "14px",
-                    }} size="small">
-                    <InputLabel sx={{color: "white", fontSize: "14px"}} id="demo-simple-select-standard-label">Filter</InputLabel>
-                    <Select
-                            value={filterValue}
-                            label="Filter"
-                            onChange={handleSelectChange}
+            <Fab
+                sx={{
+                    position: "fixed",
+                    bottom: "20px",
+                    right: "20px"
+                }}
+                size="medium"
+                color="white"
+                aria-label="add"
+                onClick={() => { navigate('/review-form') }}
+            >
+                <AddIcon />
+            </Fab>
+            <Table
+                aria-label="customized table"
+                size={isMobile ? 'small' : 'medium'}
+            >
+                <TableHead>
+                    <TableRow>
+                        <StyledTableCell
+                            align="center"
                             sx={{
-                                fontSize: '13px',
-                                color: 'white', // 선택된 텍스트의 색상을 빨간색으로 설정
-                                '.MuiSelect-select': {
-                                  color: 'white', // 선택된 텍스트의 색상을 빨간색으로 설정
-                                },
-                                '& .Mui-selected': {
-                                  color: 'white', // 선택된 항목의 텍스트 색상을 파란색으로 설정
-                                },
-                              }}
+                                padding: {
+                                    xs: "0px",
+                                    md: "6px 16px"
+                                }
+                            }}
                         >
-                        <MenuItem value="">
-                            <em>None</em>
-                        </MenuItem>
-                        <MenuItem value="building">Building</MenuItem>
-                    </Select>
-                </FormControl>
-              </StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-            .map((row, i) => (
-              <StyledTableRow key={row.id}>
-                <StyledTableCell
-                    sx={{
-                        padding: "3px"
-                    }}
-                    size="small"
-                    align="left"
-                >
-                    <Typography
-                        sx={{
-                            fontSize: "12px",
-                            textAlign: "center"
-                        }}
-                    >
-                        {i + 1}
-                    </Typography>
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row">
-                    <Typography
-                        sx={{
-                            fontSize: "12px",
-                        }}
-                    >
-                        {row.building}
-                    </Typography>
-                </StyledTableCell>
-                <StyledTableCell align="left">
-                    <Stack
-                        display="flex"
-                        flexWrap="wrap"
-                        maxWidth="400px"
-                        gap="5px"
-                        flexDirection="row"
-                        minWidth="50px"
-                    >
-                    {
-                        row.keywords.map((e, i) => (
-                            <Chip
-                                size='small'
-                                label={e}
-                                key={i}
-                                color="secondary"
-                            />
-                        ))
-                    }
-                    </Stack>
-                </StyledTableCell>
-                <StyledTableCell
-                    sx={{
-                        padding: "0px"
-                    }}
-                    align="center"
-                    >
-                    <Button
-                        sx={{
-                            fontSize: "10px",
-                            minWidth: "5px"
-                        }}
-                        size='small'
-                        variant="outlined"
-                        onClick={() => {
-                            startTransition(() => {
-                                navigate(`/review/${row.id}`)
-                            })
-                            
-                        }}
-                    >
-                        More
-                    </Button>
-               </StyledTableCell>
-                <StyledTableCell align="left">
-                    <Stack
-                        direction="row"
-                        alignItems="center"
-                        gap="5px"
-                    >
-                        <LikeCounter reviewId={row.id} buildingId={row.buildingId} likes={row.likes} />
-                    </Stack>
-                </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+                            #
+                        </StyledTableCell>
+                        <StyledTableCell>Building</StyledTableCell>
+                        <StyledTableCell align="left">Keywords</StyledTableCell>
+                        <StyledTableCell
+                            sx={{
+                                padding: {
+                                    xs: "0px",
+                                    md: "6px 16px"
+                                },
+                                textAlign: {
+                                    xs: "center",
+                                    md: "left"
+                                }
+                            }}
+                        >
+                            View
+                        </StyledTableCell>
+                        <StyledTableCell align="left">
+                            <FormControl variant="standard" sx={{
+                                minWidth: {
+                                    xs: 60,
+                                    md: 120
+                                },
+                                height: 0,
+                                bottom: "14px",
+                            }} size="small">
+                                <InputLabel sx={{ color: "white", fontSize: "14px" }} id="demo-simple-select-standard-label">Filter</InputLabel>
+                                <Select
+                                    value={filterValue}
+                                    label="Filter"
+                                    onChange={handleSelectChange}
+                                    sx={{
+                                        fontSize: '13px',
+                                        color: 'white',
+                                        '.MuiSelect-select': {
+                                            color: 'white',
+                                        },
+                                        '& .Mui-selected': {
+                                            color: 'white',
+                                        },
+                                    }}
+                                >
+                                    <MenuItem value="">
+                                        <em>None</em>
+                                    </MenuItem>
+                                    <MenuItem value="building">Building</MenuItem>
+                                </Select>
+                            </FormControl>
+                        </StyledTableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {rows
+                        .map((row, i) => (
+                            <StyledTableRow key={row.id}>
+                                <StyledTableCell
+                                    sx={{
+                                        padding: "3px"
+                                    }}
+                                    size="small"
+                                    align="left"
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontSize: "12px",
+                                            textAlign: "center"
+                                        }}
+                                    >
+                                        {i + 1}
+                                    </Typography>
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    <Typography
+                                        sx={{
+                                            fontSize: "12px",
+                                        }}
+                                    >
+                                        {row.building}
+                                    </Typography>
+                                </StyledTableCell>
+                                <StyledTableCell align="left">
+                                    <Stack
+                                        display="flex"
+                                        flexWrap="wrap"
+                                        maxWidth="400px"
+                                        gap="5px"
+                                        flexDirection="row"
+                                        minWidth="50px"
+                                    >
+                                        {
+                                            row.keywords.map((e, i) => (
+                                                <Chip
+                                                    size='small'
+                                                    label={e}
+                                                    key={i}
+                                                    color="secondary"
+                                                />
+                                            ))
+                                        }
+                                    </Stack>
+                                </StyledTableCell>
+                                <StyledTableCell
+                                    sx={{
+                                        padding: "0px"
+                                    }}
+                                    align="center"
+                                >
+                                    <Button
+                                        sx={{
+                                            fontSize: "10px",
+                                            minWidth: "5px"
+                                        }}
+                                        size='small'
+                                        variant="outlined"
+                                        onClick={() => {
+                                            startTransition(() => {
+                                                navigate(`/review/${row.id}`)
+                                            })
+
+                                        }}
+                                    >
+                                        More
+                                    </Button>
+                                </StyledTableCell>
+                                <StyledTableCell align="left">
+                                    <Stack
+                                        direction="row"
+                                        alignItems="center"
+                                        gap="5px"
+                                    >
+                                        <LikeCounter reviewId={row.id} buildingId={row.buildingId} likes={row.likes} />
+                                    </Stack>
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
     );
 }
 

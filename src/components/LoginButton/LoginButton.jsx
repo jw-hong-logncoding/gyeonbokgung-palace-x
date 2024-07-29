@@ -8,14 +8,14 @@ const LoginButton = () => {
         <div>
             <Button
                 sx={{
-                    width: '110px',
+                    width: '120px',
                     color: 'secondary.main',
                     border: '1px solid',
                     bgcolor: '#CCCCCC',
                     borderColor: 'secondary.light',
                     '&:hover': { bgcolor: 'secondary.light' },
                     letterSpacing: "3px",
-                    fontSize: "12px"
+                    fontSize: "15px"
                 }}
                 color="secondary"
                 variant='outlined'
