@@ -22,7 +22,7 @@ const About = () => {
                 tabIndex="-1"
                 ref={aboutPageRef}
                 paddingTop="200px"
-                gap='30px'
+                gap='15px'
                 alignItems="center"
                 marginTop="400px"
             >
@@ -53,6 +53,7 @@ const About = () => {
                             sm:'56px',
                             xs: '32px'
                         },
+                        fontWeight: 350,
                         width: {
                             md: '800px',
                         }

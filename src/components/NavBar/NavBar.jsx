@@ -66,7 +66,7 @@ function DrawerAppBar() {
     };
 
     const drawer = (
-        <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+        <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center'}}>
             <Box marginTop="50px" />
             <Divider />
             <List>
@@ -97,13 +97,13 @@ function DrawerAppBar() {
                     <Typography
                         variant="h6"
                         component="div"
-                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, fontFamily: "'NanumMyeongjo', Times, serif" }}
+                        sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, fontFamily: "'NanumMyeongjo', Times, serif"}}
                     >
                         <img src={logo} alt="Logo" style={{ height: '18px', marginTop: '10px'  }} />  
                     </Typography>
                     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
                         {navItems.map(({ title, onClick }) => (
-                            <Button key={title} sx={{ color: '#fff', fontFamily: "'NanumMyeongjo', Times, serif" }} onClick={onClick}>
+                            <Button key={title} sx={{ color: '#fff', fontFamily: "'NanumMyeongjo', Times, serif" , fontSize: "12.5px"}} onClick={onClick}>
                                 {title}
                             </Button>
                         ))}

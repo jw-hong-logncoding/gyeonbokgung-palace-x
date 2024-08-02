@@ -1,12 +1,28 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, Button } from "@mui/material";
+import { keyframes } from '@mui/system';
 import IMAGES from "../../assets/images";
 import * as S from "./Main.style";
 import LoginButton from "../LoginButton";
 import useUserData from "../../hooks/useUserData";
+import useGoogleLogin from "../../hooks/useGoogleLogin";
 import About from "../About";
+
+// Define the animation keyframes
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
 
 const Main = () => {
     const { userData } = useUserData();
+    const { handleGoogleLogin } = useGoogleLogin();
+
     return (
         <Box>
             <S.MainImageContainer>
@@ -22,7 +38,7 @@ const Main = () => {
                     md: '230px'
                 }}
                 textAlign="center"
-                gap="60px"
+                gap="30px"
             >
                 <Stack
                     sx={{
@@ -50,10 +66,11 @@ const Main = () => {
                             fontSize: {
                                 sm: '71px',
                                 xs: '11vw'
-                            }
+                            },
+                            animation: `${fadeIn} 2s ease-in-out` // Apply the animation
                         }}
                         variant="mainPageTitle">
-                            Gyeongbokgung
+                        Gyeongbokgung
                     </Typography>
                     <Typography
                         sx={{
@@ -69,14 +86,14 @@ const Main = () => {
                             fontSize: {
                                 sm: '71px',
                                 xs: '11vw'
-                            }
+                            },
+                            animation: `${fadeIn} 2s ease-in-out` // Apply the animation
                         }}
                         variant="mainPageTitle">
-                            Palace X
-                    </Typography>    
+                        Palace X
+                    </Typography>
                 </Stack>
-                
-                
+
                 <Box
                     sx={{
                         display: 'flex',
@@ -84,27 +101,59 @@ const Main = () => {
                             xs: "90px",
                             md: "90px"
                         }
-
                     }}
                     textAlign="center"
                     justifyContent="center"
                 >
                     <Box sx={{
-                            maxWidth: {
-                                sm: "700px"
-                            },
-                            padding: "0px 8px"
-                         }}>
-                        <Typography variant="mainSubtitle" >
-                        This website offers diverse cultural insights on Gyeongbokgung Palace, providing a platform for sharing varied perceptions and feelings about the subject, going beyond mere information gathering.
+                        maxWidth: {
+                            sm: "700px"
+                        },
+                        padding: "0px 8px"
+                    }}>
+                        <Typography
+                            sx={{
+                                animation: `${fadeIn} 2s ease-in-out` // Apply the animation
+                            }}
+                            variant="mainSubtitle"
+                        >
+                            This website offers diverse cultural insights on Gyeongbokgung Palace, providing a platform for sharing varied perceptions and feelings about the subject, going beyond mere information gathering.
                         </Typography>
                     </Box>
                 </Box>
-                {userData ? null : (<LoginButton />)}
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        animation: `${fadeIn} 2s ease-in-out` // Apply the animation
+                    }}
+                >
+                    {userData ? (
+                        <Button
+                            sx={{
+                                width: '180px',
+                                color: 'secondary.main',
+                                border: '1px solid',
+                                bgcolor: '#CCCCCC',
+                                borderColor: 'secondary.light',
+                                '&:hover': { bgcolor: 'secondary.light' },
+                                letterSpacing: "3px",
+                                fontSize: "15px"
+                            }}
+                            color="secondary"
+                            variant='outlined'
+                            onClick={handleGoogleLogin} 
+                        >
+                            Learn More
+                        </Button>
+                    ) : (
+                        <LoginButton />
+                    )}
+                </Box>
                 <About />
             </Stack>
         </Box>
-    )
+    );
 }
 
 export default Main;
