@@ -88,22 +88,34 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
     }
   };
 
-  const handleIconClick = (icon) => {
-    // Center the stage on the clicked icon and zoom in
-    const stage = stageRef.current;
-    const newScale = 0.33; // Set the desired zoom level
-    const newPos = {
+const handleIconClick = (icon) => {
+  const stage = stageRef.current;
+  let newScale;
+  let newPos;
+
+  if (isMobile) {
+    newScale = 0.16; // Set a different zoom level for mobile
+    newPos = {
+      x: -icon.x * newScale + (window.innerWidth - drawerWidth) / 2 + 0, // Adjust centering for mobile
+      y: -icon.y * newScale + window.innerHeight / 2 - 140,
+    };
+  } else {
+    newScale = 0.33; // Set the desired zoom level for desktop
+    newPos = {
       x: -icon.x * newScale + (window.innerWidth - drawerWidth) / 2 - 500,
       y: -icon.y * newScale + window.innerHeight / 2 - 200,
     };
-    setStagePosition(newPos);
-    setScale(newScale);
-    stage.position(newPos);
-    stage.scale({ x: newScale, y: newScale });
-    stage.batchDraw();
-    setSelectedIcon(icon.id);
-    navigate(icon.pathname);
-  };
+  }
+
+  setStagePosition(newPos);
+  setScale(newScale);
+  stage.position(newPos);
+  stage.scale({ x: newScale, y: newScale });
+  stage.batchDraw();
+  setSelectedIcon(icon.id);
+  navigate(icon.pathname);
+};
+
 
   return (
     <Stage
