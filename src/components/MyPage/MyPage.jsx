@@ -11,6 +11,7 @@ const MyPage = () => {
             sx={{
                 display: "flex",
                 justifyContent: "center",
+
             }}
         >
             <Card
@@ -19,7 +20,8 @@ const MyPage = () => {
                         xs: "100vw",
                         md: "90vw"
                     },
-                    paddingBottom: "30px"
+                    paddingBottom: "30px",
+                    marginTop: "28px"
                 }}
             >
             <Box

@@ -61,7 +61,6 @@ const BuildingList = () => {
                             ►
                         </Typography>
                         <ListItemText primary={title} />
-                        <LikeCounterOnMain likeCount={countLikes(data[value])} />
                     </ListItemButton>
                 </ListItem>
                 ))}

@@ -15,23 +15,23 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
   const [stagePosition, setStagePosition] = useState({ x: 0, y: 0 });
   const [selectedIcon, setSelectedIcon] = useState(null);
 
-  const iconSize = 170;
-  const selectedIconSize = 200;
+  const iconSize = 85;
+  const selectedIconSize = 102;
 
   // 아이콘 위치 설정
   const icons = [
-    {pathname: "/map/jibokjae", x: 750, y: 0, id: 1, width: iconSize, height: iconSize },
-    {pathname: "/map/hyangwonjeong", x: 1000, y: 450, id: 2, width: iconSize, height: iconSize},
-    {pathname: "/map/jagyeongjeon", x: 1400, y: 1350, id: 3, width: iconSize, height: iconSize},
-    {pathname: "/map/gyeonghoeru", x: 675, y: 1525, id: 4, width: iconSize, height: iconSize},
-    {pathname: "/map/gangnyeongjeon", x: 1025, y: 1625, id: 5, width: iconSize, height: iconSize},
-    {pathname: "/map/gyotaejeon", x: 1025, y: 1465, id: 6, width: iconSize, height: iconSize},
-    {pathname: "/map/sajeongjeon", x: 1025, y: 1840, id: 7, width: iconSize, height: iconSize},
-    {pathname: "/map/geunjeongjeon", x: 990, y: 2060, id: 8, width: iconSize, height: iconSize},
-    {pathname: "/map/sujeongjeon", x: 665, y: 1860, id: 9, width: iconSize, height: iconSize},
-    {pathname: "/map/geunjeongmun", x: 990, y: 2360, id: 10, width: iconSize, height: iconSize},
-    {pathname: "/map/heungnyemun", x: 985, y: 2690, id: 11, width: iconSize, height: iconSize},
-    {pathname: "/map/gwanghwamun", x: 975, y: 3175, id: 12, width: iconSize, height: iconSize}
+    { pathname: "/map/jibokjae", x: 800, y: 20, id: 1, width: iconSize, height: iconSize },
+    { pathname: "/map/hyangwonjeong", x: 1050, y: 470, id: 2, width: iconSize, height: iconSize },
+    { pathname: "/map/jagyeongjeon", x: 1450, y: 1370, id: 3, width: iconSize, height: iconSize },
+    { pathname: "/map/gyeonghoeru", x: 705, y: 1575, id: 4, width: iconSize, height: iconSize },
+    { pathname: "/map/gangnyeongjeon", x: 1075, y: 1665, id: 5, width: iconSize, height: iconSize },
+    { pathname: "/map/gyotaejeon", x: 1075, y: 1505, id: 6, width: iconSize, height: iconSize },
+    { pathname: "/map/sajeongjeon", x: 1055, y: 1860, id: 7, width: iconSize, height: iconSize },
+    { pathname: "/map/geunjeongjeon", x: 1040, y: 2080, id: 8, width: iconSize, height: iconSize },
+    { pathname: "/map/sujeongjeon", x: 685, y: 1920, id: 9, width: iconSize, height: iconSize },
+    { pathname: "/map/geunjeongmun", x: 1040, y: 2430, id: 10, width: iconSize, height: iconSize },
+    { pathname: "/map/heungnyemun", x: 1005, y: 2770, id: 11, width: iconSize, height: iconSize },
+    { pathname: "/map/gwanghwamun", x: 985, y: 3165, id: 12, width: iconSize, height: iconSize }
   ];
 
   const handleWheel = (e) => {
@@ -185,9 +185,9 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
             />
             {selectedIcon === icon.id && (
               <Circle
-                x={icon.x + iconSize / 2+15}
-                y={icon.y + iconSize / 2+30}
-                radius={selectedIconSize / 2 + 10}
+                x={icon.x + iconSize / 2 + 5}
+                y={icon.y + iconSize / 2 + 25}
+                radius={selectedIconSize / 2 + 20}
                 fill="rgba(255, 255, 0, 0.3)" // 노란색 반투명
                 shadowColor="black" // 그림자 색
                 shadowBlur={20} // 그림자 블러 강도
@@ -209,6 +209,11 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
               onTap={() => {
                 handleIconClick(icon);
               }}
+              shadowColor="black" // 그림자 색
+              shadowBlur={10} // 그림자 블러 강도
+              shadowOffsetX={15} // 그림자 X축 오프셋
+              shadowOffsetY={7} // 그림자 Y축 오프셋
+              shadowOpacity={0.6} // 그림자 투명도
             />
           </Fragment>
         ))}

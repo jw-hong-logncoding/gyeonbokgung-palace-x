@@ -36,152 +36,135 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
     },
 }));
 
-function createData(id, building, date,  likes) {
-    return {id, building, date, likes };
+function createData(id, building, date, likes) {
+    return { id, building, date, likes };
 }
-
 
 const MyReview = ({ data }) => {
     const navigate = useNavigate();
     const { userData } = useUserData();
     const rows = data
         .filter((ud) => ud.userId === userData.uid)
-        .map(({ id, buildingId, date, likes }, i) => {
-            const building = BUILDING_DATA_LIST.find((b) => 
-                {
-                return b.value === buildingId;
-                }
-            );
+        .map(({ id, buildingId, date, likes }) => {
+            const building = BUILDING_DATA_LIST.find((b) => b.value === buildingId);
             const likesCount = Object.keys(likes).length;
-            return createData(id, building?.title, formatDate(new Date(date)), likesCount);
-        });
+            return createData(id, building?.title, new Date(date), likesCount);
+        })
+        .sort((a, b) => b.date - a.date) // Sort by date in descending order
+        .map((row) => ({ ...row, date: formatDate(row.date) })); // Format the date after sorting
 
     return (
-        <Box
-            display="inline-block"
-        >
-            <Box
-                marginTop="20px"
-                marginBottom="5px"
-                marginLeft="5px"
-            >
-                <Typography
-                    sx={{
-                        fontSize: "32px"                        
-                    }}
-                >
+        <Box display="inline-block">
+            <Box marginTop="20px" marginBottom="5px" marginLeft="5px">
+                <Typography sx={{ fontSize: "32px" }}>
                     My Review
                 </Typography>
             </Box>
-        <TableContainer
-        sx={{
-            width: {
-                xs: "100vw",
-                md: "500px"
-            }
-        }}
-        component={Paper}
-        >
-        <Table
-            aria-label="customized table"
-            size={isMobile ? 'small' : 'medium'}
-        >
-          <TableHead>
-            <TableRow>
-                <StyledTableCell
-                    align="center"
-                    sx={{
-                        padding: {
-                            xs: "0px",
-                            md: "6px 16px"
-                        }
-                    }}
-                >
-                    #
-                </StyledTableCell>
-                <StyledTableCell>Building</StyledTableCell>
-                <StyledTableCell>Date</StyledTableCell>
-                <StyledTableCell
-                    sx={{
-                        padding: {
-                            xs: "0px",
-                            md: "0px"
-                        },
-                        textAlign: {
-                            xs: "center",
-                            md: "left"
-                        }
-                    }}
-                >
-                    View
-                </StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows
-            .map((row, i) => (
-              <StyledTableRow key={i}>
-                <StyledTableCell
-                    sx={{
-                        padding: "3px"
-                    }}
-                    size="small"
-                    align="left"
-                >
-                    <Typography
-                        sx={{
-                            fontSize: "12px",
-                            textAlign: "center"
-                        }}
-                    >
-                        {i + 1}
-                    </Typography>
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row">
-                    <Typography
-                        sx={{
-                            fontSize: "12px",
-                        }}
-                    >
-                        {row.building}
-                    </Typography>
-                </StyledTableCell>
-                <StyledTableCell component="th" scope="row">
-                    <Typography
-                        sx={{
-                            fontSize: "12px",
-                        }}
-                    >
-                        {row.date}
-                    </Typography>
-                </StyledTableCell>
-                <StyledTableCell
-                    sx={{
-                        padding: "0px",
-                    }}
-                    align='left'
-                    >
-                    <Button
-                        sx={{
-                            fontSize: "10px",
-                            minWidth: "5px"
-                        }}
-                        size='small'
-                        variant="outlined"
-                        onClick={() => {
-                            startTransition(() => {
-                                navigate(`/review/${row.id}`)
-                            })
-                        }}
-                    >
-                        More
-                    </Button>
-               </StyledTableCell>
-              </StyledTableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            <TableContainer
+                sx={{
+                    width: {
+                        xs: "100vw",
+                        md: "500px"
+                    }
+                }}
+                component={Paper}
+            >
+                <Table aria-label="customized table" size={isMobile ? 'small' : 'medium'}>
+                    <TableHead>
+                        <TableRow>
+                            <StyledTableCell
+                                align="center"
+                                sx={{
+                                    padding: {
+                                        xs: "0px",
+                                        md: "6px 16px"
+                                    }
+                                }}
+                            >
+                                #
+                            </StyledTableCell>
+                            <StyledTableCell>Building</StyledTableCell>
+                            <StyledTableCell>Date</StyledTableCell>
+                            <StyledTableCell
+                                sx={{
+                                    padding: {
+                                        xs: "0px",
+                                        md: "0px"
+                                    },
+                                    textAlign: {
+                                        xs: "center",
+                                        md: "left"
+                                    }
+                                }}
+                            >
+                                View
+                            </StyledTableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {rows.map((row, i) => (
+                            <StyledTableRow key={i}>
+                                <StyledTableCell
+                                    sx={{
+                                        padding: "3px"
+                                    }}
+                                    size="small"
+                                    align="left"
+                                >
+                                    <Typography
+                                        sx={{
+                                            fontSize: "12px",
+                                            textAlign: "center"
+                                        }}
+                                    >
+                                        {i + 1}
+                                    </Typography>
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    <Typography
+                                        sx={{
+                                            fontSize: "12px",
+                                        }}
+                                    >
+                                        {row.building}
+                                    </Typography>
+                                </StyledTableCell>
+                                <StyledTableCell component="th" scope="row">
+                                    <Typography
+                                        sx={{
+                                            fontSize: "12px",
+                                        }}
+                                    >
+                                        {row.date}
+                                    </Typography>
+                                </StyledTableCell>
+                                <StyledTableCell
+                                    sx={{
+                                        padding: "0px",
+                                    }}
+                                    align='left'
+                                >
+                                    <Button
+                                        sx={{
+                                            fontSize: "10px",
+                                            minWidth: "5px"
+                                        }}
+                                        size='small'
+                                        variant="outlined"
+                                        onClick={() => {
+                                            startTransition(() => {
+                                                navigate(`/review/${row.id}`)
+                                            })
+                                        }}
+                                    >
+                                        More
+                                    </Button>
+                                </StyledTableCell>
+                            </StyledTableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </Box>
     );
 }
