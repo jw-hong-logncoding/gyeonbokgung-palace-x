@@ -96,19 +96,22 @@ const ReviewDetail = () => {
                             alignItems="center"
                             marginLeft="5px"
                         >
-                            <Typography
-                                fontSize="21px"
-                                sx={{ fontFamily: "'Roboto', sans-serif" }}
-                            >
-                                {`Username: ${reviewData.username}`}
-                            </Typography>
-                            <Typography
-                                fontSize="21px"
-                                sx={{ fontFamily: "'Roboto', sans-serif" }}
-                            >
-                                {reviewData.date}
-                            </Typography>
+                            <Box>
+                                <Typography
+                                    fontSize="18px"
+                                    sx={{ fontFamily: "'Roboto', sans-serif" }}
+                                >
+                                    {`Username: ${reviewData.username}`}
+                                </Typography>
+                                <Typography
+                                    fontSize="18px"
+                                    sx={{ fontFamily: "'Roboto', sans-serif" }}
+                                >
+                                    {reviewData.date}
+                                </Typography>
+                            </Box>
                         </Stack>
+
 
                         <Stack
                             flexDirection={{
@@ -243,6 +246,7 @@ const ReviewDetail = () => {
                                         minHeight: "50px",
                                         maxHeight: "400px",
                                         overflow: "auto",
+                                        color:'black',
                                         fontFamily: "'Poppins', sans-serif",
                                         fontSize: "14px"
                                     }}
