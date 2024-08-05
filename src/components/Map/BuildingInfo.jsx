@@ -1,11 +1,14 @@
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import BuildingDescription from "./BuildingDescription";
 import IMAGES from "../../assets/images";
 import { useQuery } from "react-query";
 import { fetchAllBuildingInfo } from "../../apis/firebaseApis";
 import { findBuildingKeywords } from "../../functions/finderFunctions";
+import { Button } from "@mui/material"; 
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'; 
 
 const BuildingInfo = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const pathArray = location.pathname.split('/');
     const buildingTitle = pathArray[pathArray.length - 1];
@@ -14,6 +17,7 @@ const BuildingInfo = () => {
     if (buildingTitle === 'gwanghwamun') {
         return (
             <div>
+
                 <BuildingDescription
                     title="Gwanghwamun"
                     photo={IMAGES.gwanghwamun}
