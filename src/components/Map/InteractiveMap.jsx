@@ -151,7 +151,7 @@ const handleIconClick = (icon) => {
           shadowOffsetX={10}
           shadowOffsetY={10}
           shadowOpacity={0.7}
-          stroke="black"
+          stroke="darkgray"
           strokeWidth={3}
           fontFamily="Arial Black, Gadget, sans-serif"
           textDecoration="bold"
@@ -173,7 +173,7 @@ const handleIconClick = (icon) => {
           shadowOffsetX={10}
           shadowOffsetY={10}
           shadowOpacity={0.7}
-          stroke="black"
+          stroke="darkgray"
           strokeWidth={3}
           fontFamily="Arial Black, Gadget, sans-serif"
           textDecoration="bold"
