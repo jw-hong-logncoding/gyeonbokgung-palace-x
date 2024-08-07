@@ -1,72 +1,46 @@
-
-import { useNavigate } from "react-router-dom";
 import { Box, Divider, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
 import { BUILDING_DATA_LIST } from "../../data";
 import { useMemo } from "react";
 import { useQuery } from "react-query";
 import { fetchAllLikesByBuildings } from "../../apis/firebaseApis";
-import { countLikes } from "../../functions/counterFunctions";
-import LikeCounterOnMain from "../LikeCounterOnMain";
 
-const BuildingList = () => {
-    const { data } = useQuery("buildingLikesInfo", fetchAllLikesByBuildings);
-    const navigate = useNavigate();
-    const navigateList = useMemo(() => {
-        return [
-            () => {navigate('/map/gwanghwamun')},
-            () => {navigate('/map/heungnyemun')},
-            () => {navigate('/map/geunjeongmun')},
-            () => {navigate('/map/geunjeongjeon')},
-            () => {navigate('/map/sajeongjeon')},
-            () => {navigate('/map/sujeongjeon')},
-            () => {navigate('/map/gyeonghoeru')},
-            () => {navigate('/map/hyangwonjeong')},
-            () => {navigate('/map/gangnyeongjeon')},
-            () => {navigate('/map/jagyeongjeon')},
-            () => {navigate('/map/jibokjae')},
-            () => {navigate('/map/gyotaejeon')},
-        ];
-    }, [navigate])
-    const buildingList = useMemo(() => {
-        return BUILDING_DATA_LIST
-            .map(({ title, value}, i) => ({ title, value, onClick: navigateList[i]}));
-    }, [navigateList])
+const BuildingList = ({ onBuildingClick }) => {
+  const { data } = useQuery("buildingLikesInfo", fetchAllLikesByBuildings);
+  const navigateList = useMemo(() => {
+    return [
+      { title: 'Gwanghwamun', pathname: '/map/gwanghwamun' },
+      { title: 'Heungnyemun', pathname: '/map/heungnyemun' },
+      { title: 'Geunjeongmun', pathname: '/map/geunjeongmun' },
+      { title: 'Geunjeongjeon', pathname: '/map/geunjeongjeon' },
+      { title: 'Sajeongjeon', pathname: '/map/sajeongjeon' },
+      { title: 'Sujeongjeon', pathname: '/map/sujeongjeon' },
+      { title: 'Gyeonghoeru', pathname: '/map/gyeonghoeru' },
+      { title: 'Hyangwonjeong', pathname: '/map/hyangwonjeong' },
+      { title: 'Gangnyeongjeon', pathname: '/map/gangnyeongjeon' },
+      { title: 'Jagyeongjeon', pathname: '/map/jagyeongjeon' },
+      { title: 'Jibokjae', pathname: '/map/jibokjae' },
+      { title: 'Gyotaejeon', pathname: '/map/gyotaejeon' }
+    ];
+  }, []);
 
-    return (
-        <Box sx={{ overflowY: 'auto' }}>
-            <Box
-                marginLeft="10px"
-                marginBottom="5px"
-            >
-                <Typography
-                    sx={{
-                        fontSize: '30px'
-                    }}
-                >
-                    Buildings
-                </Typography>
-            </Box>
-            <Divider />
-            <List>
-                {buildingList.map(({title, value, onClick}, index) => (
-                <ListItem key={index} disablePadding>
-                    <ListItemButton
-                        onClick={onClick}
-                    >
-                        <Typography sx={{
-                            fontSize: "18px",
-                            marginRight: "10px"
-                            }}
-                        >
-                            ►
-                        </Typography>
-                        <ListItemText primary={title} />
-                    </ListItemButton>
-                </ListItem>
-                ))}
-            </List>
-        </Box>
-    );
-}
+  return (
+    <Box sx={{ overflowY: 'auto' }}>
+      <Box marginLeft="10px" marginBottom="5px">
+        <Typography sx={{ fontSize: '30px' }}>Buildings</Typography>
+      </Box>
+      <Divider />
+      <List>
+        {navigateList.map((building, index) => (
+          <ListItem key={index} disablePadding>
+            <ListItemButton onClick={() => onBuildingClick(building)}>
+              <Typography sx={{ fontSize: "18px", marginRight: "10px" }}>►</Typography>
+              <ListItemText primary={building.title} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+};
 
 export default BuildingList;
