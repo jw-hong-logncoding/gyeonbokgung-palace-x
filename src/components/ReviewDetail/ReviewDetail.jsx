@@ -65,7 +65,7 @@ const ReviewDetail = () => {
                             alignItems="center"
                         >
                             <Typography
-                                fontSize="35px"
+                                fontSize="33px"
                                 fontWeight="bold"
                                 sx={{ fontFamily: "'NanumMyeongjo', Times, serif" }}
                             >
@@ -187,7 +187,7 @@ const ReviewDetail = () => {
                                 gap="5px"
                             >
                                 {reviewData.keywords.map((keyword, i) => {
-                                    return <Chip key={i} color="secondary" label={keyword} size="small" />
+                                    return <Chip key={i} color="black" label={keyword} size="small" />
                                 })}
                             </Stack>
                         </Stack>
