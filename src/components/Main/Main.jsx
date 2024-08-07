@@ -1,6 +1,5 @@
 import { Box, Stack, Typography, Button } from "@mui/material";
 import { keyframes } from '@mui/system';
-import { useNavigate } from "react-router-dom";
 import IMAGES from "../../assets/images";
 import * as S from "./Main.style";
 import LoginButton from "../LoginButton";
@@ -20,25 +19,9 @@ const fadeIn = keyframes`
   }
 `;
 
-// Function to generate a random string of specified length
-const generateRandomString = (length) => {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * characters.length));
-  }
-  return result;
-};
-
 const Main = () => {
     const { userData } = useUserData();
     const { handleGoogleLogin } = useGoogleLogin();
-    const navigate = useNavigate(); // Use the navigate hook from react-router-dom
-
-    const handleLearnMoreClick = () => {
-        const randomString = generateRandomString(5);
-        navigate(`/?page=about${randomString}`);
-    };
 
     return (
         <Box>
@@ -142,7 +125,7 @@ const Main = () => {
                     sx={{
                         display: 'flex',
                         justifyContent: 'center',
-                        animation: `${fadeIn} 2s ease-in-out` 
+                        animation: `${fadeIn} 2s ease-in-out` // Apply the animation
                     }}
                 >
                     {userData ? (
@@ -160,7 +143,7 @@ const Main = () => {
                             }}
                             color="secondary"
                             variant='outlined'
-                            onClick={handleLearnMoreClick} 
+                            onClick={handleGoogleLogin} 
                         >
                             Learn More
                         </Button>

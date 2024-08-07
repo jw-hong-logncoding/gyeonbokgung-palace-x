@@ -1,13 +1,13 @@
-import { Fragment, useRef, useState, useEffect } from 'react';
+import { Fragment, useRef, useState } from 'react';
 import { Stage, Layer, Image, Rect, Text, Circle } from 'react-konva';
 import IMAGES from "../../assets/images";
 import useImage from 'use-image';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
-  const [scale, setScale] = useState(0.18);
-  const [image] = useImage(IMAGES.mapPhoto);
-  const [pin] = useImage(IMAGES.pin);
+const InteractiveMap = ({ isMobile, drawerWidth = 0 }) => {
+  const [scale, setScale] = useState(0.18); // 초기 줌 레벨
+  const [image] = useImage(IMAGES.mapPhoto); 
+  const [pin] = useImage(IMAGES.pin); 
   const location = useLocation();
   const navigate = useNavigate();
   const stageRef = useRef(null);
@@ -15,34 +15,24 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
   const [stagePosition, setStagePosition] = useState({ x: 0, y: 0 });
   const [selectedIcon, setSelectedIcon] = useState(null);
 
-  const iconSize = 75;
-  const iconSizeY = 98;
-  const selectedIconSize = 89;
-  const selectedIconSizeY = 105;
+  const iconSize = 85;
+  const selectedIconSize = 102;
 
+  // 아이콘 위치 설정
   const icons = [
-    { pathname: "/map/jibokjae", x: 800, y: 20, id: 1, width: iconSize, height: iconSizeY },
-    { pathname: "/map/hyangwonjeong", x: 1050, y: 470, id: 2, width: iconSize, height: iconSizeY },
-    { pathname: "/map/jagyeongjeon", x: 1450, y: 1370, id: 3, width: iconSize, height: iconSizeY },
-    { pathname: "/map/gyeonghoeru", x: 705, y: 1575, id: 4, width: iconSize, height: iconSizeY },
-    { pathname: "/map/gangnyeongjeon", x: 1075, y: 1665, id: 5, width: iconSize, height: iconSizeY },
-    { pathname: "/map/gyotaejeon", x: 1075, y: 1505, id: 6, width: iconSize, height: iconSizeY },
-    { pathname: "/map/sajeongjeon", x: 1055, y: 1860, id: 7, width: iconSize, height: iconSizeY },
-    { pathname: "/map/geunjeongjeon", x: 1040, y: 2080, id: 8, width: iconSize, height: iconSizeY },
-    { pathname: "/map/sujeongjeon", x: 685, y: 1920, id: 9, width: iconSize, height: iconSizeY },
-    { pathname: "/map/geunjeongmun", x: 1040, y: 2430, id: 10, width: iconSize, height: iconSizeY },
-    { pathname: "/map/heungnyemun", x: 1005, y: 2770, id: 11, width: iconSize, height: iconSizeY },
-    { pathname: "/map/gwanghwamun", x: 985, y: 3165, id: 12, width: iconSize, height: iconSizeY }
+    { pathname: "/map/jibokjae", x: 800, y: 20, id: 1, width: iconSize, height: iconSize },
+    { pathname: "/map/hyangwonjeong", x: 1050, y: 470, id: 2, width: iconSize, height: iconSize },
+    { pathname: "/map/jagyeongjeon", x: 1450, y: 1370, id: 3, width: iconSize, height: iconSize },
+    { pathname: "/map/gyeonghoeru", x: 705, y: 1575, id: 4, width: iconSize, height: iconSize },
+    { pathname: "/map/gangnyeongjeon", x: 1075, y: 1665, id: 5, width: iconSize, height: iconSize },
+    { pathname: "/map/gyotaejeon", x: 1075, y: 1505, id: 6, width: iconSize, height: iconSize },
+    { pathname: "/map/sajeongjeon", x: 1055, y: 1860, id: 7, width: iconSize, height: iconSize },
+    { pathname: "/map/geunjeongjeon", x: 1040, y: 2080, id: 8, width: iconSize, height: iconSize },
+    { pathname: "/map/sujeongjeon", x: 685, y: 1920, id: 9, width: iconSize, height: iconSize },
+    { pathname: "/map/geunjeongmun", x: 1040, y: 2430, id: 10, width: iconSize, height: iconSize },
+    { pathname: "/map/heungnyemun", x: 1005, y: 2770, id: 11, width: iconSize, height: iconSize },
+    { pathname: "/map/gwanghwamun", x: 985, y: 3165, id: 12, width: iconSize, height: iconSize }
   ];
-
-  useEffect(() => {
-    if (selectedBuilding) {
-      const icon = icons.find((icon) => icon.pathname === selectedBuilding.pathname);
-      if (icon) {
-        handleIconClick(icon);
-      }
-    }
-  }, [selectedBuilding]);
 
   const handleWheel = (e) => {
     e.evt.preventDefault();
@@ -98,33 +88,34 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
     }
   };
 
-  const handleIconClick = (icon) => {
-    const stage = stageRef.current;
-    let newScale;
-    let newPos;
+const handleIconClick = (icon) => {
+  const stage = stageRef.current;
+  let newScale;
+  let newPos;
 
-    if (isMobile) {
-      newScale = 0.16; // Set a different zoom level for mobile
-      newPos = {
-        x: -icon.x * newScale + (window.innerWidth - drawerWidth) / 2 + 0, // Adjust centering for mobile
-        y: -icon.y * newScale + window.innerHeight / 2 - 140,
-      };
-    } else {
-      newScale = 0.33; // Set the desired zoom level for desktop
-      newPos = {
-        x: -icon.x * newScale + (window.innerWidth - drawerWidth) / 2 - 500,
-        y: -icon.y * newScale + window.innerHeight / 2 - 200,
-      };
-    }
+  if (isMobile) {
+    newScale = 0.16; // Set a different zoom level for mobile
+    newPos = {
+      x: -icon.x * newScale + (window.innerWidth - drawerWidth) / 2 + 0, // Adjust centering for mobile
+      y: -icon.y * newScale + window.innerHeight / 2 - 140,
+    };
+  } else {
+    newScale = 0.33; // Set the desired zoom level for desktop
+    newPos = {
+      x: -icon.x * newScale + (window.innerWidth - drawerWidth) / 2 - 500,
+      y: -icon.y * newScale + window.innerHeight / 2 - 200,
+    };
+  }
 
-    setStagePosition(newPos);
-    setScale(newScale);
-    stage.position(newPos);
-    stage.scale({ x: newScale, y: newScale });
-    stage.batchDraw();
-    setSelectedIcon(icon.id);
-    navigate(icon.pathname);
-  };
+  setStagePosition(newPos);
+  setScale(newScale);
+  stage.position(newPos);
+  stage.scale({ x: newScale, y: newScale });
+  stage.batchDraw();
+  setSelectedIcon(icon.id);
+  navigate(icon.pathname);
+};
+
 
   return (
     <Stage
@@ -150,9 +141,9 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
           National Palace
           Museum of Korea
           "
-          x={1420}
+          x={1400}
           y={750}
-          fontSize={43}
+          fontSize={45}
           fill="white"
           align="center"
           shadowColor="black"
@@ -160,11 +151,11 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
           shadowOffsetX={10}
           shadowOffsetY={10}
           shadowOpacity={0.7}
-          strokeWidth={2}
+          stroke="darkgray"
+          strokeWidth={3}
           fontFamily="Arial Black, Gadget, sans-serif"
           textDecoration="bold"
           lineJoin="round"
-          lineHeight="1.2" 
         />
         <Text
           text="
@@ -172,7 +163,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
           Museum
           of Korea
           "
-          x={88}
+          x={90}
           y={2900}
           fontSize={45}
           fill="white"
@@ -182,11 +173,11 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
           shadowOffsetX={10}
           shadowOffsetY={10}
           shadowOpacity={0.7}
-          strokeWidth={2}
+          stroke="darkgray"
+          strokeWidth={3}
           fontFamily="Arial Black, Gadget, sans-serif"
           textDecoration="bold"
           lineJoin="round"
-          lineHeight="1.2" 
         />
         {icons.map((icon, i) => (
           <Fragment key={`frag-${i}`}>
@@ -195,7 +186,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
               x={icon.x}
               y={icon.y}
               width={icon.pathname === location.pathname ? selectedIconSize : iconSize}
-              height={icon.pathname === location.pathname ? selectedIconSize : iconSizeY}
+              height={icon.pathname === location.pathname ? selectedIconSize : iconSize}
               fill="transparent" // 흰색 배경
               cornerRadius={40} // 테두리 반경 설정
               shadowColor="black" // 그림자 색
@@ -206,10 +197,10 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
             />
             {selectedIcon === icon.id && (
               <Circle
-                x={icon.x + iconSize / 2 + 10}
-                y={icon.y + iconSize / 2 + 32}
+                x={icon.x + iconSize / 2 + 5}
+                y={icon.y + iconSize / 2 + 25}
                 radius={selectedIconSize / 2 + 20}
-                fill="rgba(255, 255, 0, 0.45)" // 노란색 반투명
+                fill="rgba(255, 255, 0, 0.3)" // 노란색 반투명
                 shadowColor="black" // 그림자 색
                 shadowBlur={20} // 그림자 블러 강도
                 shadowOffsetX={10} // 그림자 X축 오프셋
@@ -223,7 +214,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
               x={icon.x}
               y={icon.y}
               width={icon.pathname === location.pathname ? selectedIconSize : iconSize}  // 아이콘 크기 조절
-              height={icon.pathname === location.pathname ? selectedIconSizeY : iconSizeY}
+              height={icon.pathname === location.pathname ? selectedIconSize : iconSize}
               onClick={() => {
                 handleIconClick(icon);
               }}
