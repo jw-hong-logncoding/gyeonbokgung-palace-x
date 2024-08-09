@@ -12,7 +12,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
   const navigate = useNavigate();
   const stageRef = useRef(null);
   const lastTouches = useRef([]);
-  const [stagePosition, setStagePosition] = useState({ x: 0, y: 0 });
+  const [stagePosition, setStagePosition] = useState({ x: 25, y: 50 });
   const [selectedIcon, setSelectedIcon] = useState(null);
 
   const iconSize = 75;
@@ -34,6 +34,13 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
     { pathname: "/map/heungnyemun", x: 1005, y: 2770, id: 11, width: iconSize, height: iconSizeY },
     { pathname: "/map/gwanghwamun", x: 985, y: 3165, id: 12, width: iconSize, height: iconSizeY }
   ];
+
+  useEffect(() => {
+    const currentIcon = icons.find((icon) => icon.pathname === location.pathname);
+    if (currentIcon) {
+      setSelectedIcon(currentIcon.id);
+    }
+  }, [location.pathname]);
 
   useEffect(() => {
     if (selectedBuilding) {

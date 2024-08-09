@@ -26,10 +26,8 @@ const BuildingList = ({ onBuildingClick = () => {} }) => {
   }, []);
 
   const handleBuildingClick = (building) => {
-    // Call the passed onBuildingClick function
     console.log("ABC");
     onBuildingClick(building);
-    // Navigate to the selected building's path
     console.log("DEF");
     navigate(building.pathname);
   };
