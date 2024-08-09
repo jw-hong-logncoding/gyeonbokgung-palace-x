@@ -15,7 +15,8 @@ const LoginButton = () => {
                     borderColor: 'secondary.light',
                     '&:hover': { bgcolor: 'secondary.light' },
                     letterSpacing: "3px",
-                    fontSize: "15px"
+                    fontSize: "15px",
+                    marginTop: "22px"
                 }}
                 color="secondary"
                 variant='outlined'

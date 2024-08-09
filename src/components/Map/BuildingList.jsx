@@ -1,11 +1,13 @@
 import { Box, Divider, List, ListItem, ListItemButton, ListItemText, Typography } from "@mui/material";
-import { BUILDING_DATA_LIST } from "../../data";
 import { useMemo } from "react";
 import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { fetchAllLikesByBuildings } from "../../apis/firebaseApis";
 
-const BuildingList = ({ onBuildingClick }) => {
+const BuildingList = ({ onBuildingClick = () => {} }) => {
+  const navigate = useNavigate();
   const { data } = useQuery("buildingLikesInfo", fetchAllLikesByBuildings);
+
   const navigateList = useMemo(() => {
     return [
       { title: 'Gwanghwamun', pathname: '/map/gwanghwamun' },
@@ -23,6 +25,15 @@ const BuildingList = ({ onBuildingClick }) => {
     ];
   }, []);
 
+  const handleBuildingClick = (building) => {
+    // Call the passed onBuildingClick function
+    console.log("ABC");
+    onBuildingClick(building);
+    // Navigate to the selected building's path
+    console.log("DEF");
+    navigate(building.pathname);
+  };
+
   return (
     <Box sx={{ overflowY: 'auto' }}>
       <Box marginLeft="10px" marginBottom="5px">
@@ -32,7 +43,10 @@ const BuildingList = ({ onBuildingClick }) => {
       <List>
         {navigateList.map((building, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton onClick={() => onBuildingClick(building)}>
+            <ListItemButton 
+              onClick={() => handleBuildingClick(building)}
+              onTouchStart={() => handleBuildingClick(building)}
+            >
               <Typography sx={{ fontSize: "18px", marginRight: "10px" }}>►</Typography>
               <ListItemText primary={building.title} />
             </ListItemButton>
