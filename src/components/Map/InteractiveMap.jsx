@@ -49,7 +49,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
         handleIconClick(icon);
       }
     }
-  }, [selectedBuilding, isMobile]);  // Add isMobile as a dependency
+  }, [selectedBuilding]);
 
   const handleWheel = (e) => {
     e.evt.preventDefault();
@@ -101,7 +101,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
 
   const handleTouchEnd = (e) => {
     if (e.evt.touches.length < 2) {
-      lastTouches.current = 0; // Reset
+      lastTouches.current = 0; // 초기화
     }
   };
 
@@ -203,25 +203,25 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
               y={icon.y}
               width={icon.pathname === location.pathname ? selectedIconSize : iconSize}
               height={icon.pathname === location.pathname ? selectedIconSize : iconSizeY}
-              fill="transparent" 
-              cornerRadius={40} 
-              shadowColor="black" 
-              shadowBlur={20} 
-              shadowOffsetX={10} 
-              shadowOffsetY={10} 
-              shadowOpacity={0.6} 
+              fill="transparent" // 흰색 배경
+              cornerRadius={40} // 테두리 반경 설정
+              shadowColor="black" // 그림자 색
+              shadowBlur={20} // 그림자 블러 강도
+              shadowOffsetX={10} // 그림자 X축 오프셋
+              shadowOffsetY={10} // 그림자 Y축 오프셋
+              shadowOpacity={0.6} // 그림자 투명도
             />
             {selectedIcon === icon.id && (
               <Circle
                 x={icon.x + iconSize / 2 + 10}
                 y={icon.y + iconSize / 2 + 32}
                 radius={selectedIconSize / 2 + 20}
-                fill="rgba(255, 255, 0, 0.45)" 
-                shadowColor="black" 
-                shadowBlur={20} 
-                shadowOffsetX={10} 
-                shadowOffsetY={10} 
-                shadowOpacity={0.6} 
+                fill="rgba(255, 255, 0, 0.45)" // 노란색 반투명
+                shadowColor="black" // 그림자 색
+                shadowBlur={20} // 그림자 블러 강도
+                shadowOffsetX={10} // 그림자 X축 오프셋
+                shadowOffsetY={10} // 그림자 Y축 오프셋
+                shadowOpacity={0.6} // 그림자 투명도
               />
             )}
             <Image
@@ -229,7 +229,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
               image={pin}
               x={icon.x}
               y={icon.y}
-              width={icon.pathname === location.pathname ? selectedIconSize : iconSize}
+              width={icon.pathname === location.pathname ? selectedIconSize : iconSize}  // 아이콘 크기 조절
               height={icon.pathname === location.pathname ? selectedIconSizeY : iconSizeY}
               onClick={() => {
                 handleIconClick(icon);
@@ -237,11 +237,11 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
               onTap={() => {
                 handleIconClick(icon);
               }}
-              shadowColor="black" 
-              shadowBlur={10} 
-              shadowOffsetX={15} 
-              shadowOffsetY={7} 
-              shadowOpacity={0.6} 
+              shadowColor="black" // 그림자 색
+              shadowBlur={10} // 그림자 블러 강도
+              shadowOffsetX={15} // 그림자 X축 오프셋
+              shadowOffsetY={7} // 그림자 Y축 오프셋
+              shadowOpacity={0.6} // 그림자 투명도
             />
           </Fragment>
         ))}

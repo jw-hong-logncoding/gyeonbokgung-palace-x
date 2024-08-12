@@ -25,7 +25,11 @@ const BuildingList = ({ onBuildingClick = () => {} }) => {
     ];
   }, []);
 
-  const handleBuildingClick = (building) => {
+  const handleBuildingClick = (building, e) => {
+    e.preventDefault();  // Prevent default behavior
+    console.log("ABC");
+    onBuildingClick(building);
+    console.log("DEF");
     navigate(building.pathname);
   };
 
@@ -39,8 +43,8 @@ const BuildingList = ({ onBuildingClick = () => {} }) => {
         {navigateList.map((building, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton 
-              onClick={() => handleBuildingClick(building)}
-              onTouchEnd={() => handleBuildingClick(building)}  // Use onTouchEnd instead of onTouchStart
+              onClick={(e) => handleBuildingClick(building, e)}
+              onTouchStart={(e) => handleBuildingClick(building, e)}
             >
               <Typography sx={{ fontSize: "18px", marginRight: "10px" }}>►</Typography>
               <ListItemText primary={building.title} />
