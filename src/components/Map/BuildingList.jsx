@@ -30,6 +30,7 @@ const BuildingList = ({ onBuildingClick = () => {} }) => {
     onBuildingClick(building);
     console.log("DEF");
     navigate(building.pathname);
+
   };
 
   return (
