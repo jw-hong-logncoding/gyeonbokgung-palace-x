@@ -45,6 +45,7 @@ console.log("Updating selectedBuilding:", selectedBuilding);
 
 useEffect(() => {
   if (selectedBuilding) {
+    console.log("A");
     const icon = icons.find((icon) => icon.pathname === selectedBuilding.pathname);
     console.log(icon);
     if (icon) {
@@ -52,8 +53,11 @@ useEffect(() => {
     }
   } else {
     const currentIcon = icons.find((icon) => icon.pathname === location.pathname);
+    console.log("X:", currentIcon);
     if (currentIcon) {
+      console.log("B");
       setSelectedIcon(currentIcon.id);
+       handleIconClick(currentIcon);
     } else {
       setSelectedIcon(null); 
     }
