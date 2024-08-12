@@ -41,6 +41,17 @@ console.log("Updating selectedBuilding:", selectedBuilding);
     if (currentIcon) {
       setSelectedIcon(currentIcon.id);
     }
+    if (!selectedBuilding){
+          const currentIcon = icons.find((icon) => icon.pathname === location.pathname);
+    console.log("X:", currentIcon);
+    if (currentIcon) {
+      console.log("B");
+      setSelectedIcon(currentIcon.id);
+       handleIconClick(currentIcon);
+    } else {
+      setSelectedIcon(null); 
+    }
+    }
   }, [location.pathname]);
 
 useEffect(() => {
@@ -52,17 +63,9 @@ useEffect(() => {
       handleIconClick(icon);
     }
   } 
-  // else {
-  //   const currentIcon = icons.find((icon) => icon.pathname === location.pathname);
-  //   console.log("X:", currentIcon);
-  //   if (currentIcon) {
-  //     console.log("B");
-  //     setSelectedIcon(currentIcon.id);
-  //      handleIconClick(currentIcon);
-  //   } else {
-  //     setSelectedIcon(null); 
-  //   }
-  // }
+  else {
+
+  }
 }, [selectedBuilding]);
 
 

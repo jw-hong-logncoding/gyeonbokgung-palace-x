@@ -2,7 +2,7 @@ import { Sheet } from "react-modal-sheet";
 import { Box, CircularProgress, Drawer, Toolbar } from "@mui/material";
 import { useOutlet, Outlet } from "react-router-dom";
 import InteractiveMap from "./InteractiveMap";
-import { Suspense, lazy, useRef } from "react";
+import { Suspense, lazy, useRef, useState } from "react";
 
 // Lazily load the BuildingList component
 const BuildingList = lazy(() => import("./BuildingList"));
@@ -13,10 +13,13 @@ const MobileMap = () => {
     const outlet = useOutlet();
     const sheetRef = useRef(null);
     const contentRef = useRef(null);
+    const [selectedBuilding, setSelectedBuilding] = useState(null);
 
     // snapPoints for the Sheet component
     const snapPoints = [-50, 350, 50];
-
+    const handleBuildingClick = (building) => {
+        setSelectedBuilding(building);
+    };
     return (
         <div>
             <InteractiveMap isMobile />
@@ -40,7 +43,7 @@ const MobileMap = () => {
                                     <Outlet />
                                 ) : (
                                     <Suspense fallback={<CircularProgress />}>
-                                        <BuildingList />
+                            <BuildingList onBuildingClick={handleBuildingClick} />
                                     </Suspense>
                                 )}
                             </Box>
