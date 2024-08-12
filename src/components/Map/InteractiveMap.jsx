@@ -128,7 +128,7 @@ useEffect(() => {
       newScale = 0.16; // Set a different zoom level for mobile
       newPos = {
         x: -icon.x * newScale + (window.innerWidth - drawerWidth) / 2 + 0, // Adjust centering for mobile
-        y: -icon.y * newScale + window.innerHeight / 2 - 140,
+        y: -icon.y * newScale + window.innerHeight / 2 - 170,
       };
     } else {
       newScale = 0.33; // Set the desired zoom level for desktop
