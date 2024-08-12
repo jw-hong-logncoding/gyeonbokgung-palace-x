@@ -51,18 +51,19 @@ useEffect(() => {
     if (icon) {
       handleIconClick(icon);
     }
-  } else {
-    const currentIcon = icons.find((icon) => icon.pathname === location.pathname);
-    console.log("X:", currentIcon);
-    if (currentIcon) {
-      console.log("B");
-      setSelectedIcon(currentIcon.id);
-       handleIconClick(currentIcon);
-    } else {
-      setSelectedIcon(null); 
-    }
-  }
-}, [selectedBuilding, location.pathname]);
+  } 
+  // else {
+  //   const currentIcon = icons.find((icon) => icon.pathname === location.pathname);
+  //   console.log("X:", currentIcon);
+  //   if (currentIcon) {
+  //     console.log("B");
+  //     setSelectedIcon(currentIcon.id);
+  //      handleIconClick(currentIcon);
+  //   } else {
+  //     setSelectedIcon(null); 
+  //   }
+  // }
+}, [selectedBuilding]);
 
 
   const handleWheel = (e) => {

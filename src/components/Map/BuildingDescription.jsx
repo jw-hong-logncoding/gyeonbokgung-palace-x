@@ -9,6 +9,7 @@ const BuildingDescription = ({ title, photo, keywordList, description }) => {
         navigate("/review-form", { state: { title: title.toLowerCase() } });
     };
     const handleBackClick = () => {
+        console.log("back");
         navigate('/map'); 
     };
 
