@@ -44,7 +44,6 @@ const BuildingList = ({ onBuildingClick = () => {} }) => {
           <ListItem key={index} disablePadding>
             <ListItemButton 
               onClick={(e) => handleBuildingClick(building, e)}
-              onTouchStart={(e) => handleBuildingClick(building, e)}
             >
               <Typography sx={{ fontSize: "18px", marginRight: "10px" }}>►</Typography>
               <ListItemText primary={building.title} />
