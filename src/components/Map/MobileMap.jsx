@@ -1,10 +1,11 @@
 import { Sheet } from "react-modal-sheet";
-import BuildingList from "./BuildingList";
-import { Outlet, useOutlet } from "react-router-dom";
-import { Box } from "@mui/material";
-import { useEffect, useRef } from "react";
-import { parseTranslateY } from "../../functions/stringFunctions";
+import { Box, CircularProgress, Drawer, Toolbar } from "@mui/material";
+import { useOutlet, Outlet } from "react-router-dom";
 import InteractiveMap from "./InteractiveMap";
+import { Suspense, lazy, useRef } from "react";
+
+// Lazily load the BuildingList component
+const BuildingList = lazy(() => import("./BuildingList"));
 
 const BETWEEN_TOP_AND_SHEET = 50;
 
@@ -13,23 +14,7 @@ const MobileMap = () => {
     const sheetRef = useRef(null);
     const contentRef = useRef(null);
 
-    // useEffect(() => {
-    //     const targetElement = document.querySelector('#top-sheet > *');
-
-    //     const observer = new MutationObserver((mutations) => {
-    //     mutations.forEach((mutation) => {
-    //         if (mutation.attributeName === 'style') {
-    //         const newValue = targetElement.style.transform;
-    //         const integer = Math.ceil(parseTranslateY(newValue));
-    //         contentRef.current.style.height = (window.innerHeight-integer-BETWEEN_TOP_AND_SHEET-40)+"px";
-    //         }
-    //         });
-    //     });
-
-    //     const config = { attributes: true, attributeFilter: ['style'] };
-    //     observer.observe(targetElement, config);
-    //     }, []);
-
+    // snapPoints for the Sheet component
     const snapPoints = [-50, 350, 50];
 
     return (
@@ -48,22 +33,23 @@ const MobileMap = () => {
             >
                 <Sheet.Container>
                     <Sheet.Header />
-                        <Sheet.Content>
-                            <Sheet.Scroller draggableAt="bottom">
-                                {/* <Box sx={{height: window.innerHeight-BETWEEN_TOP_AND_SHEET-40}}> */}
-                                    <Box
-                                        ref={contentRef}
-                                        // sx={{ overflowY: "auto" }}
-                                    >
-                                        {outlet ? <Outlet /> : <BuildingList />}
-                                    </Box>
-                                {/* </Box> */}
-                            </Sheet.Scroller>
-                        </Sheet.Content>
+                    <Sheet.Content>
+                        <Sheet.Scroller draggableAt="bottom">
+                            <Box ref={contentRef}>
+                                {outlet ? (
+                                    <Outlet />
+                                ) : (
+                                    <Suspense fallback={<CircularProgress />}>
+                                        <BuildingList />
+                                    </Suspense>
+                                )}
+                            </Box>
+                        </Sheet.Scroller>
+                    </Sheet.Content>
                 </Sheet.Container>
             </Sheet>
         </div>
-    )
+    );
 }
 
 export default MobileMap;
