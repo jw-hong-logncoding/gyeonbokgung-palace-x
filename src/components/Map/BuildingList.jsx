@@ -26,9 +26,6 @@ const BuildingList = ({ onBuildingClick = () => {} }) => {
   }, []);
 
   const handleBuildingClick = (building) => {
-    console.log("ABC");
-    onBuildingClick(building);
-    console.log("DEF");
     navigate(building.pathname);
   };
 
@@ -43,7 +40,7 @@ const BuildingList = ({ onBuildingClick = () => {} }) => {
           <ListItem key={index} disablePadding>
             <ListItemButton 
               onClick={() => handleBuildingClick(building)}
-              onTouchStart={() => handleBuildingClick(building)}
+              onTouchEnd={() => handleBuildingClick(building)}  // Use onTouchEnd instead of onTouchStart
             >
               <Typography sx={{ fontSize: "18px", marginRight: "10px" }}>►</Typography>
               <ListItemText primary={building.title} />

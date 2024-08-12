@@ -92,6 +92,21 @@ const About = () => {
                 >
                     Joseon Dynasty
                 </Typography>
+                                <Typography
+                    sx={{
+                        marginTop: "20px",
+                        color:"white",
+                        fontsize: {
+                            sm:'56px',
+                            xs: '32px'
+                        },
+                        fontWeight: 350,
+                        width: {
+                            md: '800px',
+                        }
+
+                    }}
+                >The Joseon Dynasty ruled Korea for over five centuries, from 1392 to 1897, making it one of the longest-lasting dynasties in East Asia. During this period, a total of 27 kings governed, shaping much of Korea's cultural and historical heritage.</Typography>
                 <Stack
                     alignItems="left"
                     marginTop="50px"

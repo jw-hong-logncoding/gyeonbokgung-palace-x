@@ -19,13 +19,13 @@ const BuildingDescription = ({ title, photo, keywordList, description }) => {
                     <Typography sx={{ fontSize: "30px", marginBottom: "10px" }}>
                         {title}
                     </Typography>
-<Button 
-    style={{ marginRight: "15px", marginBottom: "8px" }} 
-    onClick={handleBackClick} 
-    startIcon={<ArrowBackIcon />}
->
-    Back
-</Button>
+                    <Button 
+                        style={{ marginRight: "15px", marginBottom: "8px" }} 
+                        onClick={handleBackClick} 
+                        startIcon={<ArrowBackIcon />}
+                    >
+                        Back
+                    </Button>
                 </Box>
                 <Divider />
                 <Box
