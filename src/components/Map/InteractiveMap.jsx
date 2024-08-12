@@ -19,6 +19,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
   const iconSizeY = 98;
   const selectedIconSize = 89;
   const selectedIconSizeY = 105;
+console.log("Updating selectedBuilding:", selectedBuilding);
 
   const icons = [
     { pathname: "/map/jibokjae", x: 800, y: 20, id: 1, width: iconSize, height: iconSizeY },
@@ -45,6 +46,7 @@ const InteractiveMap = ({ isMobile, drawerWidth = 0, selectedBuilding }) => {
   useEffect(() => {
     if (selectedBuilding) {
       const icon = icons.find((icon) => icon.pathname === selectedBuilding.pathname);
+      console.log(icon);
       if (icon) {
         handleIconClick(icon);
       }

@@ -26,7 +26,6 @@ const BuildingList = ({ onBuildingClick = () => {} }) => {
   }, []);
 
   const handleBuildingClick = (building, e) => {
-    e.preventDefault();  // Prevent default behavior
     console.log("ABC");
     onBuildingClick(building);
     console.log("DEF");
